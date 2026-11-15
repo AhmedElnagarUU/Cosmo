@@ -41,6 +41,7 @@ This is the single list of business decisions. Every other document refers to th
 |---|---|
 | C-24 | Orders are accepted by hand. The stock manager accepts or rejects each order, and the owner can too. A rejection needs a reason, and the customer sees it |
 | C-32 | Sales employees can place an order for a customer |
+| C-35 | An order that waits a long time for acceptance is reported to the owner on the dashboard and as an alert. It is not cancelled automatically |
 
 ### Payment
 
@@ -52,6 +53,7 @@ This is the single list of business decisions. Every other document refers to th
 | C-26 | Each customer has a "credit allowed" switch. Without it, the customer pays when the order arrives: cash, InstaPay, or Vodafone Cash. With it, the customer pays later. The credit period is set per customer, with a default of one month that the owner can change |
 | C-27 | The delivery person records the payment they collected. The accountant then confirms or rejects it. An invoice counts as paid only after the accountant confirms |
 | C-33 | A credit invoice past its due date is shown as overdue to the owner and accountant. The system does not block the customer automatically |
+| C-36 | The credit period starts on the invoice date |
 
 ### Delivery and returns
 
@@ -93,7 +95,6 @@ This is the single list of business decisions. Every other document refers to th
 | A-20 | Technology | TypeScript on both sides and PostgreSQL as the database | Stock and money need strict transactions |
 | A-22 | Who creates returns | An employee creates the return. Customers can see their returns but cannot create them | Returns need a physical check of the goods |
 | A-23 | Permissions | Each role can do what the table in [User stories](user-stories/README.md) shows | Keeps roles few and simple |
-| A-24 | Credit period start | The credit period starts on the invoice date | The invoice date is always known |
 
 ## Open — needs a decision
 
@@ -108,7 +109,6 @@ This is the single list of business decisions. Every other document refers to th
 | O-08 | Outside notifications | Should customers or employees get SMS, WhatsApp, or email messages, on top of alerts inside the app? | Adds an outside service and cost |
 | O-09 | Refunds | Can a return be refunded in cash, or only as a credit on the balance? | Changes the payment module |
 | O-10 | Partial delivery detail | When a customer refuses some items at the door, is that handled as a partial delivery or as a return? | Changes the delivery flow and the invoice |
-| O-11 | Acceptance waiting time | What happens if nobody accepts an order for a long time? | Stock stays reserved while the order waits |
 
 ## Change history
 
@@ -122,6 +122,8 @@ This is the single list of business decisions. Every other document refers to th
 | Trip planning | Was assumed for the manager (A-21). Now confirmed for the new delivery manager role (C-28) |
 | Roles | Manager removed. Stock manager replaces Warehouse. Delivery manager added. Driver renamed Delivery (C-22) |
 | Permissions | Was open (O-07). Now a proposal to confirm (A-23) |
+| Slow acceptance | Was open (O-11). Now confirmed: report to the owner (C-35) |
+| Credit period start | Was assumed (A-24). Now confirmed (C-36) |
 
 ## How decisions change
 

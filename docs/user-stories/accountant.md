@@ -57,7 +57,7 @@ As an accountant, I want to print an invoice, so that I can give it to the custo
 ### ACC-08 Follow overdue invoices
 As an accountant, I want to see credit invoices that are past their due date, so that I can collect the money.
 
-- The due date is the invoice date plus the customer's credit period (C-26, A-24).
+- The due date is the invoice date plus the customer's credit period (C-26, C-36).
 - An unpaid invoice past its due date is marked overdue (C-33).
 - I see overdue invoices grouped by customer, with the number of days late.
 - The system does not block the customer. The owner decides what to do (C-33).

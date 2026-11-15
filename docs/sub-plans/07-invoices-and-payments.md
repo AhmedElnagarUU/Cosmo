@@ -24,7 +24,7 @@ After this phase, the full main journey works: goods in, order, acceptance, prep
 - Cash handover after a trip and closing the trip
 - One payment per invoice (A-15)
 - Cancelling a wrong payment with a reason
-- Credit period per customer, due dates, and overdue marking (C-26, C-33)
+- Credit period per customer, due dates from the invoice date, and overdue marking (C-26, C-33, C-36)
 - Customer balance and statement
 - Invoice printing in Arabic and English
 - Invoice cancellation when an order is cancelled
@@ -72,7 +72,6 @@ Phase 6 (delivery results and payments recorded at the door), phase 4 (orders), 
 |---|---|
 | A-05 | Invoice timing as a setting, default on delivered |
 | A-15 | One payment belongs to one invoice |
-| A-24 | The credit period starts on the invoice date |
 | O-01 | Discounts and bonus units on invoices |
 
 Also to decide here: the invoice number format, what the printed invoice must show, and whether a customer can pay before delivery.

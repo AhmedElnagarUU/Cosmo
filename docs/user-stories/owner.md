@@ -76,7 +76,8 @@ As an owner, I want to see every order and act on it when needed, so that work d
 ### OWN-09 Dashboard
 As an owner, I want one screen that shows what needs attention today, so that I can act quickly.
 
-- I see orders waiting for acceptance, orders being prepared, orders ready for delivery, and trips in progress.
+- I see orders waiting for acceptance, with those waiting a long time marked clearly (C-35).
+- I see orders being prepared, orders ready for delivery, and trips in progress.
 - I see failed deliveries that need a decision.
 - I see products that are out of stock or close to expiry.
 - I see payments waiting for the accountant, overdue credit invoices, total unpaid invoices, and the total owed to suppliers.
@@ -92,7 +93,7 @@ As an owner, I want to see who did what and when, so that I know who is working 
 ### OWN-11 Alerts for important events
 As an owner, I want an alert when something important happens, so that I do not have to watch the activity screen all day.
 
-- I get an alert inside the app for: a rejected order, a cancelled order, a stock correction, and a payment the accountant rejected (C-30).
+- I get an alert inside the app for: a rejected order, a cancelled order, a stock correction, a payment the accountant rejected, and an order waiting a long time for acceptance (C-30, C-35).
 - Each alert shows the employee's name and the reason they wrote.
 - Ordinary actions do not create alerts. They appear only on the activity screen.
 - Alerts outside the app, such as SMS or WhatsApp, are still open (O-08).

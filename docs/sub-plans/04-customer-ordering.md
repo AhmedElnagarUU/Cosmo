@@ -23,6 +23,7 @@ A customer can browse the catalog and place an order. The system reserves the st
 - Cancellation and release of reservation (C-12, A-06)
 - Orders placed by sales staff (C-32)
 - Alerts to the owner for rejected and cancelled orders (C-30)
+- Report to the owner when an order waits a long time for acceptance (C-35)
 
 ## Not in scope
 
@@ -66,12 +67,11 @@ Phase 1 (customer accounts), phase 2 (products and stock), phase 3 (so that ther
 | ID | Question |
 |---|---|
 | O-01 | Discounts and bonus units |
-| O-11 | What happens when an order waits too long for acceptance |
 | A-06 | Who can cancel, and until when |
 | A-07 | No ordering above available stock |
 | A-18 | Customers see "in stock" or "out of stock" only |
 
-Also to decide here: whether there is a minimum order value, and whether the stock manager can change quantities when accepting instead of rejecting the whole order.
+Also to decide here: how many hours of waiting count as "a long time", whether there is a minimum order value, and whether the stock manager can change quantities when accepting instead of rejecting the whole order.
 
 ## Done when
 

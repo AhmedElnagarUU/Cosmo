@@ -20,7 +20,7 @@ flowchart TD
 | Who can use it | Every customer | Only customers with "credit allowed" |
 | When the money is paid | At the door | Later, before the due date |
 | Who records it | Delivery person, then the accountant confirms | Accountant |
-| Due date | The delivery day | Invoice date plus the customer's credit period |
+| Due date | The delivery day | Invoice date plus the customer's credit period (C-36) |
 
 The credit period is set per customer. The default is one month, and the owner can change the default and each customer's period, for example to 15 days (C-26).
 
@@ -147,7 +147,7 @@ A balance is never typed in. It is always calculated from the documents behind i
 | A payment from a delivery person counts only after the accountant confirms it | C-27 |
 | A rejected payment needs a reason and alerts the owner | C-27, C-30 |
 | A saved payment cannot be edited. A wrong payment is cancelled with a reason and recorded again | C-10 |
-| The due date of a credit invoice is the invoice date plus the customer's credit period | C-26, A-24 |
+| The due date of a credit invoice is the invoice date plus the customer's credit period | C-26, C-36 |
 | Overdue invoices are shown to the owner and accountant. Nothing is blocked automatically | C-33 |
 | Invoices can be printed | |
 | Invoices keep the price from the moment the order was placed, even if the product price changes later | |
@@ -157,4 +157,3 @@ A balance is never typed in. It is always calculated from the documents behind i
 
 - **O-01** — Discounts and bonus units would change invoice lines.
 - **O-09** — Cash refunds for returns.
-- With invoice timing "on delivered", a credit customer's period starts on the delivery day. With the other timings it starts earlier. Confirm this is acceptable (A-24).

@@ -128,6 +128,8 @@ A cancellation by an employee needs a reason and sends an alert to the owner (C-
 
 If an invoice already exists when an order is cancelled, the invoice is cancelled too. This can only happen when invoice timing is set to "on accepted" or "on prepared" (A-05).
 
-## Still open
+## Orders that wait too long (C-35)
 
-- **O-11** — What happens if nobody accepts an order for a long time? The stock stays reserved while it waits. Options: show a warning on the owner's dashboard after some hours, or cancel the order automatically after a set time.
+Stock stays reserved while an order waits for acceptance. If an order waits a long time, the owner sees it on the dashboard and gets an alert. The order is not cancelled automatically. The owner can accept it, reject it, or ask the stock manager to decide.
+
+Still to decide: how many hours count as "a long time".
