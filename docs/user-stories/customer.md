@@ -44,47 +44,57 @@ As a customer, I want to add products to a cart and change quantities, so that I
 ### CUS-06 Choose how to pay
 As a customer, I want to choose a payment method at checkout, so that the wholesaler knows how I will pay.
 
-- I can choose cash on delivery, InstaPay, Vodafone Cash, or another listed method (C-16).
-- I see "credit" only if the wholesaler has allowed credit for me (A-14).
+- Without credit, I choose how I will pay when the order arrives: cash, InstaPay, or Vodafone Cash (C-26).
+- If the wholesaler has allowed credit for me, I can also choose credit and pay later (C-26).
+- When I choose credit, I see how many days I have to pay.
 
 ### CUS-07 Place the order
-As a customer, I want to place my order and get a clear confirmation, so that I know it was received.
+As a customer, I want to place my order and know it was received, so that I can wait for the answer.
 
-- If every product has enough stock, the order is confirmed immediately (A-03).
+- If every product has enough stock, the order is saved and the stock is held for me immediately (C-25).
 - If a product does not have enough stock, I am told which product and how many I can order (A-07).
-- I see an order number after placing the order.
+- I see an order number and the message "waiting for acceptance" (C-24).
 - Pressing the button twice does not create two orders.
 
-### CUS-08 Follow my order
+### CUS-08 See if my order was accepted or rejected
+As a customer, I want to know whether the wholesaler accepted my order, so that I know if the goods are coming.
+
+- When the order is accepted, its status changes to "accepted".
+- When the order is rejected, I see the reason the wholesaler wrote (C-24).
+- A rejected order cannot be changed. I can place a new one.
+
+### CUS-09 Follow my order
 As a customer, I want to see the status of my orders, so that I know when to expect the goods.
 
 - I see a list of my orders with their status.
 - I see what was ordered and, if different, what was prepared (A-08).
 - I see only my own orders.
 
-### CUS-09 Cancel an order
+### CUS-10 Cancel an order
 As a customer, I want to cancel an order I placed by mistake, so that I do not receive goods I do not want.
 
-- I can cancel only while the order is in the Placed status (A-06).
+- I can cancel while the order is waiting for acceptance or accepted, before preparation starts (A-06).
 - After that, the cancel button is gone and I am told to contact the wholesaler.
 
 ## Money
 
-### CUS-10 See my invoices and balance
+### CUS-11 See my invoices and balance
 As a customer, I want to see my invoices and how much I owe, so that I can plan my payments.
 
 - I see each invoice with its total, paid amount, and status.
+- For credit invoices, I see the due date, and whether it is overdue (C-26, C-33).
 - I see my total balance.
 - I can open and print an invoice.
 
-### CUS-11 See my payments
-As a customer, I want to see the payments the wholesaler has recorded for me, so that I can check they are correct.
+### CUS-12 See my payments
+As a customer, I want to see the payments recorded for me, so that I can check they are correct.
 
 - I see date, amount, method, and the invoice each payment belongs to.
+- A payment I gave to the delivery person shows "waiting for confirmation" until the accountant confirms it (C-27).
 
 ## Returns
 
-### CUS-12 See my returns
+### CUS-13 See my returns
 As a customer, I want to see my returns and the credit I received, so that I know my balance is correct.
 
 - I see each return with its products, quantities, status, and credit amount.

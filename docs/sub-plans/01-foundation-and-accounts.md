@@ -6,8 +6,10 @@ People can log in, and the owner can set up the business: employees, roles, and 
 
 ## What a person can do at the end
 
-- The owner logs in and adds employees with roles.
-- A manager or sales employee creates a customer account.
+- The owner logs in and creates employee accounts with a name, a password, and one or more roles.
+- An employee logs in and must change the password.
+- The owner or a sales employee creates a customer account.
+- The owner allows credit for a customer and sets the credit period.
 - A customer logs in for the first time, sets a password, and can reset it later.
 - Each person sees only the menu items for their role.
 
@@ -16,10 +18,11 @@ People can log in, and the owner can set up the business: employees, roles, and 
 - The project itself: Next.js frontend, Express backend, database (C-23, A-20)
 - Wholesaler workspace, with data separated per wholesaler (A-12)
 - Login, logout, first-login password, password reset
-- Employees and the six roles (C-22)
-- Customer accounts, including the "credit allowed" switch (A-01, A-14)
+- Employee accounts created by the owner, with a forced password change at first login (C-29)
+- The six roles, and more than one role per employee (C-22, C-31)
+- Customer accounts, including the "credit allowed" switch and the credit period (A-01, C-26)
 - App layout and navigation in Arabic and English, working on phones (A-11)
-- Activity history recording, used by every later phase
+- Activity recording with the employee's name, used by every later phase (C-30)
 
 ## Not in scope
 
@@ -29,15 +32,16 @@ People can log in, and the owner can set up the business: employees, roles, and 
 
 ## Stories
 
-MGR-01, MGR-02 (settings screen only), MGR-03, MGR-04, SAL-01, CUS-01, CUS-02
+OWN-01, OWN-02 (settings screen only), OWN-03, OWN-04, OWN-05, SAL-01, CUS-01, CUS-02
 
 ## Flow
 
 ```mermaid
 flowchart TD
     A[Platform creates the wholesaler workspace<br/>and the owner account] --> B[Owner logs in]
-    B --> C[Owner adds employees with roles]
-    C --> D[Manager or sales creates a customer account]
+    B --> C[Owner creates employee accounts<br/>with name, password, and roles]
+    C --> C2[Employee logs in and changes the password]
+    C2 --> D[Owner or sales creates a customer account]
     D --> E[Customer receives first-login details]
     E --> F[Customer logs in and sets a password]
     F --> G[Customer sees an empty home screen<br/>ready for ordering in phase 4]
@@ -55,7 +59,7 @@ Nothing. This is the first phase.
 | A-11 | Arabic and English, working on phones |
 | A-12 | Many wholesalers on one platform, each with separate data |
 | A-20 | TypeScript and PostgreSQL |
-| O-07 | Role permissions (first proposal is in the user stories) |
+| A-23 | Role permissions, as shown in the user stories table |
 
 Also to decide here: how the customer receives their first-login details (SMS, WhatsApp message sent by the employee, or a printed note), and whether login uses a phone number or an email address.
 

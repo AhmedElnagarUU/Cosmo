@@ -34,7 +34,7 @@ flowchart TD
 
     subgraph Changes reserved only
         R1[Order placed: reserved up]
-        R2[Order cancelled: reserved down]
+        R2[Order rejected or cancelled: reserved down]
         R3[Prepared less than ordered: reserved down]
     end
 
@@ -55,20 +55,20 @@ flowchart TD
 
 | Movement | On hand | Reserved | Started by |
 |---|---|---|---|
-| Receiving from supplier | Up | | Warehouse confirms a receipt |
+| Receiving from supplier | Up | | Stock manager confirms a receipt |
 | Order placed | | Up | System |
-| Order cancelled | | Down | System |
+| Order rejected or cancelled | | Down | System |
 | Prepared less than ordered | | Down | System, at preparation |
-| Trip starts | Down | Down | System, when the driver starts |
-| Failed delivery, goods back | Up | Up if the order will be delivered again | Warehouse confirms |
-| Customer return, sellable | Up | | Warehouse confirms |
-| Customer return, damaged | Recorded as damaged, not sellable | | Warehouse confirms |
-| Damaged, lost, or expired | Down | | Warehouse, with a reason |
-| Manual adjustment | Up or down | | Manager, with a reason |
+| Trip starts | Down | Down | System, when the delivery person starts |
+| Failed delivery, goods back | Up | Up if the order will be delivered again | Stock manager confirms |
+| Customer return, sellable | Up | | Stock manager confirms |
+| Customer return, damaged | Recorded as damaged, not sellable | | Stock manager confirms |
+| Damaged, lost, or expired | Down | | Stock manager, with a reason |
+| Manual adjustment | Up or down | | Stock manager, with a reason. The owner gets an alert |
 
 ## Reservation and batches
 
-A reservation is made against the product, not against a specific batch. The batch is chosen later by the warehouse employee during preparation (C-14). This keeps ordering fast and leaves the physical choice to the person holding the box.
+A reservation is made against the product, not against a specific batch. The batch is chosen later by the stock manager during preparation (C-14). This keeps ordering fast and leaves the physical choice to the person holding the box.
 
 ## Rules that must always be true
 
@@ -82,12 +82,14 @@ A reservation is made against the product, not against a specific batch. The bat
 
 ```mermaid
 sequenceDiagram
-    actor M as Manager
+    actor M as Stock manager
     participant S as System
+    actor O as Owner
 
     M->>S: Choose product and batch
     M->>S: Enter new counted quantity and a reason
     S->>S: Check the result does not go below reserved
     S->>S: Record an adjustment movement for the difference
-    S-->>M: Stock updated, entry added to activity history
+    S-->>M: Stock updated
+    S-->>O: Alert with the name and the reason
 ```

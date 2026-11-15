@@ -22,7 +22,7 @@ flowchart TD
 
 ```mermaid
 sequenceDiagram
-    actor W as Warehouse employee
+    actor W as Stock manager
     participant S as System
     actor A as Accountant
 

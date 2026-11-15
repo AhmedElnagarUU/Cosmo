@@ -2,20 +2,22 @@
 
 ## Goal
 
-The owner and manager see the state of the business on one screen, and can look up who did what.
+The owner sees the state of the business on one screen, knows who did what, and gets an alert when something important happens.
 
 This phase comes last because it only shows data that the earlier phases create.
 
 ## What a person can do at the end
 
-- A manager opens the dashboard and sees what needs attention today.
-- A manager searches the activity history.
-- The owner and accountant open a few simple reports.
+- The owner opens the dashboard and sees what needs attention today.
+- The owner opens the activity screen and sees every action with the employee's name.
+- The owner gets an alert for important events.
+- The owner, accountant, and stock manager open the reports for their work.
 
 ## In scope
 
-- Dashboard: orders to prepare, orders ready, trips in progress, failed deliveries, out-of-stock products, stock close to expiry, unpaid invoices, amount owed to suppliers
-- Activity history screen with filters by employee, date, and type
+- Dashboard: orders waiting for acceptance, orders to prepare, orders ready, trips in progress, failed deliveries, out-of-stock products, stock close to expiry, payments waiting for confirmation, overdue invoices, unpaid invoices, amount owed to suppliers
+- Activity screen with filters by employee, date, and type (C-30)
+- Alerts inside the app for a rejected order, a cancelled order, a stock correction, and a rejected payment (C-30)
 - Reports: sales by period, product, and customer; stock value; customer balances; supplier balances; stock close to expiry
 - Each role sees a home screen that fits its job
 
@@ -28,7 +30,7 @@ This phase comes last because it only shows data that the earlier phases create.
 
 ## Stories
 
-MGR-10, MGR-11, MGR-12
+OWN-09, OWN-10, OWN-11, OWN-12
 
 ## What the dashboard shows
 
@@ -39,6 +41,7 @@ flowchart TD
     D --> B[Stock warnings]
     D --> C[Money]
 
+    A --> A0[Orders waiting for acceptance]
     A --> A1[Orders waiting for preparation]
     A --> A2[Orders ready for a trip]
     A --> A3[Trips in progress]
@@ -50,7 +53,8 @@ flowchart TD
 
     C --> C1[Unpaid customer invoices]
     C --> C2[Owed to suppliers]
-    C --> C3[Cash with drivers]
+    C --> C3[Payments waiting for confirmation]
+    C --> C4[Overdue credit invoices]
 ```
 
 Every number on the dashboard opens the list behind it.
@@ -63,8 +67,8 @@ Phases 1 to 8.
 
 | ID | Question |
 |---|---|
-| O-07 | Which role sees which report |
-| O-08 | Notifications by SMS, WhatsApp, or email |
+| A-23 | Which role sees which report |
+| O-08 | Notifications outside the app by SMS, WhatsApp, or email |
 
 Also to decide here: which reports the wholesaler really uses every week. Only those are built.
 
@@ -72,5 +76,6 @@ Also to decide here: which reports the wholesaler really uses every week. Only t
 
 - Every story's acceptance checks pass.
 - Every dashboard number matches the list it opens.
-- Activity history entries cannot be changed or deleted.
+- Activity entries cannot be changed or deleted.
+- Each important event creates exactly one alert for the owner.
 - The project owner has tried it and approved.

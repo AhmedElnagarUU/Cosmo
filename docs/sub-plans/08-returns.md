@@ -7,7 +7,7 @@ When a customer sends goods back, the wholesaler records it once, and both the s
 ## What a person can do at the end
 
 - An employee starts a return from the original invoice.
-- The warehouse confirms the goods arrived and decides whether they can be sold again.
+- The stock manager confirms the goods arrived and decides whether they can be sold again.
 - The customer gets a credit on their balance and can see the return.
 
 ## In scope
@@ -28,7 +28,7 @@ When a customer sends goods back, the wholesaler records it once, and both the s
 
 ## Stories
 
-SAL-05, WH-10, ACC-09, CUS-12
+SAL-05, STK-13, ACC-11, CUS-13
 
 ## Workflow
 
@@ -37,7 +37,7 @@ SAL-05, WH-10, ACC-09, CUS-12
 ```mermaid
 flowchart LR
     A[Employee starts a return<br/>from the invoice] --> B[Goods arrive]
-    B --> C[Warehouse checks condition]
+    B --> C[Stock manager checks condition]
     C --> D[Stock is corrected]
     C --> E[Customer gets a credit]
 ```

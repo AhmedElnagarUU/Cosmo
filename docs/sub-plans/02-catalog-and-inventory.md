@@ -6,10 +6,10 @@ The wholesaler has a product catalog and can see stock per product and per batch
 
 ## What a person can do at the end
 
-- A manager creates and edits products and prices.
-- Anyone in the warehouse can see on hand, reserved, and available for each product, and the batches behind it.
-- A manager corrects stock with an adjustment and a reason.
-- Warehouse staff record damaged, lost, or expired stock.
+- The owner creates and edits products and prices. The stock manager can edit products but not prices.
+- The stock manager sees on hand, reserved, and available for each product, and the batches behind it.
+- The stock manager corrects stock with a reason, and the owner gets an alert.
+- The stock manager records damaged, lost, or expired stock.
 
 ## In scope
 
@@ -31,7 +31,7 @@ The wholesaler has a product catalog and can see stock per product and per batch
 
 ## Stories
 
-MGR-05, MGR-06, MGR-07, WH-11, WH-12
+OWN-06, OWN-07, STK-14, STK-15, STK-16
 
 ## Workflow
 
@@ -39,7 +39,7 @@ MGR-05, MGR-06, MGR-07, WH-11, WH-12
 
 ```mermaid
 flowchart LR
-    A[Manager creates a product] --> B[Stock is zero]
+    A[Owner or stock manager creates a product] --> B[Stock is zero]
     B --> C[Adjustment or receiving adds stock to a batch]
     C --> D[Movement is recorded]
     D --> E[On hand, reserved, and available are recalculated]

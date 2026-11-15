@@ -10,7 +10,7 @@ flowchart TD
     B --> C[Employee selects products and quantities to return]
     C --> D[Employee chooses a reason]
     D --> E[Goods arrive at the warehouse]
-    E --> F[Warehouse checks each product and its batch]
+    E --> F[Stock manager checks each product and its batch]
     F --> G{Condition of the goods?}
     G -- Good, can be sold again --> H[Add to sellable stock<br/>in the original batch]
     G -- Damaged or expired --> I[Add to damaged stock<br/>not available for sale]
@@ -25,7 +25,7 @@ flowchart TD
 ```mermaid
 stateDiagram-v2
     [*] --> Requested: Employee creates the return
-    Requested --> Received: Warehouse confirms goods arrived and their condition
+    Requested --> Received: Stock manager confirms goods arrived and their condition
     Received --> Completed: Credit applied to customer balance
     Requested --> Cancelled: Goods never arrived
     Completed --> [*]
@@ -47,7 +47,7 @@ stateDiagram-v2
 |---|---|
 | A return must point to an original invoice | C-19 |
 | The returned quantity cannot be more than the quantity on the invoice, minus earlier returns | |
-| The warehouse employee decides the condition: sellable or damaged | A-09 |
+| The stock manager decides the condition: sellable or damaged | A-09 |
 | Sellable goods go back into their original batch, with its original expiry date | |
 | Damaged goods are recorded but never become available for sale | A-09 |
 | The customer gets a credit equal to the invoice price of the returned goods | A-09 |

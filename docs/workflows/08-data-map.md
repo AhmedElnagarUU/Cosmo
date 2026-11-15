@@ -33,7 +33,7 @@ erDiagram
 
     DELIVERY_TRIP ||--|{ DELIVERY_STOP : includes
     DELIVERY_STOP }o--|| ORDER : delivers
-    EMPLOYEE ||--o{ DELIVERY_TRIP : drives
+    EMPLOYEE ||--o{ DELIVERY_TRIP : delivers
 
     ORDER ||--o| INVOICE : "is billed by"
     INVOICE ||--o{ PAYMENT : "is paid by"
@@ -48,8 +48,8 @@ erDiagram
 | Thing | Meaning |
 |---|---|
 | Wholesaler | One business workspace. All other data belongs to exactly one wholesaler (A-12) |
-| Employee | A person who works for the wholesaler, with one role |
-| Customer | A pharmacy or store with a login |
+| Employee | A person who works for the wholesaler, with one or more roles (C-31) |
+| Customer | A pharmacy or store with a login, a credit switch, and a credit period (C-26) |
 | Supplier | A company the wholesaler buys from. No login |
 | Product | An item in the catalog with one selling price |
 | Batch | One lot of a product with a batch number, expiry date, and its own stock |
@@ -57,13 +57,13 @@ erDiagram
 | Receipt | One delivery from a supplier, with the supplier's invoice details |
 | Receipt line | One product and batch inside a receipt |
 | Supplier payment | Money paid to a supplier |
-| Order | A customer's request for products |
+| Order | A customer's request for products, accepted or rejected by the stock manager (C-24) |
 | Order line | One product and quantity inside an order |
-| Pick | The batch and quantity a warehouse employee actually took for an order line |
-| Delivery trip | One driver's outing |
+| Pick | The batch and quantity the stock manager actually took for an order line |
+| Delivery trip | One delivery person's outing |
 | Delivery stop | One order inside a trip, with its result |
 | Invoice | The bill for an order |
-| Payment | Money received from a customer for an invoice |
+| Payment | Money received from a customer for an invoice. It counts only after the accountant confirms it (C-27) |
 | Return | Goods a customer sent back, linked to an invoice |
 | Return line | One product, batch, quantity, and condition inside a return |
 

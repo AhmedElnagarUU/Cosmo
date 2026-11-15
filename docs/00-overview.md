@@ -33,33 +33,37 @@ flowchart LR
 
 | Role | Main job in the app |
 |---|---|
-| Owner | Everything, including settings and employees |
-| Manager | Daily control: customers, products, orders, delivery trips |
-| Sales | Create customers and place orders for them |
-| Warehouse | Receive goods, prepare orders, handle stock |
-| Accountant | Invoices, payments, balances |
-| Driver | Deliver orders and report the result |
+| Owner | Everything, including employee accounts, settings, prices, and credit |
+| Sales (optional) | Add customers and place orders for them |
+| Stock manager | Accept or reject orders, receive goods, manage stock, prepare orders |
+| Delivery manager | Assign ready orders to delivery people and follow them |
+| Accountant | Confirm payments, manage invoices and balances |
+| Delivery | Deliver assigned orders and record the payment collected |
+
+One employee can hold more than one role. The owner creates every employee account.
 
 ## The whole business in one picture
 
 ```mermaid
 flowchart TD
     subgraph IN[Goods come in]
-        A1[Supplier delivers goods] --> A2[Warehouse records what was received<br/>with batch and expiry]
+        A1[Supplier delivers goods] --> A2[Stock manager records what was received<br/>with batch and expiry]
         A2 --> A3[Stock increases]
         A2 --> A4[Amount owed to supplier increases]
     end
 
     subgraph SELL[Goods go out]
         B1[Customer places order] --> B2[System checks and reserves stock]
-        B2 --> B3[Warehouse prepares the order]
-        B3 --> B4[Driver delivers the order]
+        B2 --> B7[Stock manager accepts or rejects]
+        B7 --> B3[Stock manager prepares the order]
+        B3 --> B8[Delivery manager assigns a delivery person]
+        B8 --> B4[Delivery person delivers and collects payment]
         B4 --> B5[Invoice is created]
-        B5 --> B6[Payment is recorded]
+        B5 --> B6[Accountant confirms the payment]
     end
 
     subgraph BACK[Goods come back]
-        C1[Customer returns goods] --> C2[Warehouse checks condition]
+        C1[Customer returns goods] --> C2[Stock manager checks condition]
         C2 --> C3[Stock and customer balance are corrected]
     end
 
@@ -87,7 +91,7 @@ flowchart TD
 ## What we are not building in the first version
 
 - More than one warehouse
-- GPS, live driver tracking, automatic route planning
+- GPS, live tracking of delivery people, automatic route planning
 - Supplier login or supplier portal
 - Different prices for different customers
 - Customer credit limits
@@ -110,6 +114,8 @@ flowchart TD
 | Stock movement | One recorded change to stock, with a reason. Stock is never edited directly |
 | Receiving | Recording goods that a supplier delivered |
 | Preparation | Picking and packing an order in the warehouse |
-| Trip | One driver's outing, covering one or more orders |
+| Trip | One delivery person's outing, covering one or more orders |
 | Stop | One customer delivery inside a trip |
+| Credit period | The number of days a credit customer has to pay an invoice |
+| Overdue | A credit invoice that is still unpaid after its due date |
 | Balance | What a customer owes the wholesaler, or what the wholesaler owes a supplier |

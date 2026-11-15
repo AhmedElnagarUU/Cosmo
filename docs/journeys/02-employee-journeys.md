@@ -4,70 +4,93 @@ A typical day for each role inside the wholesaler.
 
 ## How the roles hand work to each other
 
-One order passes through several people. Each person only does their own real-world action. The system does the rest.
+One order passes through several people. Each person only does their own decision or real-world action. The system does the rest.
 
 ```mermaid
 sequenceDiagram
     actor C as Customer
     participant S as System
-    actor W as Warehouse
-    actor M as Manager
-    actor D as Driver
+    actor K as Stock manager
+    actor M as Delivery manager
+    actor D as Delivery person
     actor A as Accountant
+    actor O as Owner
 
     C->>S: Place order
-    S-->>W: Task appears
-    W->>S: Confirm preparation
+    S-->>K: New order to decide
+    K->>S: Accept
+    K->>S: Confirm preparation
     S-->>M: Order is ready
-    M->>S: Create trip and assign driver
+    M->>S: Create trip and assign delivery person
     S-->>D: Trip appears
     D->>S: Start trip
-    D->>S: Mark delivered and record cash
-    S-->>A: Invoice and cash to confirm
-    A->>S: Confirm cash and record payment
+    D->>S: Mark delivered and record payment
+    S-->>A: Payment waiting for confirmation
+    A->>S: Confirm payment
     S-->>C: Updated invoice and balance
+    S-->>O: Every step appears on the activity screen
 ```
 
-## Warehouse employee
+## Stock manager
 
 ```mermaid
 journey
-    title A day in the warehouse
+    title A day as stock manager
     section Morning
-      Open the task list: 5: Warehouse
-      Receive a supplier delivery: 3: Warehouse
-      Enter batches and expiry dates: 3: Warehouse
+      Review new orders: 4: Stock manager
+      Accept or reject each order: 4: Stock manager
+      Receive a supplier delivery: 3: Stock manager
+      Enter batches and expiry dates: 3: Stock manager
     section Preparing orders
-      Open the oldest task: 5: Warehouse
-      Pick products with the recommended batch: 4: Warehouse
-      Record a short quantity: 3: Warehouse
-      Confirm preparation: 5: Warehouse
+      Open the oldest accepted order: 5: Stock manager
+      Pick products with the recommended batch: 4: Stock manager
+      Record a short quantity: 3: Stock manager
+      Confirm preparation: 5: Stock manager
     section Afternoon
-      Take back goods from a failed delivery: 3: Warehouse
-      Check goods a customer returned: 3: Warehouse
-      Review stock close to expiry: 4: Warehouse
+      Take back goods from a failed delivery: 3: Stock manager
+      Check goods a customer returned: 3: Stock manager
+      Review stock close to expiry: 4: Stock manager
 ```
 
 Receiving and entering batches score lowest because they involve the most typing. Barcode scanning and remembering the last cost price should reduce that work.
 
-## Driver
+The stock manager has the most tasks of any role. If the wholesaler grows, this is the first role to split into two.
+
+## Delivery manager
+
+```mermaid
+journey
+    title A day as delivery manager
+    section Morning
+      See orders ready for delivery: 5: Delivery manager
+      Group orders into trips: 4: Delivery manager
+      Assign each trip to a delivery person: 4: Delivery manager
+    section During the day
+      Follow trips in progress: 4: Delivery manager
+      Find who has a specific order: 5: Delivery manager
+      See a failed delivery and its reason: 3: Delivery manager
+    section End of day
+      Plan failed orders into a new trip: 3: Delivery manager
+```
+
+## Delivery person
 
 ```mermaid
 journey
     title A day on the road
     section At the warehouse
-      Open my trip: 5: Driver
-      Load the goods: 4: Driver
-      Start the trip: 5: Driver
+      Open my trip: 5: Delivery
+      Load the goods: 4: Delivery
+      Start the trip: 5: Delivery
     section On the road
-      Find the customer: 3: Driver
-      Hand over the goods: 5: Driver
-      Mark delivered: 5: Driver
-      Record cash collected: 4: Driver
-      Report a failed delivery: 3: Driver
+      Find the customer: 3: Delivery
+      Hand over the goods: 5: Delivery
+      Mark delivered: 5: Delivery
+      Record the payment collected: 4: Delivery
+      Report a failed delivery: 3: Delivery
     section Back at the warehouse
-      Return undelivered goods: 3: Driver
-      Hand over cash: 4: Driver
+      Return undelivered goods: 3: Delivery
+      Hand over cash: 4: Delivery
 ```
 
 ## Accountant
@@ -76,33 +99,37 @@ journey
 journey
     title A day in accounts
     section Morning
-      Review unpaid invoices: 4: Accountant
-      Record transfers received: 4: Accountant
+      Review payments waiting for confirmation: 4: Accountant
+      Check InstaPay and Vodafone Cash transfers: 3: Accountant
+      Confirm or reject each payment: 4: Accountant
     section During the day
+      Record a payment from a credit customer: 4: Accountant
       Answer a customer about their balance: 4: Accountant
       Record a supplier payment: 4: Accountant
     section End of day
-      Confirm cash from drivers: 3: Accountant
+      Receive cash from delivery people: 3: Accountant
       Check differences in cash: 2: Accountant
+      Review overdue invoices: 3: Accountant
 ```
 
-Cash differences are the hardest moment. The app must show clearly what the driver recorded against what the accountant received.
+Cash differences are the hardest moment. The app must show clearly what the delivery person recorded against what the accountant received.
 
-## Manager
+## Owner
 
 ```mermaid
 journey
-    title A day as manager
+    title A day as owner
     section Morning
-      Check the dashboard: 5: Manager
-      Plan delivery trips: 4: Manager
+      Check the dashboard: 5: Owner
+      Read alerts from yesterday: 4: Owner
     section During the day
-      Add a new customer: 4: Manager
-      Decide on a failed delivery: 3: Manager
-      Cancel an order for a customer: 3: Manager
+      Add a new employee account: 4: Owner
+      Allow credit for a trusted customer: 4: Owner
+      Accept an order while the stock manager is away: 4: Owner
+      Read why an order was rejected: 4: Owner
     section End of day
-      Review the activity history: 4: Manager
-      Check stock and expiry: 4: Manager
+      Review the activity screen: 4: Owner
+      Check overdue invoices and stock: 4: Owner
 ```
 
 ## Sales employee
@@ -121,8 +148,9 @@ journey
 
 ## Related stories
 
-- [Warehouse](../user-stories/warehouse.md)
-- [Driver](../user-stories/driver.md)
-- [Accountant](../user-stories/accountant.md)
-- [Owner and manager](../user-stories/owner-and-manager.md)
+- [Owner](../user-stories/owner.md)
 - [Sales](../user-stories/sales.md)
+- [Stock manager](../user-stories/stock-manager.md)
+- [Delivery manager](../user-stories/delivery-manager.md)
+- [Delivery](../user-stories/delivery.md)
+- [Accountant](../user-stories/accountant.md)

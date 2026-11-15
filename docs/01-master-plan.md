@@ -34,8 +34,8 @@ flowchart TD
     F1[Phase 1<br/>Foundation and accounts]
     F2[Phase 2<br/>Catalog and inventory]
     F3[Phase 3<br/>Suppliers and receiving]
-    F4[Phase 4<br/>Customer ordering]
-    F5[Phase 5<br/>Warehouse preparation]
+    F4[Phase 4<br/>Ordering and acceptance]
+    F5[Phase 5<br/>Order preparation]
     F6[Phase 6<br/>Delivery]
     F7[Phase 7<br/>Invoices and payments]
     F8[Phase 8<br/>Returns]
@@ -60,14 +60,14 @@ An arrow means "must be finished first".
 | 1 | [Foundation and accounts](sub-plans/01-foundation-and-accounts.md) | Log in. The owner can add employees and customers |
 | 2 | [Catalog and inventory](sub-plans/02-catalog-and-inventory.md) | Create products and see stock per batch |
 | 3 | [Suppliers and receiving](sub-plans/03-suppliers-and-receiving.md) | Record goods from a supplier and see stock go up |
-| 4 | [Customer ordering](sub-plans/04-customer-ordering.md) | A pharmacy can browse, order, and see stock reserved |
-| 5 | [Warehouse preparation](sub-plans/05-warehouse-preparation.md) | Warehouse staff can prepare an order and choose batches |
-| 6 | [Delivery](sub-plans/06-delivery.md) | A driver can deliver a trip and report results |
-| 7 | [Invoices and payments](sub-plans/07-invoices-and-payments.md) | The accountant can see invoices and record payments |
+| 4 | [Customer ordering and acceptance](sub-plans/04-customer-ordering.md) | A pharmacy can browse and order. The stock manager accepts or rejects |
+| 5 | [Order preparation](sub-plans/05-order-preparation.md) | The stock manager can prepare an order and choose batches |
+| 6 | [Delivery](sub-plans/06-delivery.md) | The delivery manager can assign orders, and a delivery person can deliver and record payment |
+| 7 | [Invoices and payments](sub-plans/07-invoices-and-payments.md) | The accountant can confirm payments and follow balances |
 | 8 | [Returns](sub-plans/08-returns.md) | An employee can record a customer return |
 | 9 | [Dashboard and reports](sub-plans/09-dashboard-and-reports.md) | The owner can see the state of the business on one screen |
 
-After phase 7, the full main journey works from start to finish: goods in, order, preparation, delivery, invoice, payment.
+After phase 7, the full main journey works from start to finish: goods in, order, acceptance, preparation, delivery, invoice, payment.
 
 ## How one phase runs
 

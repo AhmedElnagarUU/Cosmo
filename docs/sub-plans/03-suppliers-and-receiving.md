@@ -7,7 +7,7 @@ The wholesaler records goods delivered by suppliers. Stock goes up, and the amou
 ## What a person can do at the end
 
 - An employee keeps a list of suppliers.
-- A warehouse employee records a delivery with quantities, cost prices, batches, and expiry dates.
+- The stock manager records a delivery with quantities, cost prices, batches, and expiry dates.
 - The accountant sees what is owed to each supplier and records payments.
 
 ## In scope
@@ -27,7 +27,7 @@ The wholesaler records goods delivered by suppliers. Stock goes up, and the amou
 
 ## Stories
 
-WH-01, WH-02, ACC-06, ACC-07
+STK-01, STK-02, ACC-09, ACC-10
 
 ## Workflow
 

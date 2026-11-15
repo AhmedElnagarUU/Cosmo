@@ -1,30 +1,70 @@
 # Invoices and payments
 
+## Two ways a customer pays (C-26)
+
+```mermaid
+flowchart TD
+    Q{Is credit allowed<br/>for this customer?}
+    Q -- No --> N[Customer pays when the order arrives<br/>cash, InstaPay, or Vodafone Cash]
+    Q -- Yes --> Y{What did the customer<br/>choose at checkout?}
+    Y -- Pay on arrival --> N
+    Y -- Credit --> C[Customer receives the goods now<br/>and pays within the credit period]
+    N --> P1[Delivery person records the payment]
+    P1 --> P2[Accountant confirms or rejects]
+    C --> P3[Customer pays the office later]
+    P3 --> P4[Accountant records the payment]
+```
+
+| | Pay on arrival | Credit |
+|---|---|---|
+| Who can use it | Every customer | Only customers with "credit allowed" |
+| When the money is paid | At the door | Later, before the due date |
+| Who records it | Delivery person, then the accountant confirms | Accountant |
+| Due date | The delivery day | Invoice date plus the customer's credit period |
+
+The credit period is set per customer. The default is one month, and the owner can change the default and each customer's period, for example to 15 days (C-26).
+
 ## When the invoice is created (A-05)
 
-The wholesaler chooses one of three moments in the settings. The default is "on delivered".
+The owner chooses one of three moments in the settings. The default is "on delivered".
 
 ```mermaid
 flowchart TD
     S{Invoice timing setting}
-    S -- On order placed --> A[Invoice is created when the order is placed<br/>Amount is what was ordered]
+    S -- On accepted --> A[Invoice is created when the stock manager accepts the order<br/>Amount is what was ordered]
     S -- On prepared --> B[Invoice is created when preparation is confirmed<br/>Amount is what was prepared]
-    S -- On delivered, default --> C[Invoice is created when the driver confirms delivery<br/>Amount is what was delivered]
+    S -- On delivered, default --> C[Invoice is created when delivery is confirmed<br/>Amount is what was delivered]
 ```
 
 | Timing | Good | Bad |
 |---|---|---|
-| On order placed | The customer sees the amount immediately | Any change later (short stock, cancellation, failed delivery) means the invoice must be corrected or cancelled |
+| On accepted | The customer sees the amount early | Any change later (short stock, cancellation, failed delivery) means the invoice must be corrected or cancelled |
 | On prepared | The invoice can be printed and sent with the goods | A failed delivery still needs the invoice to be cancelled |
 | On delivered | The invoice always matches what the customer has | No printed invoice travels with the goods. A delivery note is used instead |
+
+## Payment statuses (C-27)
+
+```mermaid
+stateDiagram-v2
+    [*] --> WaitingForConfirmation: Delivery person records a payment
+    [*] --> Confirmed: Accountant records a payment directly
+    WaitingForConfirmation --> Confirmed: Accountant confirms the money arrived
+    WaitingForConfirmation --> Rejected: Accountant rejects with a reason
+    Confirmed --> Cancelled: Accountant cancels a mistake with a reason
+    Confirmed --> [*]
+    Rejected --> [*]
+    Cancelled --> [*]
+```
+
+Only a **confirmed** payment changes the invoice status and the customer's balance.
 
 ## Invoice statuses
 
 ```mermaid
 stateDiagram-v2
     [*] --> Unpaid: Invoice created
-    Unpaid --> PartiallyPaid: Payment smaller than the total
-    Unpaid --> Paid: Payment equal to the total
+    Unpaid --> PartiallyPaid: Confirmed payment smaller than the total
+    Unpaid --> Paid: Confirmed payment equal to the total
     PartiallyPaid --> PartiallyPaid: Another partial payment
     PartiallyPaid --> Paid: Remaining amount paid
     Unpaid --> Cancelled: Order cancelled before delivery
@@ -32,9 +72,40 @@ stateDiagram-v2
     Cancelled --> [*]
 ```
 
-The status is calculated from the payments. Nobody sets it by hand.
+The status is calculated from the confirmed payments. Nobody sets it by hand.
 
-## Recording a customer payment
+An unpaid or partially paid credit invoice that is past its due date is shown as **overdue**. Overdue is a warning, not a status change, and it does not block the customer (C-33).
+
+## Payment collected at delivery
+
+```mermaid
+sequenceDiagram
+    actor C as Customer
+    actor D as Delivery person
+    participant S as System
+    actor A as Accountant
+    actor O as Owner
+
+    C->>D: Pays by cash, InstaPay, or Vodafone Cash
+    D->>S: Record method, amount, and reference number
+    S->>S: Save payment as waiting for confirmation
+    Note over D,A: After the trip
+    alt Cash
+        D->>A: Hand over the cash
+    else InstaPay or Vodafone Cash
+        A->>A: Check the wholesaler's account for the transfer
+    end
+    alt Money arrived
+        A->>S: Confirm the payment
+        S->>S: Update invoice status and customer balance
+    else Money did not arrive
+        A->>S: Reject the payment and write a reason
+        S->>S: Invoice stays unpaid
+        S-->>O: Alert with the reason
+    end
+```
+
+## Payment made to the office
 
 ```mermaid
 sequenceDiagram
@@ -45,31 +116,21 @@ sequenceDiagram
     A->>S: Choose an invoice
     A->>S: Enter amount, method, date, reference number
     S->>S: Check the amount is not more than the remaining amount
-    S->>S: Save payment, recalculate invoice status and customer balance
+    S->>S: Save a confirmed payment, recalculate invoice status and customer balance
     S-->>A: Updated invoice and balance
 ```
-
-## Payment methods (C-16, A-14)
-
-| Method | When the money arrives | Who records it |
-|---|---|---|
-| Cash on delivery | At the door | Driver records the cash. Accountant confirms the handover (A-16) |
-| InstaPay | Before or after delivery | Accountant, with the reference number |
-| Vodafone Cash | Before or after delivery | Accountant, with the reference number |
-| Credit | Later | Accountant, when the customer pays. Only for customers with "credit allowed" (A-14) |
-| Other | Any time | Accountant, with a note |
 
 ## Balances
 
 ```mermaid
 flowchart LR
-    subgraph Customer balance
+    subgraph CUST[Customer balance]
         I[Invoices] -- increase --> CB[What the customer owes]
-        P[Payments] -- decrease --> CB
+        P[Confirmed payments] -- decrease --> CB
         R[Return credits] -- decrease --> CB
     end
 
-    subgraph Supplier balance
+    subgraph SUPP[Supplier balance]
         PI[Purchase invoices] -- increase --> SB[What we owe the supplier]
         SP[Supplier payments] -- decrease --> SB
     end
@@ -83,7 +144,11 @@ A balance is never typed in. It is always calculated from the documents behind i
 |---|---|
 | Each payment belongs to one invoice | A-15 |
 | A payment cannot be larger than the remaining amount of the invoice | |
+| A payment from a delivery person counts only after the accountant confirms it | C-27 |
+| A rejected payment needs a reason and alerts the owner | C-27, C-30 |
 | A saved payment cannot be edited. A wrong payment is cancelled with a reason and recorded again | C-10 |
+| The due date of a credit invoice is the invoice date plus the customer's credit period | C-26, A-24 |
+| Overdue invoices are shown to the owner and accountant. Nothing is blocked automatically | C-33 |
 | Invoices can be printed | |
 | Invoices keep the price from the moment the order was placed, even if the product price changes later | |
 | No tax integration and no payment gateway | C-15, C-18 |
@@ -92,3 +157,4 @@ A balance is never typed in. It is always calculated from the documents behind i
 
 - **O-01** — Discounts and bonus units would change invoice lines.
 - **O-09** — Cash refunds for returns.
+- With invoice timing "on delivered", a credit customer's period starts on the delivery day. With the other timings it starts earlier. Confirm this is acceptable (A-24).

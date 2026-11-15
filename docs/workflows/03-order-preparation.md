@@ -1,12 +1,12 @@
-# Warehouse preparation
+# Order preparation
 
-The warehouse employee works from a list of tasks. They do not manage order statuses. They do the physical work and confirm it.
+The stock manager prepares orders that have been accepted (C-24, C-34). They work from a simple list, do the physical work, and confirm it.
 
 ## The flow
 
 ```mermaid
 flowchart TD
-    A[New order appears in the task list] --> B[Employee opens the task]
+    A[Accepted order appears in the preparation list] --> B[Stock manager opens the order]
     B --> C[System shows each product<br/>with a recommended batch]
     C --> D[Employee picks the product from the shelf]
     D --> E{Is the recommended batch<br/>the one in hand?}
@@ -42,13 +42,14 @@ The system only recommends. The employee always makes the final choice, because 
 
 | Rule | Decision |
 |---|---|
-| Opening a task moves the order to Preparing automatically | A-03 |
+| Only accepted orders appear in the preparation list | C-24 |
+| Opening an order moves it to Preparing automatically | |
 | One order line can be filled from more than one batch | |
 | A barcode scan can select the product, where a scanner or phone camera is available | |
 | If less than the ordered quantity is found, the employee enters a reason. The extra reservation is released | A-08 |
-| If nothing at all can be prepared, the employee reports it and a manager cancels the order | A-06 |
+| If nothing at all can be prepared, the stock manager cancels the order with a reason | A-06 |
 | Batches close to expiry show a warning | A-17, O-06 |
-| On-hand stock does not change at preparation. It changes when the trip starts | A-04 |
+| On-hand stock does not change at preparation. It changes when the trip starts | C-25 |
 
 ## Reasons for preparing less than ordered
 
