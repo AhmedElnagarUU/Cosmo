@@ -14,10 +14,12 @@ journey
       I search for products: 5: Customer
       I check price and stock status: 4: Customer
       I add products to my cart: 5: Customer
+      I mark the products I must have: 4: Customer
       I choose a payment method: 4: Customer
       I place the order: 5: Customer
     section Waiting
       I wait for the wholesaler to accept: 3: Customer
+      I answer a change to a must-have product: 2: Customer
       I see my order was accepted: 5: Customer
       I see my order is being prepared: 4: Customer
       I see my order is out for delivery: 4: Customer
@@ -44,10 +46,13 @@ flowchart TD
     G -- Yes --> I[Order received, stock reserved]
     I --> Q{Stock manager accepts?}
     Q -- No --> R[Customer sees the rejection reason]
+    Q -- Yes, with a must-have product reduced --> T{Customer accepts the change?}
+    T -- No --> U[Order is cancelled]
+    T -- Yes --> J
     Q -- Yes --> J[Customer follows the order status]
     J --> K[Delivery person delivers the goods]
     K --> L{Delivered?}
-    L -- Yes --> M[Invoice appears in the customer's account]
+    L -- Yes --> M[Customer signs the paper<br/>Invoice appears in the customer's account]
     L -- No --> N[Wholesaler arranges a new delivery<br/>or cancels the order]
     M --> O[Customer pays on arrival, or later if on credit]
     O --> S[Accountant confirms the payment]
@@ -61,13 +66,13 @@ flowchart TD
 | Placed | "Waiting for acceptance" | Cancel the order |
 | Accepted | "Accepted" | Cancel the order |
 | Rejected | "Rejected", with the reason | Order again |
+| Waiting for customer | "Waiting for your answer", with the change and the reason | Accept the change or cancel the order |
 | Preparing | "Being prepared" | Nothing. Contact the wholesaler to cancel |
 | Ready | "Ready for delivery" | Nothing |
 | Out for delivery | "On the way" | Nothing |
-| Delivered | "Delivered" | See the invoice |
-| Partially delivered | "Delivered in part", with the quantities | See the invoice |
+| Delivered | "Delivered" | See the invoice, and any return for items refused at the door |
 | Delivery failed | "Delivery was not completed" | Contact the wholesaler |
-| Cancelled | "Cancelled" | Order again |
+| Cancelled | "Cancelled", with the reason if the wholesaler cancelled | Order again |
 
 ## Moments that can go wrong
 
@@ -75,11 +80,15 @@ flowchart TD
 |---|---|---|
 | Placing the order | A product ran out while the cart was open | The customer is told which product and how many are available (A-07) |
 | Acceptance | The wholesaler rejects the order | The customer sees the reason and can order again (C-24) |
-| Preparation | The stock manager finds less than ordered | The order continues with the smaller quantity, and the customer sees it (A-08) |
+| Acceptance | The warehouse is closed | The customer sees "Closed now" and is told the order will be reviewed when it opens (C-37) |
+| Acceptance | Nobody answers the order | After 5 working hours the owner is alerted. The order is never cancelled automatically (C-35) |
+| Acceptance or preparation | A normal product is short | The order continues with the smaller quantity, and the customer sees the reason (C-38) |
+| Acceptance or preparation | A must-have product is short | The order waits. The customer accepts the change or cancels (C-39) |
+| Delivery | The customer refuses some items | The items are recorded as a return, and the customer pays only for what they kept (C-47) |
 | Delivery | Nobody is at the pharmacy | The delivery person reports a failed delivery. The order is delivered again or cancelled (A-19) |
 | Payment | The accountant cannot find the transfer | The payment is rejected with a reason, and the invoice stays unpaid (C-27) |
 | After delivery | A product is damaged or wrong | The customer contacts the wholesaler, who records a return and a credit (A-09, A-22) |
 
 ## Related stories
 
-[Customer stories](../user-stories/customer.md): CUS-01 to CUS-13.
+[Customer stories](../user-stories/customer.md): CUS-01 to CUS-16.

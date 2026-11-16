@@ -21,6 +21,8 @@ This is the single list of business decisions. Every other document refers to th
 | C-07 | No customer credit limits |
 | C-18 | Invoices are internal documents. No tax or e-invoicing integration |
 | C-23 | The frontend is Next.js and the backend is Express |
+| C-40 | The app works one clear way, with few owner settings: working hours, default credit period, invoice timing, and the near-expiry period. The settings area is built so that more settings can be added later |
+| C-46 | Notifications are inside the app only. No SMS, WhatsApp, or email. They are designed so that other channels can be added later without rebuilding |
 
 ### Stock
 
@@ -33,6 +35,9 @@ This is the single list of business decisions. Every other document refers to th
 | C-12 | Cancelling or rejecting an order releases its reservation |
 | C-13 | Products can have batch and expiry tracking |
 | C-14 | The system recommends a batch by expiry. The employee chooses and can override |
+| C-42 | Goods can be returned to a supplier. The return records the product, batch, quantity, and a reason. Stock decreases, and the amount owed to the supplier decreases. If the supplier sends new goods in exchange, they are recorded as a normal receipt |
+| C-43 | The supplier's invoice arrives with the goods. The goods and the invoice are recorded together in one step |
+| C-45 | "Near expiry" means six months before the expiry date by default. The owner can change this in the settings |
 | C-25 | Stock is reserved the moment the customer places the order, before acceptance. On hand decreases only when the goods leave the warehouse |
 
 ### Orders
@@ -41,7 +46,11 @@ This is the single list of business decisions. Every other document refers to th
 |---|---|
 | C-24 | Orders are accepted by hand. The stock manager accepts or rejects each order, and the owner can too. A rejection needs a reason, and the customer sees it |
 | C-32 | Sales employees can place an order for a customer |
-| C-35 | An order that waits a long time for acceptance is reported to the owner on the dashboard and as an alert. It is not cancelled automatically |
+| C-35 | An order that waits more than 5 working hours for acceptance is reported to the owner on the dashboard and as an alert. It is never cancelled automatically. The owner can cancel it with a reason, and the customer is notified |
+| C-37 | The owner sets working hours: open days, opening time, and closing time, with a "closed today" switch. Customers see whether the warehouse is open or closed. Customers can place orders while it is closed, and they are told the order will be reviewed when it opens |
+| C-38 | The stock manager can reduce a quantity or remove a product, when accepting an order or when preparing it. A reason is required. A quantity can never be increased. This replaces the old assumption A-08 |
+| C-39 | The customer can mark products in the cart as "must have". If a normal product is reduced or removed, the order continues and the customer is informed. If a must-have product is reduced or removed, the order becomes "Waiting for customer", and the customer accepts the change or cancels the order. If the customer does not answer within 5 working hours, it is reported to the owner and not cancelled automatically |
+| C-41 | The owner can put an offer on a product: a percent discount, or bonus units such as "buy 10, get 1 free". An offer is the same for every customer and can have a start and end date. Bonus units are reserved and delivered like normal units and appear on the invoice at price zero |
 
 ### Payment
 
@@ -61,8 +70,10 @@ This is the single list of business decisions. Every other document refers to th
 |---|---|
 | C-19 | Returns are their own module, linked to the original order or invoice |
 | C-20 | Delivery uses trips with several orders, manual stop order, and a delivery view on the phone |
-| C-21 | Delivery results are Delivered, Failed, or Partially delivered. A failure needs a reason |
+| C-21 | Delivery results are Delivered or Failed. A failure needs a reason |
 | C-28 | The delivery manager assigns ready orders to delivery people and follows them |
+| C-44 | Proof of delivery is a paper signed by the customer. The delivery person brings it back, and the delivery manager marks "signed paper received" for each order. Nothing is uploaded to the app. A missing paper is shown to the owner |
+| C-47 | Items the customer refuses at the door are handled as a return, with a reason. There is no "Partially delivered" status |
 
 ### People
 
@@ -70,7 +81,7 @@ This is the single list of business decisions. Every other document refers to th
 |---|---|
 | C-22 | Roles are Owner, Sales, Stock manager, Delivery manager, Accountant, Delivery. There is no separate Manager role |
 | C-29 | The owner creates each employee account with a name and a password. The employee must change the password at first login |
-| C-30 | The owner has an activity screen showing who did what and when. The owner gets an alert only for important events: a rejected order, a cancelled order, a stock correction, a payment the accountant rejected |
+| C-30 | The owner has an activity screen showing who did what and when. The owner gets an alert only for important events: a rejected order, a cancelled order, a stock correction, a payment the accountant rejected, an order or a customer answer waiting more than 5 working hours, and a missing signed delivery paper |
 | C-31 | One employee can hold more than one role |
 | C-34 | The stock manager also picks and packs orders. There is no separate warehouse worker role for now |
 
@@ -83,7 +94,6 @@ This is the single list of business decisions. Every other document refers to th
 | A-05 | Invoice timing | A setting per wholesaler: on accepted, on prepared, or on delivered. Default is on delivered | The invoice then always matches what the customer really received |
 | A-06 | Cancellation | A customer can cancel until preparation starts. The owner or stock manager can cancel until the trip starts | After preparation starts, people have already done physical work |
 | A-07 | Shortage at order time | A customer cannot order more than the available quantity | Simplest rule. No backorders |
-| A-08 | Partial preparation | The stock manager can confirm less than ordered, with a reason. The order continues with the smaller quantity | Handles damaged or missing stock without splitting orders |
 | A-09 | Return effect | The stock manager chooses whether returned goods go back to sellable stock or to damaged stock. The customer gets a credit on their balance | Covers both cases without a quarantine process |
 | A-10 | Units | Each product is sold in one unit (for example "box"). No unit conversion | Conversion adds a lot of complexity |
 | A-11 | Language and devices | Arabic and English, with right-to-left layout. Web app that works well on phones | Delivery people and pharmacies mostly use phones |
@@ -95,20 +105,14 @@ This is the single list of business decisions. Every other document refers to th
 | A-20 | Technology | TypeScript on both sides and PostgreSQL as the database | Stock and money need strict transactions |
 | A-22 | Who creates returns | An employee creates the return. Customers can see their returns but cannot create them | Returns need a physical check of the goods |
 | A-23 | Permissions | Each role can do what the table in [User stories](user-stories/README.md) shows | Keeps roles few and simple |
+| A-25 | Returning goods bought with a bonus offer | The credit for each returned unit is the amount paid for the line divided by all its units, including the free ones. The other choice is that the customer must return the whole line | The customer never gets back more than they paid, and can still return a part |
 
 ## Open — needs a decision
 
 | ID | Area | Question | Why it matters |
 |---|---|---|---|
-| O-01 | Discounts and bonus units | Do we need discounts or "buy 10, get 1 free" offers in the first version? | Common in pharmaceutical wholesale. It changes order lines, invoices, and returns |
-| O-02 | Supplier returns | Can the wholesaler send expired or damaged goods back to a supplier? | It reduces stock and the amount owed to the supplier |
-| O-03 | Purchase invoice timing | Is the supplier's invoice always recorded together with receiving, or can it arrive later? | Decides whether receiving is one step or two |
-| O-04 | Proof of delivery | Does the delivery person need a signature, a photo, or nothing? | Changes the delivery screen and what is stored |
 | O-05 | Product fields | Which exact fields does each product type need? | Needed before the product screens are designed |
-| O-06 | Near-expiry threshold | How many days before expiry counts as "near expiry"? | Drives warnings and the batch recommendation |
-| O-08 | Outside notifications | Should customers or employees get SMS, WhatsApp, or email messages, on top of alerts inside the app? | Adds an outside service and cost |
 | O-09 | Refunds | Can a return be refunded in cash, or only as a credit on the balance? | Changes the payment module |
-| O-10 | Partial delivery detail | When a customer refuses some items at the door, is that handled as a partial delivery or as a return? | Changes the delivery flow and the invoice |
 
 ## Change history
 
@@ -124,6 +128,17 @@ This is the single list of business decisions. Every other document refers to th
 | Permissions | Was open (O-07). Now a proposal to confirm (A-23) |
 | Slow acceptance | Was open (O-11). Now confirmed: report to the owner (C-35) |
 | Credit period start | Was assumed (A-24). Now confirmed (C-36) |
+| Slow acceptance | The limit is now 5 working hours (C-35) |
+| Working hours | New (C-37) |
+| Preparing less than ordered | Was assumed (A-08). Now confirmed, and extended to acceptance, with "must have" products (C-38, C-39) |
+| Settings | Confirmed: few settings, open for more later (C-40) |
+| Discounts and bonus units | Was open (O-01). Now confirmed (C-41). The return rule is still to confirm (A-25) |
+| Supplier returns | Was open (O-02). Now confirmed (C-42) |
+| Purchase invoice timing | Was open (O-03). Now confirmed: one step (C-43) |
+| Proof of delivery | Was open (O-04). Now confirmed: signed paper, checked by the delivery manager (C-44) |
+| Near-expiry period | Was open (O-06). Now confirmed: six months by default (C-45) |
+| Outside notifications | Was open (O-08). Now confirmed: inside the app only (C-46) |
+| Items refused at the door | Was open (O-10). Now confirmed: handled as a return. "Partially delivered" is removed (C-47, C-21) |
 
 ## How decisions change
 

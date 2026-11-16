@@ -7,12 +7,15 @@ When a customer sends goods back, the wholesaler records it once, and both the s
 ## What a person can do at the end
 
 - An employee starts a return from the original invoice.
+- Items refused at the door become a return automatically, with the credit applied at once.
 - The stock manager confirms the goods arrived and decides whether they can be sold again.
 - The customer gets a credit on their balance and can see the return.
 
 ## In scope
 
 - Returns linked to an invoice (C-19)
+- Returns created from items refused at the door (C-47)
+- Credit for goods bought with a bonus offer (A-25)
 - Return reasons
 - Condition check per product: sellable or damaged (A-09)
 - Stock movements for returned goods, into the original batch
@@ -21,7 +24,7 @@ When a customer sends goods back, the wholesaler records it once, and both the s
 
 ## Not in scope
 
-- Returns to suppliers (O-02)
+- Returns to suppliers. They are built in phase 3 (C-42)
 - Customers creating returns themselves (A-22)
 - Cash refunds, unless O-09 is decided
 - Exchange of one product for another. This is a return plus a new order
@@ -53,8 +56,7 @@ Phase 7 (invoices and balances), phase 5 (which batch was sent to the customer).
 | A-09 | Sellable or damaged, and credit on the balance |
 | A-22 | Only employees create returns |
 | O-09 | Cash refund or credit only |
-| O-10 | Items refused at the door |
-| O-02 | Returns to suppliers |
+| A-25 | Credit for returned goods bought with a bonus offer |
 
 Also to decide here: whether returns have a time limit, and who approves a return of high value.
 

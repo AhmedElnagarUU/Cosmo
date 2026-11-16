@@ -1,6 +1,6 @@
 # Receiving goods from a supplier
 
-There is no purchase order (C-04). The wholesaler orders from suppliers outside the app, by phone or WhatsApp. The app records only what actually arrived.
+There is no purchase order (C-04). The wholesaler orders from suppliers outside the app, by phone or WhatsApp. The app records only what actually arrived. The supplier's invoice comes with the goods, so both are recorded in one step (C-43).
 
 ## The flow
 
@@ -46,9 +46,10 @@ sequenceDiagram
 | Batch number and expiry date are required for products that have batch tracking switched on | C-13 |
 | An expiry date in the past is rejected | A-17 |
 | The same batch number received again for the same product is added to the existing batch | |
+| The supplier's invoice number and total are entered on the same receipt as the goods | C-43 |
 | Supplier payments can be partial | |
+| Goods sent back to a supplier are recorded as a [supplier return](09-supplier-returns.md) | C-42 |
 
-## Still open
+## Still to decide
 
-- **O-03** — Can the supplier's invoice arrive later than the goods? If yes, receiving and the purchase invoice become two separate steps.
-- **O-02** — Can goods be sent back to a supplier?
+- Does a new cost price on a receipt change the product's cost price automatically?

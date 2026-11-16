@@ -14,6 +14,8 @@ As a sales employee, I want to place an order on behalf of a customer, so that p
 - I choose the customer, then add products and quantities (C-32).
 - I see the exact available quantity, unlike the customer.
 - The order follows the same rules as a customer order: stock is reserved immediately, and the order waits for acceptance (C-24, C-25).
+- I can mark products as "must have" for the customer (C-39).
+- Offers apply the same way as for a customer order (C-41).
 - The order shows that I placed it.
 
 ### SAL-03 See a customer's orders and balance

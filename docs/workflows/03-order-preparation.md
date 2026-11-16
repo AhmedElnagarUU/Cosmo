@@ -16,7 +16,10 @@ flowchart TD
     G --> H
     H -- Yes --> I[Next product]
     H -- No --> J[Employee enters the quantity found<br/>and a reason]
-    J --> I
+    J --> J2{Is the product<br/>marked must have?}
+    J2 -- No --> I
+    J2 -- Yes --> J3[Order becomes Waiting for customer<br/>until the customer accepts or cancels]
+    J3 --> I
     I --> K{All products done?}
     K -- No --> D
     K -- Yes --> L[Employee confirms preparation]
@@ -46,9 +49,11 @@ The system only recommends. The employee always makes the final choice, because 
 | Opening an order moves it to Preparing automatically | |
 | One order line can be filled from more than one batch | |
 | A barcode scan can select the product, where a scanner or phone camera is available | |
-| If less than the ordered quantity is found, the employee enters a reason. The extra reservation is released | A-08 |
+| If less than the ordered quantity is found, the employee enters a reason. The extra reservation is released, and the customer is informed | C-38 |
+| If the short product is marked must have, the order waits for the customer's answer before it can be confirmed | C-39 |
+| Bonus units are picked together with the paid units | C-41 |
 | If nothing at all can be prepared, the stock manager cancels the order with a reason | A-06 |
-| Batches close to expiry show a warning | A-17, O-06 |
+| Batches that expire within the near-expiry period show a warning. The default is six months | A-17, C-45 |
 | On-hand stock does not change at preparation. It changes when the trip starts | C-25 |
 
 ## Reasons for preparing less than ordered

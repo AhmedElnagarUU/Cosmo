@@ -16,9 +16,11 @@ As an owner, I want to create an account for each employee and give them a role,
 ### OWN-02 Business settings
 As an owner, I want to set how my business works, so that the app matches my way of working.
 
-- I can choose when invoices are created: on accepted, on prepared, or on delivered (A-05).
-- I can set the default credit period, which starts at one month (C-26).
-- I can set how many days before expiry counts as "near expiry" (O-06).
+- There are only a few settings, so the app stays clear (C-40).
+- Working hours: I set the open days, the opening time, and the closing time. I also have a "closed today" switch for holidays (C-37).
+- Default credit period: it starts at one month (C-26).
+- Invoice timing: on accepted, on prepared, or on delivered (A-05).
+- Near-expiry period: it starts at six months (C-45).
 - A changed setting applies to new orders only.
 
 ### OWN-03 Create customer accounts
@@ -61,6 +63,16 @@ As an owner, I want to change a product's selling price, so that it stays up to 
 - Orders already placed keep their original price.
 - The price change appears on the activity screen.
 
+### OWN-13 Manage offers
+As an owner, I want to put a discount or bonus units on a product, so that I can sell more of it.
+
+- I choose the product and the offer type: a percent discount, or bonus units such as "buy 10, get 1 free" (C-41).
+- I can set a start date and an end date. Without dates, the offer runs until I stop it.
+- The offer is the same for every customer (C-06).
+- A product has only one active offer at a time.
+- Orders already placed keep the offer they were placed with.
+- Only the owner can create, change, or stop an offer.
+
 ## Orders
 
 ### OWN-08 See all orders and step in
@@ -69,6 +81,7 @@ As an owner, I want to see every order and act on it when needed, so that work d
 - I can filter orders by status, customer, and date.
 - I can accept or reject an order myself (C-24).
 - I can cancel an order until its trip starts, and I must give a reason (A-06).
+- The customer gets a notification that the order was cancelled, with my reason (C-35).
 - Cancelling releases the reserved stock (C-12).
 
 ## Watching the business
@@ -76,7 +89,9 @@ As an owner, I want to see every order and act on it when needed, so that work d
 ### OWN-09 Dashboard
 As an owner, I want one screen that shows what needs attention today, so that I can act quickly.
 
-- I see orders waiting for acceptance, with those waiting a long time marked clearly (C-35).
+- I see orders waiting for acceptance, with those waiting more than 5 working hours marked clearly (C-35).
+- I see orders waiting for the customer's answer, with those waiting more than 5 working hours marked clearly (C-39).
+- I see delivered orders whose signed paper has not come back (C-44).
 - I see orders being prepared, orders ready for delivery, and trips in progress.
 - I see failed deliveries that need a decision.
 - I see products that are out of stock or close to expiry.
@@ -93,10 +108,10 @@ As an owner, I want to see who did what and when, so that I know who is working 
 ### OWN-11 Alerts for important events
 As an owner, I want an alert when something important happens, so that I do not have to watch the activity screen all day.
 
-- I get an alert inside the app for: a rejected order, a cancelled order, a stock correction, a payment the accountant rejected, and an order waiting a long time for acceptance (C-30, C-35).
+- I get an alert inside the app for: a rejected order, a cancelled order, a stock correction, a payment the accountant rejected, an order or a customer answer waiting more than 5 working hours, and a missing signed delivery paper (C-30, C-35, C-39, C-44).
 - Each alert shows the employee's name and the reason they wrote.
 - Ordinary actions do not create alerts. They appear only on the activity screen.
-- Alerts outside the app, such as SMS or WhatsApp, are still open (O-08).
+- Alerts are inside the app only. There is no SMS or WhatsApp (C-46).
 
 ### OWN-12 Basic reports
 As an owner, I want a few simple reports, so that I understand how the business is doing.

@@ -29,7 +29,7 @@ As a delivery person, I want to mark an order as delivered, so that the office k
 - One tap marks the stop as Delivered.
 - If invoice timing is "on delivered", the invoice is created now (A-05).
 - Tapping twice does not record the delivery twice.
-- Proof of delivery, such as a signature or photo, is still open (O-04).
+- The customer signs the delivery paper, and I keep it to hand to the delivery manager. I do not upload a photo (C-44).
 
 ### DEL-05 Record the payment I collected
 As a delivery person, I want to record what the customer paid me, so that the accountant can confirm it.
@@ -46,15 +46,17 @@ As a delivery person, I want to report that I could not deliver, so that the off
 - I must choose a reason: customer not available, address problem, customer refused, or other (C-21).
 - The goods stay with me until I return them to the warehouse (A-19).
 
-### DEL-07 Report a partial delivery
-As a delivery person, I want to record that the customer accepted only some items, so that they are charged only for what they took.
+### DEL-07 Record items refused at the door
+As a delivery person, I want to record the items the customer refused, so that they pay only for what they kept.
 
-- I enter the quantity accepted for each product.
+- I enter the refused quantity for each product and choose a reason (C-47).
+- The system creates a return for these items. The stop is still Delivered.
+- The amount to collect is updated at once.
 - The refused items come back to the warehouse with me.
-- The exact handling is still open (O-10).
+- If the customer refuses everything, I report a failed delivery instead (DEL-06).
 
 ### DEL-08 Finish the trip
 As a delivery person, I want to see when my trip is complete, so that I know what to bring back.
 
 - The trip is finished when every stop has a result.
-- I see a summary: delivered stops, failed stops, goods to return, and cash to hand over.
+- I see a summary: delivered stops, failed stops, goods to return, cash to hand over, and signed papers to hand over (C-44).

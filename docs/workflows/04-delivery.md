@@ -9,7 +9,7 @@ stateDiagram-v2
     [*] --> Planned: Delivery manager creates the trip and assigns a delivery person
     Planned --> InProgress: Delivery person starts the trip
     InProgress --> Finished: Every stop has a result
-    Finished --> Closed: Accountant has confirmed or rejected every payment
+    Finished --> Closed: Every payment is checked and every signed paper is received
     Planned --> [*]: Delivery manager deletes the trip
     Closed --> [*]
 ```
@@ -22,13 +22,26 @@ Each stop is one customer's order inside the trip.
 stateDiagram-v2
     [*] --> Assigned
     Assigned --> OutForDelivery: Trip starts
-    OutForDelivery --> Delivered: Customer received everything
-    OutForDelivery --> PartiallyDelivered: Customer accepted some items
+    OutForDelivery --> Delivered: Customer received the order and signed the paper
     OutForDelivery --> Failed: Not delivered, reason recorded
     Delivered --> [*]
-    PartiallyDelivered --> [*]
     Failed --> [*]
 ```
+
+If the customer refuses some items, the stop is still Delivered. The refused items are recorded as a return with a reason (C-47). If the customer refuses everything, the stop is Failed.
+
+## Proof of delivery (C-44)
+
+```mermaid
+flowchart LR
+    A[Customer signs<br/>the delivery paper] --> B[Delivery person marks<br/>the stop as delivered]
+    B --> C[Delivery person brings<br/>the paper back]
+    C --> D{Delivery manager<br/>has the paper?}
+    D -- Yes --> E[Marks signed paper received]
+    D -- No --> F[Order stays on the missing papers list<br/>Owner gets an alert]
+```
+
+The paper is not photographed or uploaded. The wholesaler keeps it in their own way. The app only records that the delivery manager received it.
 
 ## Planning a trip
 
@@ -59,7 +72,12 @@ sequenceDiagram
     loop For each stop
         D->>C: Hand over the goods
         alt Delivered
+            C->>D: Signs the delivery paper
             D->>S: Mark delivered
+            opt Customer refuses some items
+                D->>S: Record refused items and a reason
+                S->>S: Create a return for the refused items
+            end
             opt Customer pays now
                 C->>D: Pays by cash, InstaPay, or Vodafone Cash
                 D->>S: Record method, amount, and reference
@@ -70,8 +88,10 @@ sequenceDiagram
             S-->>M: Failed delivery appears
         end
     end
-    D->>K: Bring back goods from failed stops
-    K->>S: Confirm returned goods are back
+    D->>K: Bring back goods from failed stops and refused items
+    K->>S: Confirm the goods are back and their condition
+    D->>M: Hand over the signed papers
+    M->>S: Mark signed paper received for each order
     D->>A: Hand over cash
     A->>S: Confirm or reject each payment
     S->>S: Close the trip
@@ -91,9 +111,11 @@ sequenceDiagram
 | The delivery person sees only their own trips | A-23 |
 | A payment recorded by the delivery person waits for the accountant. It does not count as paid yet | C-27 |
 | A credit order has nothing to collect at the door | C-26 |
+| Items refused at the door become a return with a reason. The customer pays only for what they kept | C-47 |
+| A delivered order needs a signed paper. The delivery manager confirms it arrived | C-44 |
+| A trip closes only when every payment is checked and every signed paper is received | C-27, C-44 |
 | No GPS, no live tracking, no automatic route | |
 
-## Still open
+## Still to decide
 
-- **O-04** — Does the delivery person capture a signature or a photo as proof of delivery?
-- **O-10** — When a customer refuses some items at the door, is it recorded as a partial delivery or as a return?
+- Can a delivery person change the order of stops during the trip?

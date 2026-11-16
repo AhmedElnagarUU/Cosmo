@@ -27,7 +27,7 @@ As a delivery manager, I want to change a trip that has not started, so that I c
 As a delivery manager, I want to see every trip and its progress, so that I always know who has which order.
 
 - I see each trip with its delivery person and its status.
-- For each stop I see the result: waiting, delivered, partially delivered, or failed.
+- For each stop I see the result: waiting, delivered, or failed. I also see if items were refused (C-47).
 - I can search for an order and see which delivery person has it.
 - There is no map or live location.
 
@@ -37,3 +37,12 @@ As a delivery manager, I want to plan a new delivery for an order that failed, s
 - I see failed orders with the reason the delivery person chose (C-21).
 - After the stock manager confirms the goods are back, the order is Ready again and I can add it to a new trip (A-19).
 - If the order should not be delivered again, the owner or stock manager cancels it.
+
+### DM-06 Confirm signed delivery papers
+As a delivery manager, I want to mark which signed papers came back, so that we have proof for every delivered order.
+
+- After a trip, I see its delivered orders, each with a "signed paper received" check (C-44).
+- I tick the check when the delivery person hands me the paper.
+- Nothing is uploaded. The paper is kept the way the wholesaler chooses.
+- An order without a paper stays on a "missing papers" list, and the owner gets an alert.
+- The trip closes only when every paper is received and every payment is checked.

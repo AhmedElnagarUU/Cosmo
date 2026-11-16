@@ -23,6 +23,8 @@ People can log in, and the owner can set up the business: employees, roles, and 
 - Customer accounts, including the "credit allowed" switch and the credit period (A-01, C-26)
 - App layout and navigation in Arabic and English, working on phones (A-11)
 - Activity recording with the employee's name, used by every later phase (C-30)
+- Settings area with working hours, built so that more settings can be added later (C-37, C-40)
+- Notifications inside the app, built so that other channels can be added later (C-46)
 
 ## Not in scope
 

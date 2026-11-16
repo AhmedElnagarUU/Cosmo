@@ -30,12 +30,13 @@ flowchart TD
         D2[Damaged or lost stock]
         D3[Expired stock removed]
         D4[Adjustment down, with reason]
+        D5[Return to supplier]
     end
 
     subgraph Changes reserved only
         R1[Order placed: reserved up]
         R2[Order rejected or cancelled: reserved down]
-        R3[Prepared less than ordered: reserved down]
+        R3[Quantity reduced by the stock manager: reserved down]
     end
 
     STOCK[(Stock per product and batch)]
@@ -48,6 +49,7 @@ flowchart TD
     STOCK --> D2
     STOCK --> D3
     STOCK --> D4
+    STOCK --> D5
     R1 -.-> STOCK
     R2 -.-> STOCK
     R3 -.-> STOCK
@@ -58,10 +60,11 @@ flowchart TD
 | Receiving from supplier | Up | | Stock manager confirms a receipt |
 | Order placed | | Up | System |
 | Order rejected or cancelled | | Down | System |
-| Prepared less than ordered | | Down | System, at preparation |
+| Quantity reduced at acceptance or preparation | | Down | System, when the stock manager saves the change (C-38) |
 | Trip starts | Down | Down | System, when the delivery person starts |
 | Failed delivery, goods back | Up | Up if the order will be delivered again | Stock manager confirms |
-| Customer return, sellable | Up | | Stock manager confirms |
+| Customer return or items refused at the door, sellable | Up | | Stock manager confirms |
+| Return to supplier | Down | | Stock manager confirms (C-42) |
 | Customer return, damaged | Recorded as damaged, not sellable | | Stock manager confirms |
 | Damaged, lost, or expired | Down | | Stock manager, with a reason |
 | Manual adjustment | Up or down | | Stock manager, with a reason. The owner gets an alert |
@@ -75,7 +78,7 @@ A reservation is made against the product, not against a specific batch. The bat
 - On hand is never negative.
 - Reserved is never more than on hand.
 - Available is never negative.
-- Every movement can be traced to a document (receipt, order, trip, return, or adjustment) and an employee.
+- Every movement can be traced to a document (receipt, order, trip, return, supplier return, or adjustment) and an employee.
 - Expired batches are not counted in available stock (A-17).
 
 ## Manual adjustment (C-10)

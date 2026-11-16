@@ -19,7 +19,8 @@ The wholesaler has a product catalog and can see stock per product and per batch
 - Stock movements as the only way stock changes (C-09)
 - Manual adjustments with a reason (C-10)
 - Damaged, lost, and expired stock
-- List of stock close to expiry and expired stock (A-17)
+- List of stock close to expiry and expired stock, with a near-expiry period of six months by default (A-17, C-45)
+- Offers on products: percent discount or bonus units, with optional dates (C-41)
 - Barcode search
 
 ## Not in scope
@@ -31,7 +32,7 @@ The wholesaler has a product catalog and can see stock per product and per batch
 
 ## Stories
 
-OWN-06, OWN-07, STK-14, STK-15, STK-16
+OWN-06, OWN-07, OWN-13 (creating offers; they affect orders from phase 4), STK-14, STK-15, STK-16
 
 ## Workflow
 
@@ -54,7 +55,6 @@ Phase 1 (login and roles).
 | ID | Question |
 |---|---|
 | O-05 | The exact product fields for pharmaceuticals and for cosmetics |
-| O-06 | How many days before expiry is "near expiry" |
 | A-10 | One selling unit per product, no conversion |
 | A-17 | Expired batches cannot be sold |
 

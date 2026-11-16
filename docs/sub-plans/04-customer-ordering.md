@@ -8,7 +8,10 @@ A customer can browse the catalog and place an order. The system reserves the st
 
 - A customer searches the catalog, fills a cart, chooses a payment method, and places an order.
 - A sales employee places an order for a customer.
-- The stock manager sees each new order and accepts it, or rejects it with a reason.
+- The customer sees whether the warehouse is open, and can order also when it is closed.
+- The customer marks "must have" products in the cart.
+- The stock manager sees each new order and accepts it, accepts it with a smaller quantity, or rejects it with a reason.
+- The customer answers a change to a must-have product: accept it or cancel the order.
 - The customer sees whether the order was accepted or rejected, and why.
 - The customer can cancel before preparation starts. The stock manager or owner can cancel later.
 
@@ -23,18 +26,23 @@ A customer can browse the catalog and place an order. The system reserves the st
 - Cancellation and release of reservation (C-12, A-06)
 - Orders placed by sales staff (C-32)
 - Alerts to the owner for rejected and cancelled orders (C-30)
-- Report to the owner when an order waits a long time for acceptance (C-35)
+- Report to the owner when an order waits more than 5 working hours for acceptance (C-35)
+- Working hours shown to the customer, and ordering while closed (C-37)
+- Reducing a quantity or removing a product at acceptance, with a reason (C-38)
+- "Must have" marks and the "Waiting for customer" status (C-39)
+- Discounts and bonus units on order lines (C-41)
+- Notifications to the customer inside the app (C-46)
 
 ## Not in scope
 
 - Preparation, delivery, and invoices (phases 5 to 7). In this phase an order stops at Accepted
 - Backorders or waiting lists
-- Discounts and bonus units, unless O-01 is decided
+- Different offers for different customers (C-06)
 - Editing an order after it is placed. The customer cancels and orders again
 
 ## Stories
 
-CUS-03 to CUS-10, SAL-02 to SAL-04, STK-03 to STK-05, STK-17, OWN-08
+CUS-03 to CUS-10, CUS-14 to CUS-16, SAL-02 to SAL-04, STK-03 to STK-05, STK-17, STK-18, OWN-08
 
 ## Workflow
 
@@ -50,6 +58,10 @@ flowchart TD
     D --> F[Order is Placed, waiting for acceptance]
     F --> G{Stock manager decides}
     G -- Accept --> H[Order is Accepted<br/>waits for preparation, phase 5]
+    G -- Reduce a normal product --> H
+    G -- Reduce a must-have product --> K[Order is Waiting for customer]
+    K -- Customer accepts --> H
+    K -- Customer cancels --> J
     G -- Reject with reason --> I[Order is Rejected<br/>reservation released<br/>customer sees the reason]
     F --> J[Customer cancels<br/>reservation released]
 ```
@@ -66,12 +78,11 @@ Phase 1 (customer accounts), phase 2 (products and stock), phase 3 (so that ther
 
 | ID | Question |
 |---|---|
-| O-01 | Discounts and bonus units |
 | A-06 | Who can cancel, and until when |
 | A-07 | No ordering above available stock |
 | A-18 | Customers see "in stock" or "out of stock" only |
 
-Also to decide here: how many hours of waiting count as "a long time", whether there is a minimum order value, and whether the stock manager can change quantities when accepting instead of rejecting the whole order.
+Also to decide here: whether there is a minimum order value.
 
 ## Done when
 
@@ -79,5 +90,8 @@ Also to decide here: how many hours of waiting count as "a long time", whether t
 - Two orders placed at the same time can never reserve more than the available stock.
 - Placing the same order twice by accident creates one order.
 - Rejecting or cancelling returns the available quantity to its earlier value.
-- A rejected order always has a reason, and the customer can read it.
+- A rejected, changed, or cancelled order always has a reason, and the customer can read it.
+- A quantity can be reduced but never increased by an employee.
+- The 5 hours are counted only inside working hours.
+- An order total with a discount or bonus units is always calculated the same way on the cart, the order, and later the invoice.
 - The project owner has tried it and approved.

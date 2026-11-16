@@ -19,6 +19,7 @@ After this phase, the full main journey works: goods in, order, acceptance, prep
 
 - Invoice creation by setting: on accepted, on prepared, or on delivered (A-05)
 - Invoice status calculated from confirmed payments (C-17)
+- Discounts and bonus units on invoice lines (C-41)
 - Payments with method, date, and reference (C-15, C-16)
 - Confirming or rejecting payments from delivery, with a reason for rejection (C-27)
 - Cash handover after a trip and closing the trip
@@ -72,7 +73,6 @@ Phase 6 (delivery results and payments recorded at the door), phase 4 (orders), 
 |---|---|
 | A-05 | Invoice timing as a setting, default on delivered |
 | A-15 | One payment belongs to one invoice |
-| O-01 | Discounts and bonus units on invoices |
 
 Also to decide here: the invoice number format, what the printed invoice must show, and whether a customer can pay before delivery.
 

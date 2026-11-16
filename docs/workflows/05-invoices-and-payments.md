@@ -42,6 +42,19 @@ flowchart TD
 | On prepared | The invoice can be printed and sent with the goods | A failed delivery still needs the invoice to be cancelled |
 | On delivered | The invoice always matches what the customer has | No printed invoice travels with the goods. A delivery note is used instead |
 
+## Offers on the invoice (C-41)
+
+| Offer | What the invoice shows |
+|---|---|
+| Discount | The normal price, the discount, and the price after discount for the line |
+| Bonus units | The paid units at the normal price, and the free units as a separate line at price zero |
+
+The invoice total is the amount after discounts.
+
+## Items refused at the door (C-47)
+
+The invoice covers the whole delivered order. The refused items are recorded as a return, and the return credit is taken off at once. The delivery person collects the invoice total minus that credit, so the customer pays only for what they kept.
+
 ## Payment statuses (C-27)
 
 ```mermaid
@@ -155,5 +168,5 @@ A balance is never typed in. It is always calculated from the documents behind i
 
 ## Still open
 
-- **O-01** — Discounts and bonus units would change invoice lines.
+- **A-25** — How a return is credited when the goods were bought with a bonus offer.
 - **O-09** — Cash refunds for returns.

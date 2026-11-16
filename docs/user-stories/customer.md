@@ -33,12 +33,14 @@ As a customer, I want to see a product's details and price, so that I can decide
 - I see name, brand, unit, price, and description.
 - I see "in stock" or "out of stock", not the exact quantity (A-18).
 - The price is the same for every customer (C-06).
+- If the product has an offer, I see the discount or the bonus units, for example "buy 10, get 1 free" (C-41).
 
 ### CUS-05 Build a cart
 As a customer, I want to add products to a cart and change quantities, so that I can prepare my order.
 
 - I can add, change, and remove products.
-- I see the total as I go.
+- I see the total as I go, with discounts and free bonus units shown clearly (C-41).
+- I can mark any product as "must have". One button, "ask me about any change", marks every product (C-39).
 - My cart is still there if I close the app and come back.
 
 ### CUS-06 Choose how to pay
@@ -54,6 +56,7 @@ As a customer, I want to place my order and know it was received, so that I can 
 - If every product has enough stock, the order is saved and the stock is held for me immediately (C-25).
 - If a product does not have enough stock, I am told which product and how many I can order (A-07).
 - I see an order number and the message "waiting for acceptance" (C-24).
+- If the warehouse is closed, I can still place the order, and I am told it will be reviewed when the warehouse opens (C-37).
 - Pressing the button twice does not create two orders.
 
 ### CUS-08 See if my order was accepted or rejected
@@ -67,14 +70,37 @@ As a customer, I want to know whether the wholesaler accepted my order, so that 
 As a customer, I want to see the status of my orders, so that I know when to expect the goods.
 
 - I see a list of my orders with their status.
-- I see what was ordered and, if different, what was prepared (A-08).
+- If a quantity was reduced or a product removed, I see the old quantity, the new quantity, and the reason (C-38).
 - I see only my own orders.
 
 ### CUS-10 Cancel an order
 As a customer, I want to cancel an order I placed by mistake, so that I do not receive goods I do not want.
 
 - I can cancel while the order is waiting for acceptance or accepted, before preparation starts (A-06).
+- I can also cancel while the order is waiting for my answer about a change (C-39).
 - After that, the cancel button is gone and I am told to contact the wholesaler.
+
+### CUS-14 See if the warehouse is open
+As a customer, I want to know whether the wholesaler is working now, so that I know when my order will be reviewed.
+
+- I see "Open now" or "Closed now", with the next opening time (C-37).
+- I can browse and order at any time, also when it is closed.
+
+### CUS-15 Answer a change to my order
+As a customer, I want to decide what happens when a product I must have is reduced or removed, so that I do not receive an order that has no value for me.
+
+- If a product I marked "must have" is reduced or removed, the order shows "waiting for your answer", and I get a notification (C-39).
+- I see the product, the old quantity, the new quantity, and the reason.
+- I choose "accept the change" or "cancel the order".
+- If a product I did not mark is changed, the order continues, and I am only informed (C-39).
+- My order is never cancelled automatically because I answered late (C-39).
+
+### CUS-16 Get notifications
+As a customer, I want a notification inside the app when something happens to my order, so that I do not have to keep checking.
+
+- I get a notification when my order is accepted, rejected, changed, cancelled, or on the way (C-46).
+- A rejection, a change, or a cancellation always shows the reason the wholesaler wrote (C-24, C-35).
+- Notifications are inside the app only. There is no SMS or WhatsApp message (C-46).
 
 ## Money
 
@@ -98,4 +124,5 @@ As a customer, I want to see the payments recorded for me, so that I can check t
 As a customer, I want to see my returns and the credit I received, so that I know my balance is correct.
 
 - I see each return with its products, quantities, status, and credit amount.
+- Items I refused at the door appear here as a return, with the reason (C-47).
 - I cannot create a return in the app. I contact the wholesaler (A-22).

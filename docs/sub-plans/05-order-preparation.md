@@ -18,7 +18,8 @@ The stock manager prepares accepted orders from a simple list, chooses the real 
 - Batch selection and override, with the override recorded
 - Filling one order line from more than one batch
 - Barcode scanning while picking
-- Preparing less than ordered, with a reason (A-08)
+- Preparing less than ordered, with a reason, and waiting for the customer when the product is "must have" (C-38, C-39)
+- Picking bonus units together with paid units (C-41)
 - Moving the order from Accepted to Preparing to Ready
 
 ## Not in scope
@@ -52,11 +53,9 @@ Phase 4 (accepted orders with reserved stock), phase 2 (batches).
 
 | ID | Question |
 |---|---|
-| A-08 | Preparing less than ordered is allowed, and the order continues |
 | A-17 | Expired batches cannot be picked |
-| O-06 | Near-expiry warning threshold |
 
-Also to decide here: whether the customer is told when their order was prepared with a smaller quantity, and whether two stock managers can work on the same order.
+Also to decide here: whether two stock managers can work on the same order.
 
 ## Done when
 

@@ -100,6 +100,7 @@ flowchart TD
 - Purchase order workflow with suppliers
 - Egyptian tax or e-invoicing integration
 - Real payment gateway integration
+- SMS, WhatsApp, or email notifications. Notifications are inside the app only
 - Full accounting
 
 ## Glossary
@@ -118,4 +119,10 @@ flowchart TD
 | Stop | One customer delivery inside a trip |
 | Credit period | The number of days a credit customer has to pay an invoice |
 | Overdue | A credit invoice that is still unpaid after its due date |
+| Must have | A product the customer marked as essential. If it is reduced or removed, the order waits for the customer's answer |
+| Offer | A percent discount or bonus units on a product, set by the owner |
+| Bonus units | Free units given with a purchase, for example "buy 10, get 1 free" |
+| Working hours | The days and times the warehouse is open, set by the owner and shown to customers |
+| Supplier return | Goods the wholesaler sends back to a supplier, with a reason |
+| Signed paper | The delivery paper the customer signs as proof of delivery. It is kept outside the app |
 | Balance | What a customer owes the wholesaler, or what the wholesaler owes a supplier |

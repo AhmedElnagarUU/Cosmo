@@ -26,7 +26,7 @@ As an accountant, I want to see the cash each delivery person should hand over, 
 - For each finished trip, I see the total cash the delivery person recorded.
 - I enter the cash I actually received.
 - A difference is highlighted and needs a note.
-- The trip closes when every payment in it is confirmed or rejected.
+- The trip closes when every payment in it is confirmed or rejected, and the delivery manager has every signed paper (C-44).
 
 ### ACC-04 Record a payment directly
 As an accountant, I want to record a payment a customer made to the office, so that credit customers and bank transfers are covered.
@@ -52,6 +52,7 @@ As an accountant, I want a customer's full list of invoices, payments, and retur
 As an accountant, I want to print an invoice, so that I can give it to the customer.
 
 - The printed invoice shows the wholesaler's details, the customer, the products, quantities, prices, total, and for credit invoices the due date.
+- Discounts are shown on their line, and bonus units are shown at price zero (C-41).
 - It works in Arabic and English (A-11).
 
 ### ACC-08 Follow overdue invoices
@@ -74,8 +75,9 @@ As an accountant, I want to record money we paid to a supplier, so that we know 
 ### ACC-10 See supplier balances
 As an accountant, I want to see what we owe each supplier, so that I can plan payments.
 
-- I see each supplier's total purchases, total paid, and balance.
-- I can open the receipts and payments behind the balance.
+- I see each supplier's total purchases, total returns, total paid, and balance.
+- A supplier return reduces what we owe (C-42).
+- I can open the receipts, returns, and payments behind the balance.
 
 ## Corrections
 
@@ -83,6 +85,8 @@ As an accountant, I want to see what we owe each supplier, so that I can plan pa
 As an accountant, I want a completed return to reduce the customer's balance, so that they are not charged for goods they sent back.
 
 - The credit equals the invoice price of the returned goods (A-09).
+- For goods bought with a bonus offer, the credit per unit is the amount paid for the line divided by all its units (A-25).
+- For items refused at the door, the credit is applied at once (C-47).
 - The credit appears on the customer's statement.
 - Cash refunds are still open (O-09).
 

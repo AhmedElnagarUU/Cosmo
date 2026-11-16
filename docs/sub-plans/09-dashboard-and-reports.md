@@ -15,9 +15,9 @@ This phase comes last because it only shows data that the earlier phases create.
 
 ## In scope
 
-- Dashboard: orders waiting for acceptance, orders to prepare, orders ready, trips in progress, failed deliveries, out-of-stock products, stock close to expiry, payments waiting for confirmation, overdue invoices, unpaid invoices, amount owed to suppliers
+- Dashboard: orders waiting for acceptance, orders waiting for the customer, missing signed papers, orders to prepare, orders ready, trips in progress, failed deliveries, out-of-stock products, stock close to expiry, payments waiting for confirmation, overdue invoices, unpaid invoices, amount owed to suppliers
 - Activity screen with filters by employee, date, and type (C-30)
-- Alerts inside the app for a rejected order, a cancelled order, a stock correction, and a rejected payment (C-30)
+- Alerts inside the app for a rejected order, a cancelled order, a stock correction, a rejected payment, an order or a customer answer waiting more than 5 working hours, and a missing signed paper (C-30, C-35, C-39, C-44)
 - Reports: sales by period, product, and customer; stock value; customer balances; supplier balances; stock close to expiry
 - Each role sees a home screen that fits its job
 
@@ -42,6 +42,8 @@ flowchart TD
     D --> C[Money]
 
     A --> A0[Orders waiting for acceptance]
+    A --> A5[Orders waiting for the customer]
+    A --> A6[Missing signed papers]
     A --> A1[Orders waiting for preparation]
     A --> A2[Orders ready for a trip]
     A --> A3[Trips in progress]
@@ -68,7 +70,6 @@ Phases 1 to 8.
 | ID | Question |
 |---|---|
 | A-23 | Which role sees which report |
-| O-08 | Notifications outside the app by SMS, WhatsApp, or email |
 
 Also to decide here: which reports the wholesaler really uses every week. Only those are built.
 
