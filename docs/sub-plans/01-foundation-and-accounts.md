@@ -15,13 +15,13 @@ People can log in, and the owner can set up the business: employees, roles, and 
 
 ## In scope
 
-- The project itself: Next.js frontend, Express backend, database (C-23, A-20)
-- Wholesaler workspace, with data separated per wholesaler (A-12)
+- The project itself: Next.js frontend, Express backend, database (C-23, C-53)
+- Wholesaler workspace, with data separated per wholesaler (C-52)
 - Login, logout, first-login password, password reset
 - Employee accounts created by the owner, with a forced password change at first login (C-29)
 - The six roles, and more than one role per employee (C-22, C-31)
-- Customer accounts, including the "credit allowed" switch and the credit period (A-01, C-26)
-- App layout and navigation in Arabic and English, working on phones (A-11)
+- Customer accounts, including the "credit allowed" switch and the credit period (C-48, C-26)
+- App layout and navigation in Arabic and English, working on phones (C-51)
 - Activity recording with the employee's name, used by every later phase (C-30)
 - Settings area with working hours, built so that more settings can be added later (C-37, C-40)
 - Notifications inside the app, built so that other channels can be added later (C-46)
@@ -53,15 +53,15 @@ flowchart TD
 
 Nothing. This is the first phase.
 
-## Decisions to confirm before this phase
+## Decisions this phase depends on
 
-| ID | Question |
+| ID | Decision |
 |---|---|
-| A-01 | The wholesaler creates customer accounts |
-| A-11 | Arabic and English, working on phones |
-| A-12 | Many wholesalers on one platform, each with separate data |
-| A-20 | TypeScript and PostgreSQL |
-| A-23 | Role permissions, as shown in the user stories table |
+| C-48 | The wholesaler creates customer accounts |
+| C-51 | Arabic and English, working on phones |
+| C-52 | Many wholesalers on one platform, each with separate data |
+| C-53 | TypeScript and PostgreSQL |
+| C-64 | Role permissions, as shown in the user stories table |
 
 Also to decide here: how the customer receives their first-login details (SMS, WhatsApp message sent by the employee, or a printed note), and whether login uses a phone number or an email address.
 

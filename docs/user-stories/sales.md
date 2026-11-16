@@ -5,7 +5,7 @@ The sales employee brings in customers and takes orders by phone or in person. T
 ### SAL-01 Add a customer
 As a sales employee, I want to add a new pharmacy or store, so that they can start buying from us.
 
-- I enter the business name, contact person, phone, and address (A-01).
+- I enter the business name, contact person, phone, and address (C-48).
 - I cannot switch on "credit allowed" or change the credit period. Only the owner can (C-26).
 
 ### SAL-02 Place an order for a customer
@@ -35,4 +35,4 @@ As a sales employee, I want to start a return for a customer, so that the stock 
 
 - I choose the original invoice, then the products, quantities, and reason (C-19).
 - I cannot return more than what was invoiced, minus earlier returns.
-- The return waits for the stock manager to confirm the goods arrived (A-22).
+- The return waits for the stock manager to confirm the goods arrived (C-62).

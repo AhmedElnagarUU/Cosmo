@@ -106,9 +106,9 @@ sequenceDiagram
 | Every trip has exactly one delivery person | C-28 |
 | Stock leaves the warehouse when the trip starts | C-25 |
 | A failed stop needs a reason: customer not available, address problem, customer refused, other | C-21 |
-| Goods from a failed stop go back to stock only after the stock manager confirms they are back | A-19 |
-| After a failed stop, the order returns to Ready for another trip, or it is cancelled | A-19 |
-| The delivery person sees only their own trips | A-23 |
+| Goods from a failed stop go back to stock only after the stock manager confirms they are back | C-61 |
+| After a failed stop, the order returns to Ready for another trip, or it is cancelled | C-61 |
+| The delivery person sees only their own trips | C-64 |
 | A payment recorded by the delivery person waits for the accountant. It does not count as paid yet | C-27 |
 | A credit order has nothing to collect at the door | C-26 |
 | Items refused at the door become a return with a reason. The customer pays only for what they kept | C-47 |

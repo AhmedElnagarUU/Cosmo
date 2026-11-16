@@ -20,10 +20,10 @@ A customer can browse the catalog and place an order. The system reserves the st
 - Customer catalog with search and filters
 - Cart and checkout
 - Payment method choice, with credit only for allowed customers (C-16, C-26)
-- Stock check and automatic reservation at the moment of ordering (C-11, C-25, A-07)
+- Stock check and automatic reservation at the moment of ordering (C-11, C-25, C-54)
 - Manual acceptance and rejection with a reason (C-24)
 - Order list and order detail for customers and employees
-- Cancellation and release of reservation (C-12, A-06)
+- Cancellation and release of reservation (C-12, C-57)
 - Orders placed by sales staff (C-32)
 - Alerts to the owner for rejected and cancelled orders (C-30)
 - Report to the owner when an order waits more than 5 working hours for acceptance (C-35)
@@ -74,13 +74,13 @@ Two customers can order the last units of the same product at the same moment. O
 
 Phase 1 (customer accounts), phase 2 (products and stock), phase 3 (so that there is real stock to sell).
 
-## Decisions to confirm before this phase
+## Decisions this phase depends on
 
-| ID | Question |
+| ID | Decision |
 |---|---|
-| A-06 | Who can cancel, and until when |
-| A-07 | No ordering above available stock |
-| A-18 | Customers see "in stock" or "out of stock" only |
+| C-57 | Who can cancel, and until when |
+| C-54 | No ordering above available stock |
+| C-56 | Customers see "in stock" or "out of stock" only |
 
 Also to decide here: whether there is a minimum order value.
 

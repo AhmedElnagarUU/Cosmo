@@ -15,17 +15,17 @@ When a customer sends goods back, the wholesaler records it once, and both the s
 
 - Returns linked to an invoice (C-19)
 - Returns created from items refused at the door (C-47)
-- Credit for goods bought with a bonus offer (A-25)
+- Credit for goods bought with a bonus offer (C-63)
 - Return reasons
-- Condition check per product: sellable or damaged (A-09)
+- Condition check per product: sellable or damaged (C-60)
 - Stock movements for returned goods, into the original batch
-- Credit on the customer's balance (A-09)
+- Credit on the customer's balance (C-60)
 - Limit: cannot return more than was invoiced, minus earlier returns
 
 ## Not in scope
 
 - Returns to suppliers. They are built in phase 3 (C-42)
-- Customers creating returns themselves (A-22)
+- Customers creating returns themselves (C-62)
 - Cash refunds, unless O-09 is decided
 - Exchange of one product for another. This is a return plus a new order
 
@@ -49,14 +49,14 @@ flowchart LR
 
 Phase 7 (invoices and balances), phase 5 (which batch was sent to the customer).
 
-## Decisions to confirm before this phase
+## Decisions this phase depends on
 
-| ID | Question |
+| ID | Decision |
 |---|---|
-| A-09 | Sellable or damaged, and credit on the balance |
-| A-22 | Only employees create returns |
-| O-09 | Cash refund or credit only |
-| A-25 | Credit for returned goods bought with a bonus offer |
+| C-60 | Sellable or damaged, and credit on the balance |
+| C-62 | Only employees create returns |
+| O-09 | Cash refund or credit only. **Still open** |
+| C-63 | Credit for returned goods bought with a bonus offer |
 
 Also to decide here: whether returns have a time limit, and who approves a return of high value.
 

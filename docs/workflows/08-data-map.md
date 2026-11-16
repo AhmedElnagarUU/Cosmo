@@ -52,7 +52,7 @@ erDiagram
 
 | Thing | Meaning |
 |---|---|
-| Wholesaler | One business workspace. All other data belongs to exactly one wholesaler (A-12) |
+| Wholesaler | One business workspace. All other data belongs to exactly one wholesaler (C-52) |
 | Employee | A person who works for the wholesaler, with one or more roles (C-31) |
 | Customer | A pharmacy or store with a login, a credit switch, and a credit period (C-26) |
 | Supplier | A company the wholesaler buys from. No login |
@@ -86,5 +86,5 @@ erDiagram
 | Decision | Effect on the map |
 |---|---|
 | O-09 Cash refunds | A refund would be a new kind of payment going out to the customer |
-| A-15 Payment per invoice | If payments can cover several invoices, a new link between payment and invoice is needed |
-| A-12 Tenancy | If a customer can buy from several wholesalers, customer is no longer owned by one wholesaler |
+| C-59 Payment per invoice | If payments can cover several invoices, a new link between payment and invoice is needed |
+| C-52 Tenancy | If a customer can buy from several wholesalers, customer is no longer owned by one wholesaler |

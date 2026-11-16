@@ -49,11 +49,11 @@ flowchart LR
 
 Phase 4 (accepted orders with reserved stock), phase 2 (batches).
 
-## Decisions to confirm before this phase
+## Decisions this phase depends on
 
-| ID | Question |
+| ID | Decision |
 |---|---|
-| A-17 | Expired batches cannot be picked |
+| C-55 | Expired batches cannot be picked |
 
 Also to decide here: whether two stock managers can work on the same order.
 

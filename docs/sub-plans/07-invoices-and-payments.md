@@ -17,13 +17,13 @@ After this phase, the full main journey works: goods in, order, acceptance, prep
 
 ## In scope
 
-- Invoice creation by setting: on accepted, on prepared, or on delivered (A-05)
+- Invoice creation by setting: on accepted, on prepared, or on delivered (C-58)
 - Invoice status calculated from confirmed payments (C-17)
 - Discounts and bonus units on invoice lines (C-41)
 - Payments with method, date, and reference (C-15, C-16)
 - Confirming or rejecting payments from delivery, with a reason for rejection (C-27)
 - Cash handover after a trip and closing the trip
-- One payment per invoice (A-15)
+- One payment per invoice (C-59)
 - Cancelling a wrong payment with a reason
 - Credit period per customer, due dates from the invoice date, and overdue marking (C-26, C-33, C-36)
 - Customer balance and statement
@@ -67,12 +67,12 @@ flowchart LR
 
 Phase 6 (delivery results and payments recorded at the door), phase 4 (orders), phase 3 (supplier balances already exist).
 
-## Decisions to confirm before this phase
+## Decisions this phase depends on
 
-| ID | Question |
+| ID | Decision |
 |---|---|
-| A-05 | Invoice timing as a setting, default on delivered |
-| A-15 | One payment belongs to one invoice |
+| C-58 | Invoice timing as a setting, default on delivered |
+| C-59 | One payment belongs to one invoice |
 
 Also to decide here: the invoice number format, what the printed invoice must show, and whether a customer can pay before delivery.
 

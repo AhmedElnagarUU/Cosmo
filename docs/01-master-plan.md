@@ -21,8 +21,8 @@ flowchart LR
 
 | Stage | What happens | Output |
 |---|---|---|
-| 0. Planning documents | Write overview, decisions, stories, journeys, workflows, sub-plans | This repository. **We are here** |
-| 1. Review | The project owner reads the documents and confirms or changes each assumption | Decisions list with no unreviewed assumptions |
+| 0. Planning documents | Write overview, decisions, stories, journeys, workflows, sub-plans | This repository. Done |
+| 1. Review | The project owner reads the documents and confirms or changes each assumption | Decisions list with no unreviewed assumptions. **We are here**: every assumption is confirmed, and two items are still open (O-05, O-09) |
 | 2. Technical design | Database tables, API actions, project structure, security | A technical design document |
 | 3. Build | Build phases 1 to 9 below, one at a time | Working app |
 | 4. Pilot | One real wholesaler uses the app | Feedback and fixes |
@@ -83,14 +83,14 @@ flowchart LR
 
 ## What must be confirmed before building starts
 
-These come from [Decisions](02-decisions.md). They affect the foundation, so they must be settled before phase 1:
+These affect the foundation. The project owner has confirmed all of them:
 
-| ID | Question |
+| ID | Decision |
 |---|---|
-| A-01 | Does the wholesaler create customer accounts? |
-| A-02 | Do we skip the throwaway prototype? |
-| A-11 | Arabic and English, working on phones? |
-| A-12 | Many wholesalers on one platform, each with separate data? |
-| A-20 | TypeScript and PostgreSQL? |
+| C-48 | The wholesaler creates customer accounts |
+| C-49 | No throwaway prototype. We build the real app one flow at a time |
+| C-51 | Arabic and English, working on phones |
+| C-52 | Many wholesalers on one platform, each with separate data |
+| C-53 | TypeScript and PostgreSQL |
 
-Every other assumption can be confirmed when its phase begins.
+Two items are still open and are decided when their phase begins: product fields (O-05) and cash refunds (O-09).

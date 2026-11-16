@@ -44,7 +44,7 @@ sequenceDiagram
 |---|---|
 | A confirmed receipt cannot be edited. A mistake is fixed with a stock adjustment that has a reason | C-09, C-10 |
 | Batch number and expiry date are required for products that have batch tracking switched on | C-13 |
-| An expiry date in the past is rejected | A-17 |
+| An expiry date in the past is rejected | C-55 |
 | The same batch number received again for the same product is added to the existing batch | |
 | The supplier's invoice number and total are entered on the same receipt as the goods | C-43 |
 | Supplier payments can be partial | |

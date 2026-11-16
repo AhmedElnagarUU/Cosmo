@@ -17,7 +17,7 @@ As a stock manager, I want to record the goods a supplier delivered, so that the
 As a stock manager, I want to enter the batch number and expiry date when receiving, so that we can track expiry.
 
 - Both are required for products with batch tracking (C-13).
-- An expiry date in the past is rejected (A-17).
+- An expiry date in the past is rejected (C-55).
 - If the batch number already exists for that product, the quantity is added to it.
 
 ## Accepting orders
@@ -37,7 +37,7 @@ As a stock manager, I want to accept an order, so that it can be prepared.
 
 - One tap accepts the order (C-24).
 - The accepted order moves to my preparation list.
-- If invoice timing is "on accepted", the invoice is created now (A-05).
+- If invoice timing is "on accepted", the invoice is created now (C-58).
 
 ### STK-18 Accept an order with a smaller quantity
 As a stock manager, I want to reduce a quantity or remove a product before I accept, so that I do not have to reject a whole order because of one product.
@@ -70,14 +70,14 @@ As a stock manager, I want to open an order and see what to pick, so that I can 
 
 - I see each product, its quantity, and a recommended batch (C-14).
 - Opening the order marks it as Preparing automatically.
-- The customer can no longer cancel the order (A-06).
+- The customer can no longer cancel the order (C-57).
 
 ### STK-08 Choose the batch
 As a stock manager, I want to accept the recommended batch or choose another, so that the system knows which batch I really picked.
 
 - The recommended batch is the one that expires soonest (C-14).
 - I can choose a different batch. The change is recorded.
-- I cannot choose an expired batch (A-17).
+- I cannot choose an expired batch (C-55).
 - A batch that expires within the near-expiry period shows a warning. The default is six months (C-45).
 - I can fill one product from two batches.
 
@@ -102,7 +102,7 @@ As a stock manager, I want to confirm that the order is packed, so that it can b
 - I can confirm only when every product has a batch and a quantity.
 - One confirmation moves the order to Ready.
 - The delivery manager now sees the order (C-28).
-- If invoice timing is "on prepared", the invoice is created now (A-05).
+- If invoice timing is "on prepared", the invoice is created now (C-58).
 
 ## After delivery
 
@@ -110,14 +110,14 @@ As a stock manager, I want to confirm that the order is packed, so that it can b
 As a stock manager, I want to confirm that goods from a failed delivery are back, so that the stock is correct again.
 
 - I see the orders the delivery person marked as failed.
-- When I confirm, on-hand stock increases (A-19).
+- When I confirm, on-hand stock increases (C-61).
 - The order returns to Ready for a new trip, or it is cancelled.
 
 ### STK-13 Check returned goods
 As a stock manager, I want to record the condition of goods a customer returned, so that only good stock is sold again.
 
 - This covers normal returns and items refused at the door (C-47).
-- For each product, I confirm the batch and choose sellable or damaged (A-09).
+- For each product, I confirm the batch and choose sellable or damaged (C-60).
 - Sellable goods go back to their batch.
 - Damaged goods are recorded but never become available.
 
@@ -142,7 +142,7 @@ As a stock manager, I want to record stock that is damaged, lost, or expired, so
 As a stock manager, I want a list of batches that expire soon, so that we can act before they expire.
 
 - The list shows product, batch, expiry date, and quantity.
-- Expired batches are shown separately and cannot be sold (A-17).
+- Expired batches are shown separately and cannot be sold (C-55).
 
 ### STK-19 Return goods to a supplier
 As a stock manager, I want to record goods we send back to a supplier, so that the stock and the amount we owe are correct.
@@ -156,7 +156,7 @@ As a stock manager, I want to record goods we send back to a supplier, so that t
 ### STK-17 Cancel an order
 As a stock manager, I want to cancel an accepted order when a customer asks or a problem appears, so that the stock is free again.
 
-- I can cancel until the trip starts, and I must give a reason (A-06).
+- I can cancel until the trip starts, and I must give a reason (C-57).
 - The reserved stock is released (C-12).
 - The customer gets a notification with the reason (C-46).
 - The owner gets an alert (C-30).

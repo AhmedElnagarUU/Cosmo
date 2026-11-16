@@ -19,14 +19,14 @@ As an owner, I want to set how my business works, so that the app matches my way
 - There are only a few settings, so the app stays clear (C-40).
 - Working hours: I set the open days, the opening time, and the closing time. I also have a "closed today" switch for holidays (C-37).
 - Default credit period: it starts at one month (C-26).
-- Invoice timing: on accepted, on prepared, or on delivered (A-05).
+- Invoice timing: on accepted, on prepared, or on delivered (C-58).
 - Near-expiry period: it starts at six months (C-45).
 - A changed setting applies to new orders only.
 
 ### OWN-03 Create customer accounts
 As an owner, I want to create an account for a pharmacy or store, so that they can start ordering.
 
-- I enter the business name, contact person, phone, and address (A-01).
+- I enter the business name, contact person, phone, and address (C-48).
 - The customer gets a way to log in for the first time.
 - Sales employees can do this too (SAL-01).
 
@@ -52,13 +52,13 @@ As an owner, I want to create and edit products, so that the catalog is correct.
 - I can enter name, barcode, brand, category, unit, cost price, selling price, and description.
 - I can switch batch and expiry tracking on per product (C-13).
 - I can make a product inactive. Inactive products are hidden from customers.
-- The stock manager can create and edit products too, but cannot change prices (A-23).
+- The stock manager can create and edit products too, but cannot change prices (C-64).
 - The exact list of fields per product type is still open (O-05).
 
 ### OWN-07 Change a price
 As an owner, I want to change a product's selling price, so that it stays up to date.
 
-- Only the owner can change a selling price (A-23).
+- Only the owner can change a selling price (C-64).
 - The new price applies to new orders only.
 - Orders already placed keep their original price.
 - The price change appears on the activity screen.
@@ -80,7 +80,7 @@ As an owner, I want to see every order and act on it when needed, so that work d
 
 - I can filter orders by status, customer, and date.
 - I can accept or reject an order myself (C-24).
-- I can cancel an order until its trip starts, and I must give a reason (A-06).
+- I can cancel an order until its trip starts, and I must give a reason (C-57).
 - The customer gets a notification that the order was cancelled, with my reason (C-35).
 - Cancelling releases the reserved stock (C-12).
 

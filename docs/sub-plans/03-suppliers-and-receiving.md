@@ -49,7 +49,7 @@ flowchart LR
 
 Phase 2 (products, batches, stock movements).
 
-## Decisions to confirm before this phase
+## Decisions this phase depends on
 
 Nothing is waiting. One-step receiving (C-43) and supplier returns (C-42) are confirmed.
 

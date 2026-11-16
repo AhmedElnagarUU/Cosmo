@@ -27,7 +27,7 @@ As a delivery person, I want to see the details of each stop, so that I can find
 As a delivery person, I want to mark an order as delivered, so that the office knows it arrived.
 
 - One tap marks the stop as Delivered.
-- If invoice timing is "on delivered", the invoice is created now (A-05).
+- If invoice timing is "on delivered", the invoice is created now (C-58).
 - Tapping twice does not record the delivery twice.
 - The customer signs the delivery paper, and I keep it to hand to the delivery manager. I do not upload a photo (C-44).
 
@@ -44,7 +44,7 @@ As a delivery person, I want to record what the customer paid me, so that the ac
 As a delivery person, I want to report that I could not deliver, so that the office can decide what to do.
 
 - I must choose a reason: customer not available, address problem, customer refused, or other (C-21).
-- The goods stay with me until I return them to the warehouse (A-19).
+- The goods stay with me until I return them to the warehouse (C-61).
 
 ### DEL-07 Record items refused at the door
 As a delivery person, I want to record the items the customer refused, so that they pay only for what they kept.

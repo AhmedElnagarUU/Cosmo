@@ -65,11 +65,11 @@ Every number on the dashboard opens the list behind it.
 
 Phases 1 to 8.
 
-## Decisions to confirm before this phase
+## Decisions this phase depends on
 
-| ID | Question |
+| ID | Decision |
 |---|---|
-| A-23 | Which role sees which report |
+| C-64 | Which role sees which report |
 
 Also to decide here: which reports the wholesaler really uses every week. Only those are built.
 

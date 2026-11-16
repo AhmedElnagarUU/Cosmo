@@ -18,7 +18,7 @@ Under each story are **acceptance checks**. A story is finished only when every 
 | [delivery.md](delivery.md) | Delivery person | DEL |
 | [accountant.md](accountant.md) | Accountant | ACC |
 
-## Who can do what (A-23)
+## Who can do what (C-64)
 
 The owner can do everything. Every other role sees only what its job needs. One employee can hold more than one role (C-31).
 

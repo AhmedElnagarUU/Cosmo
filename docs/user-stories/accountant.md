@@ -1,6 +1,6 @@
 # User stories — Accountant
 
-The accountant is responsible for the money. The delivery person says a payment was collected. The accountant confirms whether the money really arrived (C-27). Labels such as (A-15) point to [Decisions](../02-decisions.md).
+The accountant is responsible for the money. The delivery person says a payment was collected. The accountant confirms whether the money really arrived (C-27). Labels such as (C-59) point to [Decisions](../02-decisions.md).
 
 ## Customer payments
 
@@ -31,7 +31,7 @@ As an accountant, I want to see the cash each delivery person should hand over, 
 ### ACC-04 Record a payment directly
 As an accountant, I want to record a payment a customer made to the office, so that credit customers and bank transfers are covered.
 
-- I choose the invoice, then enter the amount, method, date, and reference number (C-15, A-15).
+- I choose the invoice, then enter the amount, method, date, and reference number (C-15, C-59).
 - The amount cannot be more than the remaining amount of the invoice.
 - A payment I record myself is confirmed immediately.
 
@@ -53,7 +53,7 @@ As an accountant, I want to print an invoice, so that I can give it to the custo
 
 - The printed invoice shows the wholesaler's details, the customer, the products, quantities, prices, total, and for credit invoices the due date.
 - Discounts are shown on their line, and bonus units are shown at price zero (C-41).
-- It works in Arabic and English (A-11).
+- It works in Arabic and English (C-51).
 
 ### ACC-08 Follow overdue invoices
 As an accountant, I want to see credit invoices that are past their due date, so that I can collect the money.
@@ -84,8 +84,8 @@ As an accountant, I want to see what we owe each supplier, so that I can plan pa
 ### ACC-11 Apply a return credit
 As an accountant, I want a completed return to reduce the customer's balance, so that they are not charged for goods they sent back.
 
-- The credit equals the invoice price of the returned goods (A-09).
-- For goods bought with a bonus offer, the credit per unit is the amount paid for the line divided by all its units (A-25).
+- The credit equals the invoice price of the returned goods (C-60).
+- For goods bought with a bonus offer, the credit per unit is the amount paid for the line divided by all its units (C-63).
 - For items refused at the door, the credit is applied at once (C-47).
 - The credit appears on the customer's statement.
 - Cash refunds are still open (O-09).

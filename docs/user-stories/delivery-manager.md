@@ -35,7 +35,7 @@ As a delivery manager, I want to see every trip and its progress, so that I alwa
 As a delivery manager, I want to plan a new delivery for an order that failed, so that the customer still receives the goods.
 
 - I see failed orders with the reason the delivery person chose (C-21).
-- After the stock manager confirms the goods are back, the order is Ready again and I can add it to a new trip (A-19).
+- After the stock manager confirms the goods are back, the order is Ready again and I can add it to a new trip (C-61).
 - If the order should not be delivered again, the owner or stock manager cancels it.
 
 ### DM-06 Confirm signed delivery papers

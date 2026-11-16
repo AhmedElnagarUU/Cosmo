@@ -43,7 +43,7 @@ stateDiagram-v2
 | Out for delivery | The goods have left the warehouse | Delivery person starts the trip |
 | Delivered | The customer received the order. Items refused at the door become a return (C-47) | Delivery person |
 | Delivery failed | The delivery did not happen | Delivery person, with a reason |
-| Cancelled | The order will not be fulfilled | Customer, stock manager, or owner (A-06) |
+| Cancelled | The order will not be fulfilled | Customer, stock manager, or owner (C-57) |
 
 People press a button only for real decisions and real-world actions: placing, accepting or rejecting, answering a change, confirming preparation, starting the trip, and reporting the delivery result.
 
@@ -66,7 +66,7 @@ Example: a product has 100 units, and customer A orders 70.
 |---|---|---|---|---|
 | Before the order | 100 | 0 | 100 | |
 | Customer A places an order for 70 | 100 | 70 | 30 | C-25 |
-| Customer B tries to order 50 | 100 | 70 | 30 | Refused. Only 30 are available (A-07) |
+| Customer B tries to order 50 | 100 | 70 | 30 | Refused. Only 30 are available (C-54) |
 | Stock manager accepts A's order | 100 | 70 | 30 | No change |
 | Preparation confirmed | 100 | 70 | 30 | Batches are now chosen |
 | Delivery person starts the trip | 30 | 0 | 30 | C-25 |
@@ -82,7 +82,7 @@ Other cases:
 | Order cancelled before the trip starts | Reserved decreases by 70. Available returns to 100 (C-12) |
 | The stock manager reduces 70 to 60, at acceptance or in preparation | Reserved decreases by 10 at once. The other 60 stay reserved, also while the order waits for the customer (C-38, C-39) |
 | The product has a "buy 10, get 1 free" offer and the customer orders 70 | 77 units are reserved: 70 paid and 7 free (C-41) |
-| Delivery failed, goods are back | On hand increases by 70. If the order will be delivered again, reserved increases by 70 too (A-19) |
+| Delivery failed, goods are back | On hand increases by 70. If the order will be delivered again, reserved increases by 70 too (C-61) |
 
 ## Placing and accepting an order
 
@@ -141,7 +141,7 @@ flowchart TD
 | The same rule applies at acceptance and during preparation | C-38 |
 | The stock manager sees the must-have marks when reviewing and preparing the order | C-39 |
 | The customer sees the old quantity, the new quantity, and the reason | C-38 |
-| If every product is removed, the order is rejected or cancelled with a reason | C-24, A-06 |
+| If every product is removed, the order is rejected or cancelled with a reason | C-24, C-57 |
 | An order that is Waiting for customer keeps its remaining stock reserved | C-39 |
 
 Reasons for a reduction: stock not found on the shelf, stock damaged, stock expired, other (with a note).
@@ -155,7 +155,7 @@ Reasons for a reduction: stock not found on the shelf, stock damaged, stock expi
 
 - Only the owner creates offers. An offer is the same for every customer and can have a start and end date.
 - The order keeps the offer that was active when it was placed, even if the offer ends later.
-- Free units also need available stock. If there is not enough, the customer is told how many can be ordered (A-07).
+- Free units also need available stock. If there is not enough, the customer is told how many can be ordered (C-54).
 - If a quantity is reduced, the free units are calculated again for the new quantity.
 
 ## Working hours (C-37)
@@ -165,7 +165,7 @@ The owner sets the open days and the opening and closing times, and has a "close
 - The customer sees "Open now" or "Closed now, opens at 9:00". This comes from the schedule, not from who is logged in.
 - The customer can place an order while the warehouse is closed. Stock is reserved as usual, and the customer sees "we will review your order when the warehouse opens".
 
-## Cancellation rules (A-06)
+## Cancellation rules (C-57)
 
 ```mermaid
 flowchart TD
@@ -178,7 +178,7 @@ flowchart TD
 
 A cancellation by an employee or the owner needs a reason. The customer gets a notification with the reason, and the owner gets an alert (C-30, C-35).
 
-If an invoice already exists when an order is cancelled, the invoice is cancelled too. This can only happen when invoice timing is set to "on accepted" or "on prepared" (A-05).
+If an invoice already exists when an order is cancelled, the invoice is cancelled too. This can only happen when invoice timing is set to "on accepted" or "on prepared" (C-58).
 
 ## Orders that wait too long (C-35)
 

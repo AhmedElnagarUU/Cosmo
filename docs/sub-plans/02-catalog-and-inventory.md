@@ -19,7 +19,7 @@ The wholesaler has a product catalog and can see stock per product and per batch
 - Stock movements as the only way stock changes (C-09)
 - Manual adjustments with a reason (C-10)
 - Damaged, lost, and expired stock
-- List of stock close to expiry and expired stock, with a near-expiry period of six months by default (A-17, C-45)
+- List of stock close to expiry and expired stock, with a near-expiry period of six months by default (C-55, C-45)
 - Offers on products: percent discount or bonus units, with optional dates (C-41)
 - Barcode search
 
@@ -27,7 +27,7 @@ The wholesaler has a product catalog and can see stock per product and per batch
 
 - Receiving from suppliers (phase 3). In this phase, opening stock is entered with an adjustment
 - Reservation by orders (phase 4)
-- Unit conversion (A-10)
+- Unit conversion (C-50)
 - Customer-specific prices (C-06)
 
 ## Stories
@@ -50,13 +50,13 @@ flowchart LR
 
 Phase 1 (login and roles).
 
-## Decisions to confirm before this phase
+## Decisions this phase depends on
 
-| ID | Question |
+| ID | Decision |
 |---|---|
-| O-05 | The exact product fields for pharmaceuticals and for cosmetics |
-| A-10 | One selling unit per product, no conversion |
-| A-17 | Expired batches cannot be sold |
+| O-05 | The exact product fields for pharmaceuticals and for cosmetics. **Still open** |
+| C-50 | One selling unit per product, no conversion |
+| C-55 | Expired batches cannot be sold |
 
 ## Done when
 

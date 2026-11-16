@@ -79,7 +79,7 @@ A reservation is made against the product, not against a specific batch. The bat
 - Reserved is never more than on hand.
 - Available is never negative.
 - Every movement can be traced to a document (receipt, order, trip, return, supplier return, or adjustment) and an employee.
-- Expired batches are not counted in available stock (A-17).
+- Expired batches are not counted in available stock (C-55).
 
 ## Manual adjustment (C-10)
 

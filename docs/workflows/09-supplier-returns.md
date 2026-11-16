@@ -29,7 +29,7 @@ flowchart TD
 |---|---|
 | A reason is required | C-42 |
 | The quantity cannot be more than the on-hand stock of the batch that is not reserved | C-08 |
-| Expired and damaged stock can be returned, even though it cannot be sold | A-17 |
+| Expired and damaged stock can be returned, even though it cannot be sold | C-55 |
 | The value of the return is the cost price from the receipt of that batch | |
 | The supplier's balance decreases by that value | C-42 |
 | If the supplier sends new goods in exchange, they are recorded as a normal receipt | C-42 |

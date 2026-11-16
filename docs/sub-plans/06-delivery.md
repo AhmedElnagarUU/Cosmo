@@ -25,7 +25,7 @@ The delivery manager assigns ready orders to delivery people. Delivery people de
 - Items refused at the door, recorded as a return with a reason (C-47)
 - Signed delivery paper, confirmed by the delivery manager, with a list of missing papers (C-44)
 - Payment recorded at the door, saved as waiting for confirmation (C-27)
-- Goods coming back after a failed delivery (A-19)
+- Goods coming back after a failed delivery (C-61)
 - A printed or on-screen delivery note listing the goods
 
 ## Not in scope
@@ -66,11 +66,11 @@ Delivery people work on phones with weak connections. A tap must never be lost a
 
 Phase 5 (orders that are Ready).
 
-## Decisions to confirm before this phase
+## Decisions this phase depends on
 
-| ID | Question |
+| ID | Decision |
 |---|---|
-| A-19 | Failed delivery: goods come back, then deliver again or cancel |
+| C-61 | Failed delivery: goods come back, then deliver again or cancel |
 
 Also to decide here: whether a delivery person can change the order of stops during the trip.
 

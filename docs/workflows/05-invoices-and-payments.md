@@ -24,7 +24,7 @@ flowchart TD
 
 The credit period is set per customer. The default is one month, and the owner can change the default and each customer's period, for example to 15 days (C-26).
 
-## When the invoice is created (A-05)
+## When the invoice is created (C-58)
 
 The owner chooses one of three moments in the settings. The default is "on delivered".
 
@@ -155,7 +155,7 @@ A balance is never typed in. It is always calculated from the documents behind i
 
 | Rule | Decision |
 |---|---|
-| Each payment belongs to one invoice | A-15 |
+| Each payment belongs to one invoice | C-59 |
 | A payment cannot be larger than the remaining amount of the invoice | |
 | A payment from a delivery person counts only after the accountant confirms it | C-27 |
 | A rejected payment needs a reason and alerts the owner | C-27, C-30 |
@@ -168,5 +168,4 @@ A balance is never typed in. It is always calculated from the documents behind i
 
 ## Still open
 
-- **A-25** — How a return is credited when the goods were bought with a bonus offer.
 - **O-09** — Cash refunds for returns.

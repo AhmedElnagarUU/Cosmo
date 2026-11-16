@@ -26,7 +26,7 @@ flowchart TD
     L --> M[Order becomes Ready]
 ```
 
-## Batch recommendation (C-14, A-17)
+## Batch recommendation (C-14, C-55)
 
 ```mermaid
 flowchart TD
@@ -52,8 +52,8 @@ The system only recommends. The employee always makes the final choice, because 
 | If less than the ordered quantity is found, the employee enters a reason. The extra reservation is released, and the customer is informed | C-38 |
 | If the short product is marked must have, the order waits for the customer's answer before it can be confirmed | C-39 |
 | Bonus units are picked together with the paid units | C-41 |
-| If nothing at all can be prepared, the stock manager cancels the order with a reason | A-06 |
-| Batches that expire within the near-expiry period show a warning. The default is six months | A-17, C-45 |
+| If nothing at all can be prepared, the stock manager cancels the order with a reason | C-57 |
+| Batches that expire within the near-expiry period show a warning. The default is six months | C-55, C-45 |
 | On-hand stock does not change at preparation. It changes when the trip starts | C-25 |
 
 ## Reasons for preparing less than ordered

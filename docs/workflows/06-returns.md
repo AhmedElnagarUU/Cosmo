@@ -68,18 +68,17 @@ A return for items refused at the door follows the same statuses. The only diffe
 |---|---|
 | A return must point to an original invoice | C-19 |
 | The returned quantity cannot be more than the quantity on the invoice, minus earlier returns | |
-| The stock manager decides the condition: sellable or damaged | A-09 |
+| The stock manager decides the condition: sellable or damaged | C-60 |
 | Sellable goods go back into their original batch, with its original expiry date | |
-| Damaged goods are recorded but never become available for sale | A-09 |
-| The customer gets a credit equal to the invoice price of the returned goods | A-09 |
-| An employee creates the return. The customer can view it | A-22 |
+| Damaged goods are recorded but never become available for sale | C-60 |
+| The customer gets a credit equal to the invoice price of the returned goods | C-60 |
+| An employee creates the return. The customer can view it | C-62 |
 | Items refused at the door are a return created by the delivery person, with a reason | C-47 |
-| For goods bought with a bonus offer, the credit per unit is the amount paid for the line divided by all its units, including the free ones | A-25 |
+| For goods bought with a bonus offer, the credit per unit is the amount paid for the line divided by all its units, including the free ones | C-63 |
 
 ## Still open
 
 - **O-09** — Can the customer get cash back, or only a credit?
-- **A-25** — The bonus return rule above, or must the customer return the whole line?
 - Is there a time limit for returns, for example 14 days after delivery?
 
 Returns to a supplier are a different flow. See [Supplier returns](09-supplier-returns.md).
