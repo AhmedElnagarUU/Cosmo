@@ -39,7 +39,7 @@ The owner can do everything. Every other role sees only what its job needs. One 
 | Record payment at delivery | Yes | | | | | Yes | |
 | Confirm payments, invoices, balances | Yes | View | | | Yes | | Own invoices |
 | Supplier payments | Yes | | | | Yes | | |
-| Returns | Yes | Start | Check goods | | Credit | Record refused items | View own |
+| Returns | Yes | Start | Check goods | | Credit and refund | Record refused items | View own |
 | Activity screen and alerts | Yes | | | | | | |
 | Reports | Yes | | Stock reports | | Money reports | | |
 
@@ -63,6 +63,6 @@ flowchart LR
     S4 --- T4[STK-06 to STK-11]
     S5 --- T5[DM-01 to DM-06<br/>DEL-01 to DEL-08<br/>STK-12]
     S6 --- T6[ACC-01 to ACC-08, ACC-12<br/>CUS-11, CUS-12]
-    S7 --- T7[SAL-05, STK-13<br/>ACC-11, CUS-13]
+    S7 --- T7[SAL-05, STK-13<br/>ACC-11, ACC-13, CUS-13]
     S8 --- T8[OWN-09 to OWN-12]
 ```

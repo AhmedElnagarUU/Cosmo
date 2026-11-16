@@ -88,7 +88,7 @@ As an accountant, I want a completed return to reduce the customer's balance, so
 - For goods bought with a bonus offer, the credit per unit is the amount paid for the line divided by all its units (C-63).
 - For items refused at the door, the credit is applied at once (C-47).
 - The credit appears on the customer's statement.
-- Cash refunds are still open (O-09).
+- The credit first reduces the unpaid part of the invoice (C-69).
 
 ### ACC-12 Cancel a wrong payment
 As an accountant, I want to cancel a confirmed payment recorded by mistake, so that the balance is correct.
@@ -96,3 +96,13 @@ As an accountant, I want to cancel a confirmed payment recorded by mistake, so t
 - I must give a reason (C-10).
 - The payment stays visible as cancelled. It is not deleted.
 - The invoice status and balance are recalculated.
+
+### ACC-13 Refund a return on a paid invoice
+As an accountant, I want to give money back for a return when the invoice is already paid, so that the customer is treated fairly.
+
+- If the invoice is unpaid, there is nothing to refund. The return only reduces what the customer owes (C-69).
+- If the invoice is partly paid, the return reduces the unpaid part first. Only the amount left over can be refunded.
+- If the invoice is paid, I choose with the customer: money back, or a credit on the balance for the next order.
+- I record a refund with its amount, method (cash, InstaPay, or Vodafone Cash), date, and reference number.
+- A refund cannot be more than the amount left over from the return.
+- The refund appears on the customer's statement, and the owner gets an alert (C-30).

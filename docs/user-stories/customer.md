@@ -22,7 +22,7 @@ As a customer, I want to reset my password if I forget it, so that I am not lock
 ### CUS-03 Browse and search products
 As a customer, I want to browse and search the catalog, so that I can find what I need quickly.
 
-- I can search by name or barcode.
+- I can search by name, barcode, or active ingredient (C-66).
 - I can filter by category and brand.
 - I see only active products.
 - The catalog works in Arabic and English (C-51).
@@ -30,7 +30,9 @@ As a customer, I want to browse and search the catalog, so that I can find what 
 ### CUS-04 See product details
 As a customer, I want to see a product's details and price, so that I can decide whether to order it.
 
-- I see name, brand, unit, price, and description.
+- I see name, brand, unit, pack size, price, image, and description.
+- For a medicine, I also see the active ingredient, strength, dosage form, storage, and the public price next to my price (C-66).
+- For a cosmetic, I also see the shade, what it is suitable for, and the period after opening.
 - I see "in stock" or "out of stock", not the exact quantity (C-56).
 - The price is the same for every customer (C-06).
 - If the product has an offer, I see the discount or the bonus units, for example "buy 10, get 1 free" (C-41).

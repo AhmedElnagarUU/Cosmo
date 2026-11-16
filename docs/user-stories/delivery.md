@@ -21,6 +21,7 @@ As a delivery person, I want to see the details of each stop, so that I can find
 - I see the stops in the order the delivery manager arranged (C-20).
 - Each stop shows customer name, address, phone, products, quantities, the payment method, and the amount to collect.
 - A credit order shows "no payment to collect".
+- An order with fridge products shows a "keep cold" mark (C-68).
 - I can tap the phone number to call the customer.
 
 ### DEL-04 Mark a stop as delivered

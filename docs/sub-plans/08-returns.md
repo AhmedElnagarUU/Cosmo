@@ -16,6 +16,7 @@ When a customer sends goods back, the wholesaler records it once, and both the s
 - Returns linked to an invoice (C-19)
 - Returns created from items refused at the door (C-47)
 - Credit for goods bought with a bonus offer (C-63)
+- Money back for a return on a paid invoice, recorded by the accountant (C-69)
 - Return reasons
 - Condition check per product: sellable or damaged (C-60)
 - Stock movements for returned goods, into the original batch
@@ -26,12 +27,11 @@ When a customer sends goods back, the wholesaler records it once, and both the s
 
 - Returns to suppliers. They are built in phase 3 (C-42)
 - Customers creating returns themselves (C-62)
-- Cash refunds, unless O-09 is decided
 - Exchange of one product for another. This is a return plus a new order
 
 ## Stories
 
-SAL-05, STK-13, ACC-11, CUS-13
+SAL-05, STK-13, ACC-11, ACC-13, CUS-13
 
 ## Workflow
 
@@ -55,7 +55,7 @@ Phase 7 (invoices and balances), phase 5 (which batch was sent to the customer).
 |---|---|
 | C-60 | Sellable or damaged, and credit on the balance |
 | C-62 | Only employees create returns |
-| O-09 | Cash refund or credit only. **Still open** |
+| C-69 | Credit first, then money back or credit when the invoice is paid |
 | C-63 | Credit for returned goods bought with a bonus offer |
 
 Also to decide here: whether returns have a time limit, and who approves a return of high value.

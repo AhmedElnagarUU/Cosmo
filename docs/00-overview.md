@@ -102,6 +102,8 @@ flowchart TD
 - Real payment gateway integration
 - SMS, WhatsApp, or email notifications. Notifications are inside the app only
 - Full accounting
+- Controlled medicines that need special records
+- Product variants. Each shade or size is its own product
 
 ## Glossary
 

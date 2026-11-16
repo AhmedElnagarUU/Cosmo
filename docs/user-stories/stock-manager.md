@@ -69,6 +69,7 @@ As a stock manager, I want a list of accepted orders, so that I know what to pre
 As a stock manager, I want to open an order and see what to pick, so that I can prepare it.
 
 - I see each product, its quantity, and a recommended batch (C-14).
+- A product stored in the fridge shows a "keep cold" mark (C-68).
 - Opening the order marks it as Preparing automatically.
 - The customer can no longer cancel the order (C-57).
 

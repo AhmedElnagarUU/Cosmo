@@ -50,11 +50,15 @@ As an owner, I want to deactivate a customer, so that they can no longer place o
 ### OWN-06 Manage products
 As an owner, I want to create and edit products, so that the catalog is correct.
 
-- I can enter name, barcode, brand, category, unit, cost price, selling price, and description.
+- I choose the product type first: medicine or cosmetic. The form shows only the fields for that type (C-66).
+- For every product I enter the name in Arabic and English, barcode, brand, category, unit, pack size, cost price, selling price, image, and description.
+- For a medicine I also enter the active ingredient, strength, dosage form, storage, public price, registration number, and whether it needs a prescription.
+- For a cosmetic I can also enter the shade, what it is suitable for, and the period after opening.
+- Each shade or size is its own product (C-67).
 - I can switch batch and expiry tracking on per product (C-13).
 - I can make a product inactive. Inactive products are hidden from customers.
 - The stock manager can create and edit products too, but cannot change prices (C-64).
-- The exact list of fields per product type is still open (O-05).
+- The full list of fields is in [Product fields](../workflows/10-product-fields.md).
 
 ### OWN-07 Change a price
 As an owner, I want to change a product's selling price, so that it stays up to date.

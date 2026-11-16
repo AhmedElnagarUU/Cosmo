@@ -22,7 +22,7 @@ flowchart LR
 | Stage | What happens | Output |
 |---|---|---|
 | 0. Planning documents | Write overview, decisions, stories, journeys, workflows, sub-plans | This repository. Done |
-| 1. Review | The project owner reads the documents and confirms or changes each assumption | Decisions list with no unreviewed assumptions. **We are here**: every assumption is confirmed, and two items are still open (O-05, O-09) |
+| 1. Review | The project owner reads the documents and confirms or changes each assumption | Decisions list with no unreviewed assumptions. **We are here**: every decision is confirmed and nothing is open. The next stage is the technical design |
 | 2. Technical design | Database tables, API actions, project structure, security | A technical design document |
 | 3. Build | Build phases 1 to 9 below, one at a time | Working app |
 | 4. Pilot | One real wholesaler uses the app | Feedback and fixes |
@@ -93,4 +93,4 @@ These affect the foundation. The project owner has confirmed all of them:
 | C-52 | Many wholesalers on one platform, each with separate data |
 | C-53 | TypeScript and PostgreSQL |
 
-Two items are still open and are decided when their phase begins: product fields (O-05) and cash refunds (O-09).
+Nothing is open in the decisions list. Small questions that belong to one phase are listed in that phase's sub-plan and answered when the phase begins.

@@ -141,6 +141,7 @@ flowchart LR
         I[Invoices] -- increase --> CB[What the customer owes]
         P[Confirmed payments] -- decrease --> CB
         R[Return credits] -- decrease --> CB
+        RF[Refunds paid back] -- increase --> CB
     end
 
     subgraph SUPP[Supplier balance]
@@ -166,6 +167,6 @@ A balance is never typed in. It is always calculated from the documents behind i
 | Invoices keep the price from the moment the order was placed, even if the product price changes later | |
 | No tax integration and no payment gateway | C-15, C-18 |
 
-## Still open
+## Refunds (C-69)
 
-- **O-09** — Cash refunds for returns.
+A refund is money going back to the customer after a return on a paid invoice. It is recorded by the accountant and explained in [Customer returns](06-returns.md).

@@ -52,6 +52,23 @@ stateDiagram-v2
 
 A return for items refused at the door follows the same statuses. The only difference is that its credit is applied when it is created, not at the end.
 
+## Credit or money back (C-69)
+
+```mermaid
+flowchart TD
+    A[Return is completed] --> B{Is the invoice<br/>fully paid?}
+    B -- No --> C[The return reduces the unpaid amount<br/>of the invoice]
+    C --> D{Is the return bigger<br/>than the unpaid amount?}
+    D -- No --> E[Done. No money moves]
+    D -- Yes --> F[An amount is left over]
+    B -- Yes --> F
+    F --> G{Wholesaler and customer choose}
+    G -- Money back --> H[Accountant records a refund<br/>Owner gets an alert]
+    G -- Keep as credit --> I[Credit stays on the customer's balance<br/>for the next order]
+```
+
+Example: an invoice of 1,000 is paid 600. The customer returns goods worth 500. The unpaid 400 is cleared first. The other 100 is refunded or kept as a credit.
+
 ## Return reasons
 
 - Customer no longer needs the product
@@ -73,12 +90,13 @@ A return for items refused at the door follows the same statuses. The only diffe
 | Damaged goods are recorded but never become available for sale | C-60 |
 | The customer gets a credit equal to the invoice price of the returned goods | C-60 |
 | An employee creates the return. The customer can view it | C-62 |
+| A return reduces the unpaid part of its invoice first. Only what is left over can be refunded | C-69 |
+| Only the accountant records a refund, by cash, InstaPay, or Vodafone Cash | C-69 |
 | Items refused at the door are a return created by the delivery person, with a reason | C-47 |
 | For goods bought with a bonus offer, the credit per unit is the amount paid for the line divided by all its units, including the free ones | C-63 |
 
-## Still open
+## Still to decide
 
-- **O-09** — Can the customer get cash back, or only a credit?
 - Is there a time limit for returns, for example 14 days after delivery?
 
 Returns to a supplier are a different flow. See [Supplier returns](09-supplier-returns.md).

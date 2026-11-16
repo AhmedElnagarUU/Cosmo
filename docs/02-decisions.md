@@ -21,6 +21,10 @@ This is the single list of business decisions. Every other document refers to th
 | C-07 | No customer credit limits |
 | C-18 | Invoices are internal documents. No tax or e-invoicing integration |
 | C-23 | The frontend is Next.js and the backend is Express |
+| C-66 | Product fields are in three groups: fields for every product, extra fields for medicines, and extra fields for cosmetics. The full list is in [Product fields](workflows/10-product-fields.md) |
+| C-67 | Each shade or size is its own product, with its own barcode, price, and stock. There is no "variants" feature |
+| C-68 | A product stored in the fridge shows a "keep cold" mark to the stock manager and the delivery person |
+| C-70 | Controlled medicines that need special records are not in the first version |
 | C-40 | The app works one clear way, with few owner settings: working hours, default credit period, invoice timing, the near-expiry period, and owner approval for supplier returns. The settings area is built so that more settings can be added later |
 | C-46 | Notifications are inside the app only. No SMS, WhatsApp, or email. They are designed so that other channels can be added later without rebuilding |
 | C-48 | The wholesaler creates each customer account. The customer sets a password on first login |
@@ -74,6 +78,7 @@ This is the single list of business decisions. Every other document refers to th
 | C-27 | The delivery person records the payment they collected. The accountant then confirms or rejects it. An invoice counts as paid only after the accountant confirms |
 | C-33 | A credit invoice past its due date is shown as overdue to the owner and accountant. The system does not block the customer automatically |
 | C-36 | The credit period starts on the invoice date |
+| C-69 | A return first reduces the unpaid part of its invoice. If the invoice is already paid, the wholesaler and the customer choose: money back, or a credit on the customer's balance. The accountant records the refund by cash, InstaPay, or Vodafone Cash, and the owner gets an alert |
 | C-58 | A setting per wholesaler: on accepted, on prepared, or on delivered. Default is on delivered |
 | C-59 | Each payment is recorded against one invoice |
 
@@ -98,17 +103,14 @@ This is the single list of business decisions. Every other document refers to th
 |---|---|
 | C-22 | Roles are Owner, Sales, Stock manager, Delivery manager, Accountant, Delivery. There is no separate Manager role |
 | C-29 | The owner creates each employee account with a name and a password. The employee must change the password at first login |
-| C-30 | The owner has an activity screen showing who did what and when. The owner gets an alert only for important events: a rejected order, a cancelled order, a stock correction, a payment the accountant rejected, an order or a customer answer waiting more than 5 working hours, and a missing signed delivery paper |
+| C-30 | The owner has an activity screen showing who did what and when. The owner gets an alert only for important events: a rejected order, a cancelled order, a stock correction, a payment the accountant rejected, a refund, an order or a customer answer waiting more than 5 working hours, and a missing signed delivery paper |
 | C-31 | One employee can hold more than one role |
 | C-34 | The stock manager also picks and packs orders. There is no separate warehouse worker role for now |
 | C-64 | Each role can do what the table in [User stories](user-stories/README.md) shows |
 
 ## Open — needs a decision
 
-| ID | Area | Question | Why it matters |
-|---|---|---|---|
-| O-05 | Product fields | Which exact fields does each product type need? | Needed before the product screens are designed |
-| O-09 | Refunds | Can a return be refunded in cash, or only as a credit on the balance? | Changes the payment module |
+Nothing is open at the moment. Small questions that belong to one phase are listed in that phase's sub-plan.
 
 ## Change history
 
@@ -136,6 +138,8 @@ This is the single list of business decisions. Every other document refers to th
 | Outside notifications | Was open (O-08). Now confirmed: inside the app only (C-46) |
 | Items refused at the door | Was open (O-10). Now confirmed: handled as a return. "Partially delivered" is removed (C-47, C-21) |
 | Supplier return approval | New setting, off by default (C-65) |
+| Product fields | Was open (O-05). Now confirmed (C-66, C-67, C-68, C-70) |
+| Refunds | Was open (O-09). Now confirmed (C-69) |
 | All assumptions | The project owner confirmed every assumed default. A-01 to A-25 became C-48 to C-64 |
 
 ## How decisions change

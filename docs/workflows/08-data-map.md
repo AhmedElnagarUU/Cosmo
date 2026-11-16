@@ -44,6 +44,7 @@ erDiagram
     INVOICE ||--o{ PAYMENT : "is paid by"
 
     INVOICE ||--o{ RETURN : "can have"
+    RETURN ||--o{ REFUND : "can be paid back by"
     RETURN ||--|{ RETURN_LINE : contains
     RETURN_LINE }o--|| BATCH : "returns to"
 ```
@@ -56,7 +57,7 @@ erDiagram
 | Employee | A person who works for the wholesaler, with one or more roles (C-31) |
 | Customer | A pharmacy or store with a login, a credit switch, and a credit period (C-26) |
 | Supplier | A company the wholesaler buys from. No login |
-| Product | An item in the catalog with one selling price |
+| Product | An item in the catalog with one selling price. It is a medicine or a cosmetic, each with its own extra fields (C-66) |
 | Batch | One lot of a product with a batch number, expiry date, and its own stock |
 | Stock movement | One recorded change to a batch's stock |
 | Receipt | One delivery from a supplier, with the supplier's invoice details |
@@ -73,6 +74,7 @@ erDiagram
 | Invoice | The bill for an order |
 | Payment | Money received from a customer for an invoice. It counts only after the accountant confirms it (C-27) |
 | Return | Goods a customer sent back or refused at the door, linked to an invoice (C-47) |
+| Refund | Money paid back to a customer for a return on a paid invoice (C-69) |
 | Return line | One product, batch, quantity, and condition inside a return |
 
 ## Questions this map answers
@@ -85,6 +87,5 @@ erDiagram
 
 | Decision | Effect on the map |
 |---|---|
-| O-09 Cash refunds | A refund would be a new kind of payment going out to the customer |
 | C-59 Payment per invoice | If payments can cover several invoices, a new link between payment and invoice is needed |
 | C-52 Tenancy | If a customer can buy from several wholesalers, customer is no longer owned by one wholesaler |
