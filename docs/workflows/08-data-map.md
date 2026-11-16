@@ -64,7 +64,7 @@ erDiagram
 | Supplier payment | Money paid to a supplier |
 | Supplier return | Goods sent back to a supplier, with a reason. It reduces stock and the amount owed (C-42) |
 | Offer | A discount or a bonus-units rule on a product, with optional dates (C-41) |
-| Settings | The wholesaler's working hours, default credit period, invoice timing, and near-expiry period (C-40) |
+| Settings | The wholesaler's working hours, default credit period, invoice timing, near-expiry period, and supplier return approval (C-40, C-65) |
 | Order | A customer's request for products, accepted or rejected by the stock manager (C-24) |
 | Order line | One product inside an order, with the ordered quantity, the current quantity, the must-have mark, and any discount or bonus units (C-39, C-41) |
 | Pick | The batch and quantity the stock manager actually took for an order line |

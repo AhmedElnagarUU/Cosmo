@@ -21,6 +21,7 @@ As an owner, I want to set how my business works, so that the app matches my way
 - Default credit period: it starts at one month (C-26).
 - Invoice timing: on accepted, on prepared, or on delivered (C-58).
 - Near-expiry period: it starts at six months (C-45).
+- Supplier return approval: off at the start. When I switch it on, every supplier return waits for my approval (C-65).
 - A changed setting applies to new orders only.
 
 ### OWN-03 Create customer accounts
@@ -73,6 +74,15 @@ As an owner, I want to put a discount or bonus units on a product, so that I can
 - Orders already placed keep the offer they were placed with.
 - Only the owner can create, change, or stop an offer.
 
+### OWN-14 Approve a supplier return
+As an owner, I want to approve or reject a supplier return before the goods leave, so that I control what goes back to suppliers.
+
+- This applies only when I have switched on supplier return approval (C-65).
+- I see the supplier, the products, batches, quantities, value, and the stock manager's reason.
+- When I approve, the stock manager can confirm the return.
+- When I reject, I must write a reason, and stock and the supplier balance do not change.
+- When approval is off, I only get an alert after the stock manager confirms a return.
+
 ## Orders
 
 ### OWN-08 See all orders and step in
@@ -92,6 +102,7 @@ As an owner, I want one screen that shows what needs attention today, so that I 
 - I see orders waiting for acceptance, with those waiting more than 5 working hours marked clearly (C-35).
 - I see orders waiting for the customer's answer, with those waiting more than 5 working hours marked clearly (C-39).
 - I see delivered orders whose signed paper has not come back (C-44).
+- I see supplier returns waiting for my approval, when that setting is on (C-65).
 - I see orders being prepared, orders ready for delivery, and trips in progress.
 - I see failed deliveries that need a decision.
 - I see products that are out of stock or close to expiry.

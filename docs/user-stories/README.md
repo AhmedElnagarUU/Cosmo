@@ -30,7 +30,7 @@ The owner can do everything. Every other role sees only what its job needs. One 
 | Products and prices | Yes | View | Products yes, prices view | | View | | View catalog |
 | Offers: discounts and bonus units | Yes | View | View | | View | | View |
 | Stock and batches | Yes | View available | Yes | | | | In stock or not |
-| Suppliers, receiving, and supplier returns | Yes | | Yes | | View | | |
+| Suppliers, receiving, and supplier returns | Yes, and approves returns if the setting is on | | Yes | | View | | |
 | Accept, change, or reject orders | Yes | | Yes | | | | Answer a change |
 | Orders | Yes | Create and view | View and cancel | View ready orders | View | | Own orders |
 | Order preparation | Yes | | Yes | | | | |
@@ -58,7 +58,7 @@ flowchart LR
     S7 --> S8[Watch the business]
 
     S1 --- T1[OWN-01 to OWN-05<br/>SAL-01<br/>CUS-01, CUS-02]
-    S2 --- T2[OWN-06, OWN-07, OWN-13<br/>STK-01, STK-02<br/>STK-14 to STK-16, STK-19<br/>ACC-09, ACC-10]
+    S2 --- T2[OWN-06, OWN-07<br/>OWN-13, OWN-14<br/>STK-01, STK-02<br/>STK-14 to STK-16, STK-19<br/>ACC-09, ACC-10]
     S3 --- T3[CUS-03 to CUS-10<br/>CUS-14 to CUS-16<br/>SAL-02 to SAL-04<br/>STK-03 to STK-05<br/>STK-17, STK-18<br/>OWN-08]
     S4 --- T4[STK-06 to STK-11]
     S5 --- T5[DM-01 to DM-06<br/>DEL-01 to DEL-08<br/>STK-12]

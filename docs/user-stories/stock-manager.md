@@ -151,6 +151,7 @@ As a stock manager, I want to record goods we send back to a supplier, so that t
 - I must choose a reason: expired, close to expiry, damaged, wrong product, or other.
 - I cannot return more than the on-hand quantity of the batch that is not reserved.
 - When I confirm, on-hand stock decreases and the amount owed to the supplier decreases.
+- If the owner has switched on approval, my return waits for the owner first. If the owner rejects it, I see the reason and nothing changes (C-65).
 - A confirmed supplier return cannot be edited (C-09).
 
 ### STK-17 Cancel an order

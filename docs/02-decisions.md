@@ -21,7 +21,7 @@ This is the single list of business decisions. Every other document refers to th
 | C-07 | No customer credit limits |
 | C-18 | Invoices are internal documents. No tax or e-invoicing integration |
 | C-23 | The frontend is Next.js and the backend is Express |
-| C-40 | The app works one clear way, with few owner settings: working hours, default credit period, invoice timing, and the near-expiry period. The settings area is built so that more settings can be added later |
+| C-40 | The app works one clear way, with few owner settings: working hours, default credit period, invoice timing, the near-expiry period, and owner approval for supplier returns. The settings area is built so that more settings can be added later |
 | C-46 | Notifications are inside the app only. No SMS, WhatsApp, or email. They are designed so that other channels can be added later without rebuilding |
 | C-48 | The wholesaler creates each customer account. The customer sets a password on first login |
 | C-49 | No throwaway prototype. We build the real app one flow at a time |
@@ -42,6 +42,7 @@ This is the single list of business decisions. Every other document refers to th
 | C-13 | Products can have batch and expiry tracking |
 | C-14 | The system recommends a batch by expiry. The employee chooses and can override |
 | C-42 | Goods can be returned to a supplier. The return records the product, batch, quantity, and a reason. Stock decreases, and the amount owed to the supplier decreases. If the supplier sends new goods in exchange, they are recorded as a normal receipt |
+| C-65 | A setting decides whether a supplier return needs the owner's approval. Off by default: the stock manager confirms alone, and the owner gets an alert. On: the return waits for the owner, and stock and the supplier balance change only after approval. A rejection needs a reason |
 | C-43 | The supplier's invoice arrives with the goods. The goods and the invoice are recorded together in one step |
 | C-45 | "Near expiry" means six months before the expiry date by default. The owner can change this in the settings |
 | C-25 | Stock is reserved the moment the customer places the order, before acceptance. On hand decreases only when the goods leave the warehouse |
@@ -134,6 +135,7 @@ This is the single list of business decisions. Every other document refers to th
 | Near-expiry period | Was open (O-06). Now confirmed: six months by default (C-45) |
 | Outside notifications | Was open (O-08). Now confirmed: inside the app only (C-46) |
 | Items refused at the door | Was open (O-10). Now confirmed: handled as a return. "Partially delivered" is removed (C-47, C-21) |
+| Supplier return approval | New setting, off by default (C-65) |
 | All assumptions | The project owner confirmed every assumed default. A-01 to A-25 became C-48 to C-64 |
 
 ## How decisions change
