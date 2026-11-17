@@ -21,6 +21,7 @@ As an owner, I want to set how my business works, so that the app matches my way
 - Default credit period: it starts at one month (C-26).
 - Invoice timing: on accepted, on prepared, or on delivered (C-58).
 - Near-expiry period: it starts at six months (C-45).
+- Extra product fields: see OWN-15 (C-71).
 - Supplier return approval: off at the start. When I switch it on, every supplier return waits for my approval (C-65).
 - A changed setting applies to new orders only.
 
@@ -55,6 +56,7 @@ As an owner, I want to create and edit products, so that the catalog is correct.
 - For a medicine I also enter the active ingredient, strength, dosage form, storage, public price, registration number, and whether it needs a prescription.
 - For a cosmetic I can also enter the shade, what it is suitable for, and the period after opening.
 - Each shade or size is its own product (C-67).
+- The form also shows any extra fields I added (C-71, OWN-15).
 - I can switch batch and expiry tracking on per product (C-13).
 - I can make a product inactive. Inactive products are hidden from customers.
 - The stock manager can create and edit products too, but cannot change prices (C-64).
@@ -67,6 +69,16 @@ As an owner, I want to change a product's selling price, so that it stays up to 
 - The new price applies to new orders only.
 - Orders already placed keep their original price.
 - The price change appears on the activity screen.
+
+### OWN-15 Add extra product fields
+As an owner, I want to add product fields of my own, so that I can record information the standard form does not have.
+
+- I open Settings and add a field with a name in Arabic and English (C-71).
+- I choose the type: text, number, yes or no, date, or a choice from a list I write.
+- I choose whether it is for medicines, cosmetics, or both, whether it is required, and whether customers see it.
+- I can have up to 20 extra fields.
+- I can switch a field off. Old values are kept.
+- Only the owner can add or change extra fields.
 
 ### OWN-13 Manage offers
 As an owner, I want to put a discount or bonus units on a product, so that I can sell more of it.

@@ -28,6 +28,9 @@ erDiagram
     SUPPLIER_RETURN ||--|{ SUPPLIER_RETURN_LINE : contains
     SUPPLIER_RETURN_LINE }o--|| BATCH : "takes from"
     PRODUCT ||--o{ OFFER : "can have"
+    WHOLESALER ||--o{ EXTRA_FIELD : defines
+    PRODUCT ||--o{ EXTRA_FIELD_VALUE : has
+    EXTRA_FIELD ||--o{ EXTRA_FIELD_VALUE : "is filled by"
     WHOLESALER ||--|| SETTINGS : has
 
     CUSTOMER ||--o{ ORDER : places
@@ -64,6 +67,8 @@ erDiagram
 | Receipt line | One product and batch inside a receipt |
 | Supplier payment | Money paid to a supplier |
 | Supplier return | Goods sent back to a supplier, with a reason. It reduces stock and the amount owed (C-42) |
+| Extra field | A product field the owner added, with its name, type, and rules (C-71) |
+| Extra field value | The value of one extra field for one product |
 | Offer | A discount or a bonus-units rule on a product, with optional dates (C-41) |
 | Settings | The wholesaler's working hours, default credit period, invoice timing, near-expiry period, and supplier return approval (C-40, C-65) |
 | Order | A customer's request for products, accepted or rejected by the stock manager (C-24) |

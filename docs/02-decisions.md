@@ -24,6 +24,7 @@ This is the single list of business decisions. Every other document refers to th
 | C-66 | Product fields are in three groups: fields for every product, extra fields for medicines, and extra fields for cosmetics. The full list is in [Product fields](workflows/10-product-fields.md) |
 | C-67 | Each shade or size is its own product, with its own barcode, price, and stock. There is no "variants" feature |
 | C-68 | A product stored in the fridge shows a "keep cold" mark to the stock manager and the delivery person |
+| C-71 | The owner can add extra product fields of their own, up to 20 per wholesaler. Each field has a name in Arabic and English, a type, the product type it applies to, and whether it is required and shown to customers. Extra fields only store and show information. They never change stock, prices, or order rules |
 | C-70 | Controlled medicines that need special records are not in the first version |
 | C-40 | The app works one clear way, with few owner settings: working hours, default credit period, invoice timing, the near-expiry period, and owner approval for supplier returns. The settings area is built so that more settings can be added later |
 | C-46 | Notifications are inside the app only. No SMS, WhatsApp, or email. They are designed so that other channels can be added later without rebuilding |
@@ -139,6 +140,7 @@ Nothing is open at the moment. Small questions that belong to one phase are list
 | Items refused at the door | Was open (O-10). Now confirmed: handled as a return. "Partially delivered" is removed (C-47, C-21) |
 | Supplier return approval | New setting, off by default (C-65) |
 | Product fields | Was open (O-05). Now confirmed (C-66, C-67, C-68, C-70) |
+| Extra product fields | New: the owner can add up to 20 fields of their own (C-71) |
 | Refunds | Was open (O-09). Now confirmed (C-69) |
 | All assumptions | The project owner confirmed every assumed default. A-01 to A-25 became C-48 to C-64 |
 

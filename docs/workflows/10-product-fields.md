@@ -8,8 +8,9 @@ flowchart TD
     B --> C{Product type?}
     C -- Medicine --> D[Fills the medicine fields]
     C -- Cosmetic --> E[Fills the cosmetic fields]
-    D --> F[Product is saved with zero stock]
-    E --> F
+    D --> X[Fills any extra fields the owner added]
+    E --> X
+    X --> F[Product is saved with zero stock]
 ```
 
 ## Fields for every product
@@ -51,6 +52,36 @@ flowchart TD
 | Suitable for | No | Yes | Skin type or hair type |
 | Period after opening | No | Yes | For example "12 months" |
 
+## Extra fields added by the owner (C-71)
+
+The fixed fields above cover what most wholesalers need. When an owner needs more, for example "country of origin" or "importer", they add the field themselves in the settings. No developer is needed.
+
+```mermaid
+flowchart TD
+    A[Owner opens Settings, Product fields] --> B[Owner adds a field]
+    B --> C[Enters the name in Arabic and English]
+    C --> D[Chooses the type]
+    D --> E[Chooses: medicines, cosmetics, or both]
+    E --> F[Chooses: required or not<br/>shown to customers or not]
+    F --> G[The field appears on the product form<br/>for every product of that type]
+```
+
+| Setting of an extra field | Choices |
+|---|---|
+| Name | In Arabic and English |
+| Type | Text, number, yes or no, date, or a choice from a list the owner writes |
+| Applies to | Medicines, cosmetics, or both |
+| Required | Yes or no |
+| Shown to customers | Yes or no |
+
+Rules for extra fields:
+
+- Up to 20 extra fields per wholesaler. This keeps the product form short and clear. The limit can be raised later if real wholesalers need more.
+- An extra field only stores and shows information. It never changes stock, prices, offers, or order rules.
+- A new required field does not block old products. They are asked for the value the next time someone edits them.
+- A field is never deleted, only switched off. Its old values stay in the history.
+- Each wholesaler has its own extra fields. Other wholesalers do not see them (C-52).
+
 ## Rules
 
 | Rule | Decision |
@@ -59,6 +90,7 @@ flowchart TD
 | A product with storage "fridge" shows a "keep cold" mark on preparation and delivery screens | C-68 |
 | Controlled medicines that need special records are not in the first version | C-70 |
 | Categories, brands, and dosage forms are chosen from lists, so the catalog stays clean and searchable | |
+| The owner can add up to 20 extra fields of their own | C-71 |
 
 ## Still to decide
 

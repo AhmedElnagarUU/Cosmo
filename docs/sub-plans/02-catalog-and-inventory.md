@@ -15,6 +15,7 @@ The wholesaler has a product catalog and can see stock per product and per batch
 
 - Products with common fields, medicine fields, and cosmetic fields, and an active or inactive status (C-66)
 - A "keep cold" mark for fridge products (C-68)
+- Extra product fields added by the owner, up to 20 (C-71)
 - Batch and expiry tracking, switched on per product (C-13)
 - Stock per batch: on hand, reserved, available (C-08)
 - Stock movements as the only way stock changes (C-09)
@@ -35,7 +36,7 @@ The wholesaler has a product catalog and can see stock per product and per batch
 
 ## Stories
 
-OWN-06, OWN-07, OWN-13 (creating offers; they affect orders from phase 4), STK-14, STK-15, STK-16
+OWN-06, OWN-07, OWN-15, OWN-13 (creating offers; they affect orders from phase 4), STK-14, STK-15, STK-16
 
 ## Workflow
 
@@ -59,6 +60,7 @@ Phase 1 (login and roles).
 |---|---|
 | C-66 | Product fields for medicines and cosmetics |
 | C-67 | Each shade or size is its own product |
+| C-71 | Extra product fields added by the owner |
 | C-50 | One selling unit per product, no conversion |
 | C-55 | Expired batches cannot be sold |
 
