@@ -1,6 +1,6 @@
 # Data map
 
-This is a business-level map of the things the app stores and how they connect. It is not a database design. Exact tables and fields are decided in the technical design stage.
+This is a business-level map of the things the app stores and how they connect. It is not a database design. Exact tables and fields are in the [Database design](../technical/01-database-design.md).
 
 ## How to read it
 

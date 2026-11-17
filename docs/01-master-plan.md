@@ -17,13 +17,15 @@ flowchart LR
     P3 --> P4[Stage 4<br/>Pilot with one wholesaler]
 
     style P0 fill:#d4edda,stroke:#28a745
+    style P1 fill:#d4edda,stroke:#28a745
+    style P2 fill:#fff3cd,stroke:#ffc107
 ```
 
 | Stage | What happens | Output |
 |---|---|---|
 | 0. Planning documents | Write overview, decisions, stories, journeys, workflows, sub-plans | This repository. Done |
-| 1. Review | The project owner reads the documents and confirms or changes each assumption | Decisions list with no unreviewed assumptions. **We are here**: every decision is confirmed and nothing is open. The next stage is the technical design |
-| 2. Technical design | Database tables, API actions, project structure, security | A technical design document |
+| 1. Review | The project owner reads the documents and confirms or changes each assumption | Decisions list with no unreviewed assumptions. Done |
+| 2. Technical design | Database tables, API actions, project structure, security | A technical design document. **We are here**: the [database design](technical/01-database-design.md) is written |
 | 3. Build | Build phases 1 to 9 below, one at a time | Working app |
 | 4. Pilot | One real wholesaler uses the app | Feedback and fixes |
 

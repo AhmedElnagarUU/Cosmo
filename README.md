@@ -2,7 +2,7 @@
 
 A platform for small and medium wholesalers in Egypt who sell pharmaceutical and cosmetics products to pharmacies and retail stores.
 
-**Current stage: planning.** No code is written yet. Everything in this repository is a planning document.
+**Current stage: technical design.** No code is written yet. Everything in this repository is a planning document.
 
 ## Where to start reading
 
@@ -15,6 +15,7 @@ A platform for small and medium wholesalers in Egypt who sell pharmaceutical and
 | 5 | [User stories](docs/user-stories/) | What must each role be able to do? |
 | 6 | [Workflows](docs/workflows/) | How does each business flow work, step by step? |
 | 7 | [Sub-plans](docs/sub-plans/) | What exactly is in each phase? |
+| 8 | [Database design](docs/technical/01-database-design.md) | How is the data stored? |
 
 ## Diagrams
 
