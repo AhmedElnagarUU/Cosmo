@@ -8,7 +8,8 @@ The customer mostly uses a phone. Labels such as (C-48) point to [Decisions](../
 As a customer, I want to set my own password the first time I log in, so that only I can use my account.
 
 - The wholesaler has already created my account (C-48).
-- I receive a way to log in for the first time.
+- I receive my first-login details by WhatsApp from the wholesaler (C-73).
+- I log in with my phone number and password (C-72).
 - I must choose a new password before I can do anything else.
 
 ### CUS-02 Reset password
@@ -58,6 +59,7 @@ As a customer, I want to place my order and know it was received, so that I can 
 - If every product has enough stock, the order is saved and the stock is held for me immediately (C-25).
 - If a product does not have enough stock, I am told which product and how many I can order (C-54).
 - I see an order number and the message "waiting for acceptance" (C-24).
+- If the wholesaler has a minimum order value, I cannot place an order below it, and I see how much more I need (C-76).
 - If the warehouse is closed, I can still place the order, and I am told it will be reviewed when the warehouse opens (C-37).
 - Pressing the button twice does not create two orders.
 

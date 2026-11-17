@@ -22,6 +22,7 @@ As an owner, I want to set how my business works, so that the app matches my way
 - Invoice timing: on accepted, on prepared, or on delivered (C-58).
 - Near-expiry period: it starts at six months (C-45).
 - Extra product fields: see OWN-15 (C-71).
+- Minimum order value: off at the start (C-76).
 - Supplier return approval: off at the start. When I switch it on, every supplier return waits for my approval (C-65).
 - A changed setting applies to new orders only.
 
@@ -29,7 +30,8 @@ As an owner, I want to set how my business works, so that the app matches my way
 As an owner, I want to create an account for a pharmacy or store, so that they can start ordering.
 
 - I enter the business name, contact person, phone, and address (C-48).
-- The customer gets a way to log in for the first time.
+- The customer logs in with their phone number (C-72).
+- The app shows the first-login details, and I send them to the customer by WhatsApp from my phone (C-73).
 - Sales employees can do this too (SAL-01).
 
 ### OWN-04 Allow credit for a customer

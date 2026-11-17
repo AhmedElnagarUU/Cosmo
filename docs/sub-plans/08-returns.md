@@ -58,7 +58,7 @@ Phase 7 (invoices and balances), phase 5 (which batch was sent to the customer).
 | C-69 | Credit first, then money back or credit when the invoice is paid |
 | C-63 | Credit for returned goods bought with a bonus offer |
 
-Also to decide here: whether returns have a time limit, and who approves a return of high value.
+Also decided for this phase: no time limit for returns (C-82), and no approval step for high-value returns (C-83).
 
 ## Done when
 

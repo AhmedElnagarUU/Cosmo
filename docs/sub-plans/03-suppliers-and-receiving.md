@@ -54,7 +54,7 @@ Phase 2 (products, batches, stock movements).
 
 Nothing is waiting. One-step receiving (C-43), supplier returns (C-42), and the approval setting (C-65) are confirmed.
 
-Also to decide here: whether a new cost price on a receipt changes the product's cost price automatically.
+Also decided for this phase: a new cost price on a receipt updates the product's cost price (C-75).
 
 ## Done when
 

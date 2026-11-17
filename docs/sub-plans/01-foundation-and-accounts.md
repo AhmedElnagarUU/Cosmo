@@ -63,7 +63,7 @@ Nothing. This is the first phase.
 | C-53 | TypeScript and PostgreSQL |
 | C-64 | Role permissions, as shown in the user stories table |
 
-Also to decide here: how the customer receives their first-login details (SMS, WhatsApp message sent by the employee, or a printed note), and whether login uses a phone number or an email address.
+Also decided for this phase: login with a phone number (C-72), and first-login details sent by the employee on WhatsApp (C-73).
 
 ## Done when
 

@@ -11,6 +11,7 @@ As a stock manager, I want to record the goods a supplier delivered, so that the
 - I enter the supplier's invoice number and total on the same screen, because the invoice comes with the goods (C-43).
 - I can scan a barcode to find the product.
 - When I confirm, on-hand stock increases and the amount owed to the supplier increases.
+- A new cost price updates the product's cost price. The old price stays in the history (C-75).
 - A confirmed receipt cannot be edited (C-09).
 
 ### STK-02 Record batch and expiry
@@ -71,6 +72,7 @@ As a stock manager, I want to open an order and see what to pick, so that I can 
 - I see each product, its quantity, and a recommended batch (C-14).
 - A product stored in the fridge shows a "keep cold" mark (C-68).
 - Opening the order marks it as Preparing automatically.
+- While I prepare it, no other stock manager can open it (C-77).
 - The customer can no longer cancel the order (C-57).
 
 ### STK-08 Choose the batch

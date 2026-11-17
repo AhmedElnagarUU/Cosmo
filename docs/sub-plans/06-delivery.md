@@ -72,7 +72,7 @@ Phase 5 (orders that are Ready).
 |---|---|
 | C-61 | Failed delivery: goods come back, then deliver again or cancel |
 
-Also to decide here: whether a delivery person can change the order of stops during the trip.
+Also decided for this phase: the delivery person can change the order of stops (C-81).
 
 ## Done when
 

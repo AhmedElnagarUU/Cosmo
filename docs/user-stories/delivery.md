@@ -19,6 +19,7 @@ As a delivery person, I want to start my trip when I leave the warehouse, so tha
 As a delivery person, I want to see the details of each stop, so that I can find the customer and hand over the right goods.
 
 - I see the stops in the order the delivery manager arranged (C-20).
+- I can change the order of stops during the trip, and the change is recorded (C-81).
 - Each stop shows customer name, address, phone, products, quantities, the payment method, and the amount to collect.
 - A credit order shows "no payment to collect".
 - An order with fridge products shows a "keep cold" mark (C-68).

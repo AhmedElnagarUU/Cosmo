@@ -89,10 +89,7 @@ Rules for extra fields:
 | Each shade or size is its own product, with its own barcode, price, and stock | C-67 |
 | A product with storage "fridge" shows a "keep cold" mark on preparation and delivery screens | C-68 |
 | Controlled medicines that need special records are not in the first version | C-70 |
-| Categories, brands, and dosage forms are chosen from lists, so the catalog stays clean and searchable | |
+| Categories, brands, and dosage forms are chosen from lists, so the catalog stays clean and searchable. The owner and stock manager manage the lists | C-74 |
+| The public price is optional | C-84 |
 | The owner can add up to 20 extra fields of their own | C-71 |
 
-## Still to decide
-
-- Is the public price always printed on medicine packs in Egypt? If not, the field stays optional and is simply left empty.
-- Who keeps the lists of categories and brands: only the owner, or the stock manager too?

@@ -54,6 +54,7 @@ As an accountant, I want to print an invoice, so that I can give it to the custo
 - The printed invoice shows the wholesaler's details, the customer, the products, quantities, prices, total, and for credit invoices the due date.
 - Discounts are shown on their line, and bonus units are shown at price zero (C-41).
 - It works in Arabic and English (C-51).
+- The invoice number looks like INV-2026-00001 (C-78).
 
 ### ACC-08 Follow overdue invoices
 As an accountant, I want to see credit invoices that are past their due date, so that I can collect the money.

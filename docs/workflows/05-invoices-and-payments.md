@@ -163,7 +163,9 @@ A balance is never typed in. It is always calculated from the documents behind i
 | A saved payment cannot be edited. A wrong payment is cancelled with a reason and recorded again | C-10 |
 | The due date of a credit invoice is the invoice date plus the customer's credit period | C-26, C-36 |
 | Overdue invoices are shown to the owner and accountant. Nothing is blocked automatically | C-33 |
-| Invoices can be printed | |
+| Invoices can be printed. The printed invoice shows the wholesaler, customer, products, quantities, prices, offers, total, and due date | C-79 |
+| Invoice numbers run per wholesaler and year, for example INV-2026-00001 | C-78 |
+| A customer cannot pay before delivery | C-80 |
 | Invoices keep the price from the moment the order was placed, even if the product price changes later | |
 | No tax integration and no payment gateway | C-15, C-18 |
 

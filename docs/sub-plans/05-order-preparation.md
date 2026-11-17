@@ -55,7 +55,7 @@ Phase 4 (accepted orders with reserved stock), phase 2 (batches).
 |---|---|
 | C-55 | Expired batches cannot be picked |
 
-Also to decide here: whether two stock managers can work on the same order.
+Also decided for this phase: one stock manager prepares an order at a time (C-77).
 
 ## Done when
 

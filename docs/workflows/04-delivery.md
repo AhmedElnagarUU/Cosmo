@@ -114,8 +114,7 @@ sequenceDiagram
 | Items refused at the door become a return with a reason. The customer pays only for what they kept | C-47 |
 | A delivered order needs a signed paper. The delivery manager confirms it arrived | C-44 |
 | A trip closes only when every payment is checked and every signed paper is received | C-27, C-44 |
+| The delivery person can change the order of stops during the trip. The change is recorded | C-81 |
 | No GPS, no live tracking, no automatic route | |
 
-## Still to decide
 
-- Can a delivery person change the order of stops during the trip?

@@ -71,7 +71,7 @@ Phases 1 to 8.
 |---|---|
 | C-64 | Which role sees which report |
 
-Also to decide here: which reports the wholesaler really uses every week. Only those are built.
+Also decided for this phase: five reports first, more only when real users ask (C-85).
 
 ## Done when
 

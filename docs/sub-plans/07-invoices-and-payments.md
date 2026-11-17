@@ -74,7 +74,7 @@ Phase 6 (delivery results and payments recorded at the door), phase 4 (orders), 
 | C-58 | Invoice timing as a setting, default on delivered |
 | C-59 | One payment belongs to one invoice |
 
-Also to decide here: the invoice number format, what the printed invoice must show, and whether a customer can pay before delivery.
+Also decided for this phase: invoice number format (C-78), printed invoice content (C-79), and no payment before delivery (C-80).
 
 ## Done when
 

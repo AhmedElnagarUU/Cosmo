@@ -47,6 +47,7 @@ The system only recommends. The employee always makes the final choice, because 
 |---|---|
 | Only accepted orders appear in the preparation list | C-24 |
 | Opening an order moves it to Preparing automatically | |
+| Only one stock manager prepares an order at a time | C-77 |
 | One order line can be filled from more than one batch | |
 | A barcode scan can select the product, where a scanner or phone camera is available | |
 | If less than the ordered quantity is found, the employee enters a reason. The extra reservation is released, and the customer is informed | C-38 |

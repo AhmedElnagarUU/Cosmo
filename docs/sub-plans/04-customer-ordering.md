@@ -82,7 +82,7 @@ Phase 1 (customer accounts), phase 2 (products and stock), phase 3 (so that ther
 | C-54 | No ordering above available stock |
 | C-56 | Customers see "in stock" or "out of stock" only |
 
-Also to decide here: whether there is a minimum order value.
+Also decided for this phase: an optional minimum order value, off by default (C-76).
 
 ## Done when
 

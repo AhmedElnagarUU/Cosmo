@@ -92,11 +92,9 @@ Example: an invoice of 1,000 is paid 600. The customer returns goods worth 500. 
 | An employee creates the return. The customer can view it | C-62 |
 | A return reduces the unpaid part of its invoice first. Only what is left over can be refunded | C-69 |
 | Only the accountant records a refund, by cash, InstaPay, or Vodafone Cash | C-69 |
+| There is no fixed time limit. The employee decides | C-82 |
+| No approval step for high-value returns. The owner gets an alert for every completed return | C-83 |
 | Items refused at the door are a return created by the delivery person, with a reason | C-47 |
 | For goods bought with a bonus offer, the credit per unit is the amount paid for the line divided by all its units, including the free ones | C-63 |
-
-## Still to decide
-
-- Is there a time limit for returns, for example 14 days after delivery?
 
 Returns to a supplier are a different flow. See [Supplier returns](09-supplier-returns.md).

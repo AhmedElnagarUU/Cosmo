@@ -47,9 +47,8 @@ sequenceDiagram
 | An expiry date in the past is rejected | C-55 |
 | The same batch number received again for the same product is added to the existing batch | |
 | The supplier's invoice number and total are entered on the same receipt as the goods | C-43 |
+| A new cost price on a receipt updates the product's cost price. Old prices stay in the history | C-75 |
 | Supplier payments can be partial | |
 | Goods sent back to a supplier are recorded as a [supplier return](09-supplier-returns.md) | C-42 |
 
-## Still to decide
 
-- Does a new cost price on a receipt change the product's cost price automatically?
