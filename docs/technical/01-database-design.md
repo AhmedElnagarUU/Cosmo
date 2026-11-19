@@ -136,7 +136,7 @@ The tables are grouped into nine areas:
 
 | Area | Tables | Built in phase |
 |---|---|---|
-| 1. Wholesaler, settings, and people | 9 tables | 1 |
+| 1. Wholesaler, settings, and people | 10 tables | 1 |
 | 2. Product catalog | 11 tables | 2 |
 | 3. Stock | 3 tables | 2 |
 | 4. Suppliers | 6 tables | 3 |
@@ -190,7 +190,17 @@ erDiagram
         enum user_type "employee or customer"
         bool must_change_password
         bool is_active
+        int failed_logins
+        timestamptz locked_until
         timestamptz last_login_at
+    }
+    SESSIONS {
+        uuid id PK
+        uuid user_id FK
+        text token_hash UK "the cookie code, hashed"
+        timestamptz created_at
+        timestamptz last_used_at
+        timestamptz expires_at
     }
     EMPLOYEES {
         uuid id PK
@@ -234,6 +244,7 @@ erDiagram
     USERS ||--o| CUSTOMERS : "is"
     EMPLOYEES ||--|{ EMPLOYEE_ROLES : holds
     USERS ||--o{ PASSWORD_RESET_REQUESTS : asks
+    USERS ||--o{ SESSIONS : "is logged in by"
 ```
 
 **wholesalers** — One row per wholesale business. `login_code` is a short code in the wholesaler's own login link, for example `cosmo.app/ahmed-pharma`. It tells the app which wholesaler a phone number belongs to.
@@ -243,6 +254,8 @@ erDiagram
 **working_hours** — One row per open day, with the opening and closing time (C-37). A day with no row is a closed day. **closed_days** holds the "closed today" switch and holidays.
 
 **users** — Everyone who logs in, employee or customer. Login is by phone number and password (C-72). The password is never stored. Only a `password_hash` is stored, which is a one-way scrambled version that cannot be turned back into the password. `must_change_password` forces a new password at first login (C-29, C-48).
+
+**sessions** — One row per logged-in device. Deleting the rows logs the person out at once. Only a hash of the cookie code is stored, so a copy of the database cannot be used to log in. See [Security](04-security.md) (A-30).
 
 **employees** and **employee_roles** — One employee can have several roles (C-31), so roles are in their own table with one row per role.
 
@@ -1021,7 +1034,7 @@ An **index** is like the index at the back of a book. It lets the database find 
 
 | Area | Tables |
 |---|---|
-| 1. Wholesaler, settings, and people | wholesalers, settings, working_hours, closed_days, users, employees, employee_roles, customers, password_reset_requests |
+| 1. Wholesaler, settings, and people | wholesalers, settings, working_hours, closed_days, users, employees, employee_roles, customers, password_reset_requests, sessions |
 | 2. Product catalog | categories, brands, dosage_forms, products, medicine_details, cosmetic_details, extra_fields, extra_field_values, price_history, offers, product_search |
 | 3. Stock | batches, product_stock, stock_movements |
 | 4. Suppliers | suppliers, receipts, receipt_lines, supplier_returns, supplier_return_lines, supplier_payments |
@@ -1031,7 +1044,7 @@ An **index** is like the index at the back of a book. It lets the database find 
 | 8. Customer returns | customer_returns, customer_return_lines |
 | 9. Activity and notifications | activity_log, notifications, notification_deliveries |
 
-In total there are **46 tables**. Refunds are shown in areas 7 and 8 because they belong to both, but it is one table.
+In total there are **47 tables**. Refunds are shown in areas 7 and 8 because they belong to both, but it is one table.
 
 ## Points to confirm
 

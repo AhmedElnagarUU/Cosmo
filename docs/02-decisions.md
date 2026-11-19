@@ -125,12 +125,15 @@ This is the single list of business decisions. Every other document refers to th
 
 ## Assumed — please confirm
 
-These came from the [Database design](technical/01-database-design.md). The [API design](technical/02-api-design.md) uses them as defaults.
+These came from the technical design documents, which use them as defaults.
 
 | ID | Area | Assumed default | Why this default |
 |---|---|---|---|
 | A-26 | Login link | Each wholesaler has its own login link, for example `cosmo.app/ahmed-pharma`. A phone number is unique only inside one wholesaler | The same pharmacy phone can be a customer of two wholesalers |
 | A-27 | Password reset | The customer taps "forgot password". The owner or a sales employee sets a temporary password and sends it by WhatsApp | There is no SMS or email (C-46), so the app cannot send a reset code |
+| A-29 | Tools | pnpm monorepo, Next.js with Tailwind and next-intl, Express, Kysely, SQL migrations, Zod, Vitest, Playwright, Docker Compose, GitHub Actions. See [Project structure](technical/03-project-structure.md) | Each tool fits a need of this project, listed in that document |
+| A-30 | Sessions | Sessions are stored in the database and sent in an HttpOnly cookie. No JWT tokens | A session can be ended at once when an account is deactivated |
+| A-31 | Session length | Customers 30 days, employees 12 hours, platform administrators 1 hour with a second factor | Balances comfort on a pharmacy phone with safety on shared warehouse devices |
 | A-28 | Totals check | A nightly job compares stored totals with the documents behind them and warns the developer if they differ | Catches a bug early, before wrong numbers reach a customer |
 
 ## Open — needs a decision
