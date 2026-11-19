@@ -248,7 +248,7 @@ erDiagram
 
 **customers** — The pharmacy or store. `credit_allowed` and `credit_days` are the credit switch and credit period (C-26). New customers copy `credit_days` from the settings.
 
-**password_reset_requests** — See "Points to confirm" at the end.
+**password_reset_requests** — Customers who tapped "forgot password" (A-27).
 
 ---
 
@@ -1035,13 +1035,13 @@ In total there are **46 tables**. Refunds are shown in areas 7 and 8 because the
 
 ## Points to confirm
 
-These came up while designing the tables. Each has a suggestion.
+These came up while designing the tables. Each suggestion is now listed as an assumption in [Decisions](../02-decisions.md).
 
-| # | Question | Suggestion |
+| ID | Question | Suggestion |
 |---|---|---|
-| 1 | Login by phone needs to know the wholesaler, because the same pharmacy phone can be a customer of two wholesalers. | Each wholesaler has its own login link, for example `cosmo.app/ahmed-pharma`. The phone number is unique only inside one wholesaler |
-| 2 | Password reset (CUS-02) without SMS or email (C-46): how does the customer get a new password? | The customer taps "forgot password". The request appears to the owner and sales. They set a temporary password and send it by WhatsApp, the same way as the first login (C-73) |
-| 3 | When a payment is cancelled or an invoice is cancelled, the stored summaries must be updated. | Done in the same transaction, as with stock (idea 5). A nightly check compares summaries with the documents and alerts the developer if they differ |
+| A-26 | Login by phone needs to know the wholesaler, because the same pharmacy phone can be a customer of two wholesalers. | Each wholesaler has its own login link, for example `cosmo.app/ahmed-pharma`. The phone number is unique only inside one wholesaler |
+| A-27 | Password reset (CUS-02) without SMS or email (C-46): how does the customer get a new password? | The customer taps "forgot password". The request appears to the owner and sales. They set a temporary password and send it by WhatsApp, the same way as the first login (C-73) |
+| A-28 | When a payment is cancelled or an invoice is cancelled, the stored summaries must be updated. | Done in the same transaction, as with stock (idea 5). A nightly check compares summaries with the documents and alerts the developer if they differ |
 
 ## What comes after this
 

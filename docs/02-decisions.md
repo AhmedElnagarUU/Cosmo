@@ -3,7 +3,7 @@
 This is the single list of business decisions. Every other document refers to these IDs.
 
 - **CONFIRMED (C)** — decided by the project owner.
-- **ASSUMED (A)** — a default chosen so planning can continue, waiting for confirmation. There are none at the moment.
+- **ASSUMED (A)** — a default chosen so planning can continue, waiting for confirmation.
 - **OPEN (O)** — not decided, and no default is safe.
 
 ## Confirmed
@@ -122,6 +122,16 @@ This is the single list of business decisions. Every other document refers to th
 | C-31 | One employee can hold more than one role |
 | C-34 | The stock manager also picks and packs orders. There is no separate warehouse worker role for now |
 | C-64 | Each role can do what the table in [User stories](user-stories/README.md) shows |
+
+## Assumed — please confirm
+
+These came from the [Database design](technical/01-database-design.md). The [API design](technical/02-api-design.md) uses them as defaults.
+
+| ID | Area | Assumed default | Why this default |
+|---|---|---|---|
+| A-26 | Login link | Each wholesaler has its own login link, for example `cosmo.app/ahmed-pharma`. A phone number is unique only inside one wholesaler | The same pharmacy phone can be a customer of two wholesalers |
+| A-27 | Password reset | The customer taps "forgot password". The owner or a sales employee sets a temporary password and sends it by WhatsApp | There is no SMS or email (C-46), so the app cannot send a reset code |
+| A-28 | Totals check | A nightly job compares stored totals with the documents behind them and warns the developer if they differ | Catches a bug early, before wrong numbers reach a customer |
 
 ## Open — needs a decision
 

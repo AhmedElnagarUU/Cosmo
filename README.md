@@ -16,6 +16,7 @@ A platform for small and medium wholesalers in Egypt who sell pharmaceutical and
 | 6 | [Workflows](docs/workflows/) | How does each business flow work, step by step? |
 | 7 | [Sub-plans](docs/sub-plans/) | What exactly is in each phase? |
 | 8 | [Database design](docs/technical/01-database-design.md) | How is the data stored? |
+| 9 | [API design](docs/technical/02-api-design.md) | Which requests does the app send to the backend? |
 
 ## Diagrams
 
