@@ -1,0 +1,76 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-brand: #0f766e;
+  --color-brand-dark: #115e59;
+  --font-sans: 'Cairo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+:root {
+  --bg: #f6f7f9;
+  --card: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b0f14;
+    --card: #131a22;
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+    --line: #243040;
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+}
+.muted {
+  color: var(--muted);
+}
+.field {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--text);
+  border-radius: 0.5rem;
+  padding: 0.6rem 0.75rem;
+  font-size: 1rem;
+}
+.field:focus {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 0;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  min-height: 2.75rem;
+}
+.btn-primary {
+  background: var(--color-brand);
+  color: white;
+}
+.btn-primary:hover {
+  background: var(--color-brand-dark);
+}
+.btn-secondary {
+  border: 1px solid var(--line);
+  background: var(--card);
+}
+.btn:disabled {
+  opacity: 0.5;
+}

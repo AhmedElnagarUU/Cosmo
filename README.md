@@ -33,3 +33,41 @@ Every rule in these documents carries one of three labels:
 - **OPEN** — not decided, and no default is safe to pick.
 
 The full list is in [Decisions](docs/02-decisions.md).
+
+## Running the app on your computer
+
+You need Node.js 22, pnpm, and Docker.
+
+```bash
+pnpm install
+docker compose up -d                      # starts PostgreSQL
+cp apps/api/.env.example apps/api/.env
+pnpm db:migrate                           # creates the tables
+
+# Create a wholesaler and its owner. The temporary password is printed once.
+pnpm --filter @cosmo/api platform:create-wholesaler \
+  --name "Demo Pharma" --login-code demo-pharma --owner-name "Ahmed" --owner-phone 01012345678
+
+pnpm dev                                  # backend on port 4000, website on port 3000
+```
+
+Then open `http://localhost:3000/ar/login/demo-pharma` and log in with the owner phone and the temporary password.
+
+Other commands:
+
+| Command | What it does |
+|---|---|
+| `pnpm test` | Runs all tests. The backend tests need the database from `docker compose` |
+| `pnpm typecheck` | Checks types in every part |
+| `pnpm build` | Builds the backend and the website |
+| `pnpm --filter @cosmo/api platform:reset-owner-password --login-code demo-pharma --owner-phone 01012345678` | Sets a new temporary owner password (C-87) |
+
+## Code layout
+
+| Folder | What is inside |
+|---|---|
+| `apps/api` | Express backend: `src/core` (login, permissions, errors, activity), `src/modules` (one folder per business area), `migrations` (SQL) |
+| `apps/web` | Next.js website: `app/[locale]` (pages in Arabic and English), `components`, `lib/api.ts`, `messages` |
+| `packages/shared` | Input rules, roles, error codes, phone and working-hours helpers used by both sides |
+
+See [Project structure](docs/technical/03-project-structure.md) for the reasons behind this layout.

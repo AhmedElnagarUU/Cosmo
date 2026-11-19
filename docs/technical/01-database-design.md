@@ -158,6 +158,8 @@ erDiagram
         text login_code UK "short code in the login link"
         text phone
         text address
+        text time_zone "Africa/Cairo"
+        bool is_active
         timestamptz created_at
     }
     SETTINGS {
@@ -197,6 +199,7 @@ erDiagram
     SESSIONS {
         uuid id PK
         uuid user_id FK
+        uuid wholesaler_id FK
         text token_hash UK "the cookie code, hashed"
         timestamptz created_at
         timestamptz last_used_at
@@ -211,6 +214,7 @@ erDiagram
     EMPLOYEE_ROLES {
         uuid employee_id PK, FK
         enum role PK "owner, sales, stock_manager, delivery_manager, accountant, delivery"
+        uuid wholesaler_id FK
     }
     CUSTOMERS {
         uuid id PK
@@ -248,6 +252,8 @@ erDiagram
 ```
 
 **wholesalers** — One row per wholesale business. `login_code` is a short code in the wholesaler's own login link, for example `cosmo.app/ahmed-pharma`. It tells the app which wholesaler a phone number belongs to.
+
+`time_zone` is used to work out "open now" from the working hours. `is_active` lets the platform team stop a wholesaler.
 
 **settings** — Exactly one row per wholesaler, with one column per setting (C-40). Each setting has a clear type and a default, so it cannot hold a wrong value. A new setting in the future is one new column with a default. Old wholesalers simply get the default.
 
@@ -967,6 +973,7 @@ erDiagram
     }
     NOTIFICATION_DELIVERIES {
         uuid id PK
+        uuid wholesaler_id FK
         uuid notification_id FK
         enum channel "in_app now, more later"
         enum status "pending, sent, failed"

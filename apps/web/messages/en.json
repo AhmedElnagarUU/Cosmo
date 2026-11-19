@@ -1,0 +1,179 @@
+{
+  "app": {
+    "name": "Cosmo",
+    "loading": "Loading…",
+    "save": "Save",
+    "cancel": "Cancel",
+    "back": "Back",
+    "saved": "Saved",
+    "yes": "Yes",
+    "no": "No",
+    "edit": "Edit",
+    "copy": "Copy",
+    "copied": "Copied",
+    "language": "العربية",
+    "error": "Something went wrong"
+  },
+  "roles": {
+    "owner": "Owner",
+    "sales": "Sales",
+    "stock_manager": "Stock manager",
+    "delivery_manager": "Delivery manager",
+    "accountant": "Accountant",
+    "delivery": "Delivery"
+  },
+  "days": {
+    "0": "Sunday",
+    "1": "Monday",
+    "2": "Tuesday",
+    "3": "Wednesday",
+    "4": "Thursday",
+    "5": "Friday",
+    "6": "Saturday"
+  },
+  "login": {
+    "title": "Log in",
+    "phone": "Phone number",
+    "password": "Password",
+    "submit": "Log in",
+    "forgot": "Forgot password?",
+    "noCode": "Open the login link your wholesaler sent you."
+  },
+  "forgot": {
+    "title": "Forgot password",
+    "submit": "Send request",
+    "help": "Your wholesaler will set a temporary password and send it to you by WhatsApp.",
+    "done": "Request sent. If this number has an account, your wholesaler will contact you.",
+    "backToLogin": "Back to log in"
+  },
+  "changePassword": {
+    "title": "Choose a new password",
+    "firstTime": "This is your first login, or your password was reset. Please choose your own password.",
+    "current": "Current password",
+    "new": "New password",
+    "repeat": "Repeat new password",
+    "mismatch": "The two passwords are different",
+    "tooShort": "At least 8 characters",
+    "submit": "Save password"
+  },
+  "nav": {
+    "home": "Home",
+    "employees": "Employees",
+    "customers": "Customers",
+    "settings": "Settings",
+    "resets": "Password requests",
+    "notifications": "Notifications",
+    "profile": "My account",
+    "changePassword": "Change password",
+    "logout": "Log out"
+  },
+  "open": {
+    "openNow": "Open now",
+    "closesAt": "Closes at {time}",
+    "closedNow": "Closed now",
+    "opensAt": "Opens {date} at {time}",
+    "noHours": "Working hours are not set yet"
+  },
+  "home": {
+    "hello": "Hello, {name}",
+    "staffIntro": "Your roles: {roles}",
+    "customerIntro": "The product catalog and ordering come in the next phase.",
+    "comingSoon": "More screens are added in the next phases."
+  },
+  "employees": {
+    "title": "Employees",
+    "add": "Add employee",
+    "name": "Name",
+    "phone": "Phone",
+    "roles": "Roles",
+    "status": "Status",
+    "active": "Active",
+    "inactive": "Deactivated",
+    "lastLogin": "Last login",
+    "never": "Never",
+    "deactivate": "Deactivate",
+    "activate": "Activate",
+    "resetPassword": "Set temporary password",
+    "chooseRole": "Choose at least one role",
+    "edit": "Edit employee",
+    "confirmDeactivate": "Deactivate this employee? They are logged out at once."
+  },
+  "customers": {
+    "title": "Customers",
+    "add": "Add customer",
+    "businessName": "Business name",
+    "contactPerson": "Contact person",
+    "phone": "Phone",
+    "address": "Address",
+    "area": "Area",
+    "search": "Search by name, phone, or area",
+    "credit": "Credit",
+    "creditAllowed": "Credit allowed",
+    "creditDays": "Credit period (days)",
+    "noCredit": "Pays on arrival",
+    "creditOnlyOwner": "Only the owner can change credit.",
+    "deactivate": "Deactivate",
+    "activate": "Activate",
+    "confirmDeactivate": "Deactivate this customer? They cannot log in or order.",
+    "resetPassword": "Set temporary password",
+    "showInactive": "Show deactivated",
+    "none": "No customers yet",
+    "edit": "Edit customer",
+    "status": "Status"
+  },
+  "firstLogin": {
+    "title": "Login details",
+    "help": "Send these details by WhatsApp. The password is shown only once and must be changed at first login.",
+    "link": "Login link",
+    "phone": "Phone",
+    "password": "Temporary password",
+    "whatsapp": "Send by WhatsApp",
+    "message": "Your account at {wholesaler} is ready.\nLogin link: {link}\nPhone: {phone}\nTemporary password: {password}\nYou will choose your own password at first login."
+  },
+  "settings": {
+    "title": "Settings",
+    "general": "General",
+    "defaultCreditDays": "Default credit period (days)",
+    "invoiceTiming": "Create invoices",
+    "on_accepted": "When the order is accepted",
+    "on_prepared": "When preparation is confirmed",
+    "on_delivered": "When the order is delivered",
+    "nearExpiryMonths": "Near expiry (months before expiry)",
+    "supplierReturnApproval": "Supplier returns need my approval",
+    "minimumOrderValue": "Minimum order value (EGP)",
+    "minimumOrderOff": "Leave empty to switch off",
+    "workingHours": "Working hours",
+    "open": "Open",
+    "from": "From",
+    "to": "To",
+    "closedDays": "Closed days",
+    "addClosedDay": "Add closed day",
+    "closedToday": "Closed today",
+    "date": "Date",
+    "note": "Note",
+    "remove": "Remove",
+    "noClosedDays": "No closed days"
+  },
+  "resets": {
+    "title": "Password requests",
+    "none": "No waiting requests",
+    "requested": "Requested",
+    "customer": "Customer",
+    "employee": "Employee"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "none": "No notifications",
+    "markAll": "Mark all as read"
+  },
+  "profile": {
+    "title": "My account",
+    "creditDays": "You have {days} days to pay credit invoices.",
+    "noCredit": "You pay when the order arrives."
+  },
+  "errors": {
+    "invalid_phone": "Enter an Egyptian mobile number, for example 01012345678",
+    "password_too_short": "At least 8 characters",
+    "generic": "Please check this field"
+  }
+}

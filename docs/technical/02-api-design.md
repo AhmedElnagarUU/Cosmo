@@ -147,6 +147,7 @@ Planned for later, not in the first version: `POST /auth/reset-code` and `POST /
 | PATCH | /settings | O | Changes one or more settings (C-40) | OWN-02 |
 | GET | /settings/working-hours | Everyone | The week's open days and times | CUS-14 |
 | PUT | /settings/working-hours | O | Saves the whole week (C-37) | OWN-02 |
+| GET | /settings/closed-days | O | The closed days, newest first | OWN-02 |
 | POST | /settings/closed-days | O | Marks a day as closed, including "closed today" | OWN-02 |
 | DELETE | /settings/closed-days/{id} | O | Removes a closed day that was set by mistake | OWN-02 |
 | GET | /open-status | Everyone | "Open now" or "Closed now, opens at 9:00" (C-37) | CUS-14 |
@@ -158,7 +159,9 @@ Planned for later, not in the first version: `POST /auth/reset-code` and `POST /
 | GET | /employees | O | Lists employees with their roles | OWN-01 |
 | POST | /employees | O | Creates an employee with name, phone, temporary password, and roles (C-29, C-31) | OWN-01 |
 | PATCH | /employees/{id} | O | Changes name or roles | OWN-01 |
-| POST | /employees/{id}/deactivate | O | Stops the employee from logging in | OWN-01 |
+| GET | /employees/{id} | O | One employee with roles | OWN-01 |
+| POST | /employees/{id}/deactivate | O | Stops the employee from logging in, and logs them out at once | OWN-01 |
+| POST | /employees/{id}/activate | O | Lets a deactivated employee log in again | OWN-01 |
 | POST | /employees/{id}/reset-password | O | Sets a new temporary password | OWN-01 |
 | GET | /customers | O, S, A, M | Lists customers. M sees only name, address, and phone | SAL-03 |
 | POST | /customers | O, S | Creates a customer. The answer has the first-login details to send by WhatsApp (C-73) | OWN-03, SAL-01 |
@@ -166,6 +169,7 @@ Planned for later, not in the first version: `POST /auth/reset-code` and `POST /
 | PATCH | /customers/{id} | O, S | Changes name, contact, phone, or address | OWN-03 |
 | PATCH | /customers/{id}/credit | O | Changes "credit allowed" and the credit period (C-26) | OWN-04 |
 | POST | /customers/{id}/deactivate | O | Stops the customer from logging in and ordering | OWN-05 |
+| POST | /customers/{id}/activate | O | Lets a deactivated customer log in again | OWN-05 |
 | POST | /customers/{id}/reset-password | O, S | Sets a temporary password, to send by WhatsApp (C-87) | CUS-02 |
 | GET | /password-reset-requests | O, S | Customers waiting for a new password (C-87) | CUS-02 |
 | GET | /customers/{id}/statement | O, S, A | Invoices, payments, returns, and refunds with a running balance | ACC-06 |
@@ -385,7 +389,7 @@ Built in phase 9. Notifications are used from phase 1.
 
 ## 13. Platform administration
 
-These are used by us, the platform team, not by wholesalers. They are on a separate path and need a separate platform login.
+These are used by us, the platform team, not by wholesalers. In the first version they are command-line scripts on the server, so only people with server access can run them: `platform:create-wholesaler` and `platform:reset-owner-password`. A web screen with its own login can replace them later.
 
 | Method | Path | What it does |
 |---|---|---|
