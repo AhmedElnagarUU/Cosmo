@@ -1,0 +1,40 @@
+{
+  "name": "@cosmo/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --env-file-if-exists=.env src/server.ts",
+    "build": "tsup src/server.ts src/scripts/migrate.ts src/scripts/create-wholesaler.ts src/scripts/reset-owner-password.ts --format esm --target node22 --clean --no-splitting --noExternal @cosmo/shared",
+    "start": "node dist/server.js",
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit",
+    "test": "vitest run",
+    "db:migrate": "tsx --env-file-if-exists=.env src/scripts/migrate.ts",
+    "platform:create-wholesaler": "tsx --env-file-if-exists=.env src/scripts/create-wholesaler.ts",
+    "platform:reset-owner-password": "tsx --env-file-if-exists=.env src/scripts/reset-owner-password.ts"
+  },
+  "dependencies": {
+    "@cosmo/shared": "workspace:*",
+    "@node-rs/argon2": "^2.0.2",
+    "cookie-parser": "^1.4.7",
+    "express": "^5.1.0",
+    "express-rate-limit": "^7.5.1",
+    "helmet": "^8.1.0",
+    "kysely": "^0.28.5",
+    "pg": "^8.16.3",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.9",
+    "@types/express": "^5.0.3",
+    "@types/node": "^22.18.0",
+    "@types/pg": "^8.15.5",
+    "@types/supertest": "^6.0.3",
+    "supertest": "^7.1.4",
+    "tsup": "^8.5.0",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}
