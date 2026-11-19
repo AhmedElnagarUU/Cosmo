@@ -239,6 +239,30 @@ Built in phase 4.
 | POST | /orders/{id}/answer | C | The customer answers a change: `accept_change` or `cancel` (C-39) | CUS-15 |
 | POST | /orders/{id}/cancel | O, K, C | Cancels with a reason. The customer only before preparation (C-57) | CUS-10, STK-17, OWN-08 |
 
+### The backend never trusts the cart
+
+The cart comes from the customer's phone, so anyone could change it before it is sent. The backend therefore accepts only **choices** from the cart and works out every **number** itself, from the database.
+
+| Sent by the app | What the backend does with it |
+|---|---|
+| Product ids | Checks each product exists, belongs to this wholesaler, and is active |
+| Quantities | Checks each is a whole number above zero |
+| Must-have marks | Accepted as the customer's choice (C-39) |
+| Payment choice | Checks "credit" only if this customer has credit allowed (C-26) |
+| Prices, discounts, bonus units, totals | **Not accepted.** If the app sends them, they are ignored |
+
+The backend then calculates, from the database:
+
+- the price of each product at this moment (C-06);
+- the active offer, and the discount or bonus units it gives (C-41);
+- the line totals and the order total;
+- whether the order reaches the minimum order value (C-76);
+- whether enough stock is available, bonus units included (C-54).
+
+It also checks the customer account is active (OWN-05) and, for a sales employee, that the customer belongs to the same wholesaler (C-32).
+
+The same rule is used for every request in this document, not only the cart. For example, a payment's invoice total, a return's credit, and a stock quantity are always read from the database, never taken from the request.
+
 The body of **accept** with a reduction looks like this:
 
 ```json
