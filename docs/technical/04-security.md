@@ -16,7 +16,7 @@ Labels such as (C-52) point to [Decisions](../02-decisions.md).
 | A stolen phone stays logged in | Sessions can be ended at once, for example when the owner deactivates the employee |
 | Someone hides what they did | The activity log cannot be changed or deleted, even by the app |
 | Data is lost | Daily backups, with a restore that is tested |
-| A bug shows wrong stock or money | Database checks refuse negative stock and over-payment. A nightly totals check warns the developer (A-28) |
+| A bug shows wrong stock or money | Database checks refuse negative stock and over-payment. A nightly totals check warns the developer (C-88) |
 
 ## 1. Logging in
 
@@ -24,7 +24,7 @@ Labels such as (C-52) point to [Decisions](../02-decisions.md).
 
 - A password has **at least 8 characters**.
 - It is stored only as a **hash** made with **argon2id**. A hash is a one-way scramble: the app can check a password against it, but nobody can turn it back into the password. argon2id is deliberately slow, so guessing many passwords takes too long.
-- First passwords and reset passwords are random and temporary. The person must change them at the next login (C-29, C-48, A-27).
+- First passwords and reset passwords are random and temporary. The person must change them at the next login (C-29, C-48, C-87).
 - Changing a password ends all other sessions of that person.
 
 ### Too many wrong passwords
@@ -52,7 +52,7 @@ After login, the backend creates a **session**: a long random code stored in the
 | Secure | The cookie is sent only over HTTPS |
 | SameSite=Lax | The cookie is not sent when another website tries to submit a form to our app |
 
-**Why sessions in the database, and not tokens such as JWT?** A session in the database can be ended at once. When the owner deactivates an employee or a customer, their sessions are deleted, and the next request fails (OWN-01, OWN-05). A token keeps working until it expires. This is assumption A-30.
+**Why sessions in the database, and not tokens such as JWT?** A session in the database can be ended at once. When the owner deactivates an employee or a customer, their sessions are deleted, and the next request fails (OWN-01, OWN-05). A token keeps working until it expires. This is assumption C-90.
 
 How long a session lasts without use:
 
@@ -62,7 +62,26 @@ How long a session lasts without use:
 | Employee | 12 hours | Covers one working day. Shared warehouse devices are common |
 | Platform administrator | 1 hour, and a second factor is needed | This account can create wholesalers |
 
-This is assumption A-31.
+This is assumption C-91.
+
+### Forgotten passwords
+
+- **Customer:** taps "forgot password". The owner or a sales employee sets a temporary password and sends it by WhatsApp to the phone number on file (C-87).
+- **Employee:** the owner sets a temporary password (OWN-01).
+- **Owner:** the platform team sets a temporary password after calling the owner to check who they are (C-87).
+
+### Planned for later: reset by SMS code (C-92)
+
+Not built in the first version. The design keeps room for it, so adding it later changes nothing that already exists:
+
+| Part | What is added later |
+|---|---|
+| Notifications | A new channel `sms` in `notification_deliveries` (C-46) |
+| Database | A `login_codes` table: user, hash of the code, expiry, tries |
+| API | `POST /auth/reset-code` sends a code. `POST /auth/reset-with-code` checks it and sets the new password |
+| Rules | 6 digits, expires after 10 minutes, at most 5 tries per code, at most 3 codes per hour per phone, the same answer whether the phone exists or not |
+
+The employee reset stays as a backup for customers who changed their phone number.
 
 ## 2. Keeping wholesalers apart (C-52)
 
@@ -141,13 +160,14 @@ The app stores personal data of customers and employees: names, phone numbers, a
 - Dependencies are checked for known security problems every week, and updated.
 - No one pushes directly to the main branch. Every change is reviewed.
 
-## Summary of new assumptions
+## Decisions from this document
 
-| ID | Assumption |
+| ID | Decision |
 |---|---|
-| A-29 | The tools in the [Project structure](03-project-structure.md) |
-| A-30 | Sessions stored in the database, in an HttpOnly cookie, not JWT tokens |
-| A-31 | Session lengths: customers 30 days, employees 12 hours, platform administrators 1 hour with a second factor |
+| C-89 | The tools in the [Project structure](03-project-structure.md) |
+| C-90 | Sessions stored in the database, in an HttpOnly cookie, not JWT tokens |
+| C-91 | Session lengths: customers 30 days, employees 12 hours, platform administrators 1 hour with a second factor |
+| C-92 | SMS reset codes are planned for later |
 
 ## Database change
 

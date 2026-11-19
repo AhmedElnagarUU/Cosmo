@@ -3,7 +3,7 @@
 This is the single list of business decisions. Every other document refers to these IDs.
 
 - **CONFIRMED (C)** — decided by the project owner.
-- **ASSUMED (A)** — a default chosen so planning can continue, waiting for confirmation.
+- **ASSUMED (A)** — a default chosen so planning can continue, waiting for confirmation. There are none at the moment.
 - **OPEN (O)** — not decided, and no default is safe.
 
 ## Confirmed
@@ -122,19 +122,13 @@ This is the single list of business decisions. Every other document refers to th
 | C-31 | One employee can hold more than one role |
 | C-34 | The stock manager also picks and packs orders. There is no separate warehouse worker role for now |
 | C-64 | Each role can do what the table in [User stories](user-stories/README.md) shows |
-
-## Assumed — please confirm
-
-These came from the technical design documents, which use them as defaults.
-
-| ID | Area | Assumed default | Why this default |
-|---|---|---|---|
-| A-26 | Login link | Each wholesaler has its own login link, for example `cosmo.app/ahmed-pharma`. A phone number is unique only inside one wholesaler | The same pharmacy phone can be a customer of two wholesalers |
-| A-27 | Password reset | The customer taps "forgot password". The owner or a sales employee sets a temporary password and sends it by WhatsApp | There is no SMS or email (C-46), so the app cannot send a reset code |
-| A-29 | Tools | pnpm monorepo, Next.js with Tailwind and next-intl, Express, Kysely, SQL migrations, Zod, Vitest, Playwright, Docker Compose, GitHub Actions. See [Project structure](technical/03-project-structure.md) | Each tool fits a need of this project, listed in that document |
-| A-30 | Sessions | Sessions are stored in the database and sent in an HttpOnly cookie. No JWT tokens | A session can be ended at once when an account is deactivated |
-| A-31 | Session length | Customers 30 days, employees 12 hours, platform administrators 1 hour with a second factor | Balances comfort on a pharmacy phone with safety on shared warehouse devices |
-| A-28 | Totals check | A nightly job compares stored totals with the documents behind them and warns the developer if they differ | Catches a bug early, before wrong numbers reach a customer |
+| C-86 | Each wholesaler has its own login link, for example `cosmo.app/ahmed-pharma`. A phone number is unique only inside one wholesaler |
+| C-87 | A customer who forgets the password taps "forgot password". The owner or a sales employee sets a temporary password and sends it by WhatsApp to the phone number on file. A forgotten owner password is reset by the platform team after checking the owner's identity by phone |
+| C-88 | A nightly job compares stored totals with the documents behind them and warns the developer if they differ |
+| C-89 | pnpm monorepo, Next.js with Tailwind and next-intl, Express, Kysely, SQL migrations, Zod, Vitest, Playwright, Docker Compose, GitHub Actions. See [Project structure](technical/03-project-structure.md) |
+| C-90 | Sessions are stored in the database and sent in an HttpOnly cookie. No JWT tokens |
+| C-91 | Customers 30 days, employees 12 hours, platform administrators 1 hour with a second factor |
+| C-92 | Password reset by SMS code is planned for a future version, not the first one. The design keeps room for it: a new notification channel (C-46), a `login_codes` table, and two requests. Until then, C-87 applies |
 
 ## Open — needs a decision
 
@@ -170,6 +164,7 @@ Nothing is open at the moment. Small questions that belong to one phase are list
 | Extra product fields | New: the owner can add up to 20 fields of their own (C-71) |
 | Refunds | Was open (O-09). Now confirmed (C-69) |
 | Phase questions | The small questions from the sub-plans are now confirmed (C-72 to C-85) |
+| Technical assumptions | A-26 to A-31 confirmed as C-86 to C-91. SMS reset planned for later (C-92) |
 | All assumptions | The project owner confirmed every assumed default. A-01 to A-25 became C-48 to C-64 |
 
 ## How decisions change

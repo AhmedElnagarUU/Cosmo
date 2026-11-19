@@ -131,11 +131,13 @@ Built in phase 1.
 
 | Method | Path | Who | What it does | Story |
 |---|---|---|---|---|
-| POST | /auth/login | Everyone | Logs in with `login_code`, phone, and password (C-72, A-26) | CUS-01 |
+| POST | /auth/login | Everyone | Logs in with `login_code`, phone, and password (C-72, C-86) | CUS-01 |
 | POST | /auth/logout | Everyone | Ends the session | |
 | POST | /auth/change-password | Everyone | Sets a new password. Required at first login (C-29, C-48) | CUS-01 |
-| POST | /auth/forgot-password | Everyone | Creates a reset request for the owner or sales (A-27) | CUS-02 |
+| POST | /auth/forgot-password | Everyone | Creates a reset request for the owner or sales (C-87) | CUS-02 |
 | GET | /me | Everyone | Who I am, my roles, my wholesaler, and its open or closed status | |
+
+Planned for later, not in the first version: `POST /auth/reset-code` and `POST /auth/reset-with-code` for reset by SMS code (C-92).
 
 ## 2. Settings and working hours
 
@@ -164,8 +166,8 @@ Built in phase 1.
 | PATCH | /customers/{id} | O, S | Changes name, contact, phone, or address | OWN-03 |
 | PATCH | /customers/{id}/credit | O | Changes "credit allowed" and the credit period (C-26) | OWN-04 |
 | POST | /customers/{id}/deactivate | O | Stops the customer from logging in and ordering | OWN-05 |
-| POST | /customers/{id}/reset-password | O, S | Sets a temporary password, to send by WhatsApp (A-27) | CUS-02 |
-| GET | /password-reset-requests | O, S | Customers waiting for a new password (A-27) | CUS-02 |
+| POST | /customers/{id}/reset-password | O, S | Sets a temporary password, to send by WhatsApp (C-87) | CUS-02 |
+| GET | /password-reset-requests | O, S | Customers waiting for a new password (C-87) | CUS-02 |
 | GET | /customers/{id}/statement | O, S, A | Invoices, payments, returns, and refunds with a running balance | ACC-06 |
 | GET | /my/profile | C | The customer's own details and balance | CUS-11 |
 
@@ -400,7 +402,7 @@ Some work is not started by a person. These jobs run inside the backend on a tim
 |---|---|---|---|
 | Expiry check | Every night | Moves the sellable quantity of batches that expired into "expired" | C-55 |
 | Waiting orders check | Every 5 minutes | Counts working hours for orders waiting for acceptance or for the customer, and alerts the owner once after 5 hours | C-35, C-39 |
-| Totals check | Every night | Compares the stored totals (stock, invoice paid amounts) with the documents behind them, and warns the developer if they differ | A-28 |
+| Totals check | Every night | Compares the stored totals (stock, invoice paid amounts) with the documents behind them, and warns the developer if they differ | C-88 |
 | Notification sender | All the time | Sends notifications that are waiting. Today this is only inside the app | C-46 |
 
 ## How the app learns about new things

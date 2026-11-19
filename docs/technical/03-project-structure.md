@@ -48,7 +48,7 @@ flowchart LR
 | Local database | Docker Compose | Every developer runs the same PostgreSQL version with one command |
 | Checks on every push | GitHub Actions | Runs lint, type check, tests, and migrations before code is merged |
 
-These are listed as assumption A-29 in [Decisions](../02-decisions.md).
+These are listed as assumption C-89 in [Decisions](../02-decisions.md).
 
 ## The folders
 

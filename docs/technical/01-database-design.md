@@ -255,13 +255,13 @@ erDiagram
 
 **users** — Everyone who logs in, employee or customer. Login is by phone number and password (C-72). The password is never stored. Only a `password_hash` is stored, which is a one-way scrambled version that cannot be turned back into the password. `must_change_password` forces a new password at first login (C-29, C-48).
 
-**sessions** — One row per logged-in device. Deleting the rows logs the person out at once. Only a hash of the cookie code is stored, so a copy of the database cannot be used to log in. See [Security](04-security.md) (A-30).
+**sessions** — One row per logged-in device. Deleting the rows logs the person out at once. Only a hash of the cookie code is stored, so a copy of the database cannot be used to log in. See [Security](04-security.md) (C-90).
 
 **employees** and **employee_roles** — One employee can have several roles (C-31), so roles are in their own table with one row per role.
 
 **customers** — The pharmacy or store. `credit_allowed` and `credit_days` are the credit switch and credit period (C-26). New customers copy `credit_days` from the settings.
 
-**password_reset_requests** — Customers who tapped "forgot password" (A-27).
+**password_reset_requests** — Customers who tapped "forgot password" (C-87).
 
 ---
 
@@ -1048,13 +1048,13 @@ In total there are **47 tables**. Refunds are shown in areas 7 and 8 because the
 
 ## Points to confirm
 
-These came up while designing the tables. Each suggestion is now listed as an assumption in [Decisions](../02-decisions.md).
+These came up while designing the tables. The project owner confirmed all three (C-86 to C-88).
 
 | ID | Question | Suggestion |
 |---|---|---|
-| A-26 | Login by phone needs to know the wholesaler, because the same pharmacy phone can be a customer of two wholesalers. | Each wholesaler has its own login link, for example `cosmo.app/ahmed-pharma`. The phone number is unique only inside one wholesaler |
-| A-27 | Password reset (CUS-02) without SMS or email (C-46): how does the customer get a new password? | The customer taps "forgot password". The request appears to the owner and sales. They set a temporary password and send it by WhatsApp, the same way as the first login (C-73) |
-| A-28 | When a payment is cancelled or an invoice is cancelled, the stored summaries must be updated. | Done in the same transaction, as with stock (idea 5). A nightly check compares summaries with the documents and alerts the developer if they differ |
+| C-86 | Login by phone needs to know the wholesaler, because the same pharmacy phone can be a customer of two wholesalers. | Each wholesaler has its own login link, for example `cosmo.app/ahmed-pharma`. The phone number is unique only inside one wholesaler |
+| C-87 | Password reset (CUS-02) without SMS or email (C-46): how does the customer get a new password? | The customer taps "forgot password". The request appears to the owner and sales. They set a temporary password and send it by WhatsApp, the same way as the first login (C-73) |
+| C-88 | When a payment is cancelled or an invoice is cancelled, the stored summaries must be updated. | Done in the same transaction, as with stock (idea 5). A nightly check compares summaries with the documents and alerts the developer if they differ |
 
 ## What comes after this
 

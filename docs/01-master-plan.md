@@ -18,14 +18,15 @@ flowchart LR
 
     style P0 fill:#d4edda,stroke:#28a745
     style P1 fill:#d4edda,stroke:#28a745
-    style P2 fill:#fff3cd,stroke:#ffc107
+    style P2 fill:#d4edda,stroke:#28a745
+    style P3 fill:#fff3cd,stroke:#ffc107
 ```
 
 | Stage | What happens | Output |
 |---|---|---|
 | 0. Planning documents | Write overview, decisions, stories, journeys, workflows, sub-plans | This repository. Done |
 | 1. Review | The project owner reads the documents and confirms or changes each assumption | Decisions list with no unreviewed assumptions. Done |
-| 2. Technical design | Database tables, API actions, project structure, security | A technical design document. **We are here**: all four parts are written: [database](technical/01-database-design.md), [API](technical/02-api-design.md), [project structure](technical/03-project-structure.md), and [security](technical/04-security.md). They wait for review |
+| 2. Technical design | Database tables, API actions, project structure, security | A technical design document. Done: all four parts are written: [database](technical/01-database-design.md), [API](technical/02-api-design.md), [project structure](technical/03-project-structure.md), and [security](technical/04-security.md). The project owner approved them. **We are here**: building phase 1 |
 | 3. Build | Build phases 1 to 9 below, one at a time | Working app |
 | 4. Pilot | One real wholesaler uses the app | Feedback and fixes |
 
