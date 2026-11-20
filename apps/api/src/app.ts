@@ -17,6 +17,7 @@ import { preparationRoutes } from './modules/preparation/preparation.routes';
 import { deliveryRoutes } from './modules/delivery/delivery.routes';
 import { billingRoutes } from './modules/billing/billing.routes';
 import { returnRoutes } from './modules/returns/returns.routes';
+import { reportRoutes } from './modules/reports/reports.routes';
 
 // The path of one request (docs/technical/02-api-design.md):
 // language -> same origin -> session -> route (role check, validation, transaction) -> error shape
@@ -53,6 +54,7 @@ export function createApp(db: Db) {
   api.use(deliveryRoutes());
   api.use(billingRoutes());
   api.use(returnRoutes());
+  api.use(reportRoutes());
   api.use(notFoundHandler);
 
   app.use('/api/v1', api);
