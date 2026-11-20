@@ -190,6 +190,8 @@ Built in phase 2.
 | PATCH | /products/{id} | O, K | Edits a product. Prices cannot be changed here | OWN-06 |
 | PATCH | /products/{id}/price | O | Changes the selling price. Saved in the price history (C-64) | OWN-07 |
 | POST | /products/{id}/deactivate | O, K | Hides the product from customers | OWN-06 |
+| POST | /products/{id}/activate | O, K | Shows the product to customers again | OWN-06 |
+| GET | /products/{id}/price-history | O, K, A | Every change of selling and cost price | OWN-07 |
 | GET | /extra-fields | O, K | The owner's extra fields | OWN-15 |
 | POST | /extra-fields | O | Adds an extra field. Refused above the limit of 20 (C-71) | OWN-15 |
 | PATCH | /extra-fields/{id} | O | Changes or switches off an extra field | OWN-15 |

@@ -25,7 +25,7 @@ flowchart TD
 | Category | Yes | Yes | For example "pain relief" or "hair care" |
 | Selling unit | Yes | Yes | For example "box" (C-50) |
 | Pack size | Yes | Yes | As written on the pack, for example "20 tablets" or "200 ml" |
-| Cost price | Yes | No | Only the owner and accountant see it |
+| Cost price | Yes | No | Only the owner, the accountant, and the stock manager see it. The stock manager enters it when receiving goods |
 | Selling price | Yes | Yes | Only the owner can change it (C-64) |
 | Image | No | Yes | |
 | Description | No | Yes | |

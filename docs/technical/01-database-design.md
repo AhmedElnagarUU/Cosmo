@@ -137,7 +137,7 @@ The tables are grouped into nine areas:
 | Area | Tables | Built in phase |
 |---|---|---|
 | 1. Wholesaler, settings, and people | 10 tables | 1 |
-| 2. Product catalog | 11 tables | 2 |
+| 2. Product catalog | 10 tables | 2 |
 | 3. Stock | 3 tables | 2 |
 | 4. Suppliers | 6 tables | 3 |
 | 5. Orders | 5 tables | 4 and 5 |
@@ -314,6 +314,7 @@ erDiagram
         text description
         bool track_batches
         bool is_active
+        text search_text "names, barcode, ingredient"
         timestamptz created_at
         timestamptz updated_at
     }
@@ -374,10 +375,6 @@ erDiagram
         bool is_active
         uuid created_by FK
     }
-    PRODUCT_SEARCH {
-        uuid product_id PK, FK
-        text search_text "names, barcode, ingredient"
-    }
 
     CATEGORIES ||--o{ PRODUCTS : groups
     BRANDS ||--o{ PRODUCTS : makes
@@ -388,7 +385,6 @@ erDiagram
     PRODUCTS ||--o{ EXTRA_FIELD_VALUES : has
     PRODUCTS ||--o{ PRICE_HISTORY : "changed price"
     PRODUCTS ||--o{ OFFERS : has
-    PRODUCTS ||--|| PRODUCT_SEARCH : "is found by"
 ```
 
 **categories, brands, dosage_forms** — The lists that the owner and stock manager manage (C-74). Products choose from them, so "Panadol" and "panadol " never become two brands.
@@ -403,7 +399,7 @@ erDiagram
 
 **offers** — A discount or bonus units on a product (C-41). Only one offer per product can be active at the same time. A discount uses `discount_percent`. Bonus units use `buy_quantity` and `free_quantity`.
 
-**product_search** — A helper for fast search in Arabic and English, by name, barcode, or active ingredient. It is updated whenever a product changes.
+**search_text** (a column on products) — The names, barcode, and active ingredient in one text, with Arabic spellings made the same (أ إ آ become ا). It is updated whenever a product changes, and a trigram index makes search fast in Arabic and English.
 
 ---
 
@@ -1027,7 +1023,7 @@ An **index** is like the index at the back of a book. It lets the database find 
 | Every table | wholesaler_id together with the main search column | Fast filtering per wholesaler |
 | users | wholesaler_id, phone (unique) | Login |
 | products | wholesaler_id, barcode (unique when filled) | Barcode scan |
-| product_search | search_text, with a text search index | Catalog search in Arabic and English |
+| products | search_text, with a trigram index | Catalog search in Arabic and English |
 | batches | product_id, expiry_date | Batch recommendation and near-expiry list |
 | orders | wholesaler_id, status, placed_at | Lists of orders to accept, prepare, and deliver |
 | orders | customer_id, placed_at | The customer's own orders |
@@ -1042,7 +1038,7 @@ An **index** is like the index at the back of a book. It lets the database find 
 | Area | Tables |
 |---|---|
 | 1. Wholesaler, settings, and people | wholesalers, settings, working_hours, closed_days, users, employees, employee_roles, customers, password_reset_requests, sessions |
-| 2. Product catalog | categories, brands, dosage_forms, products, medicine_details, cosmetic_details, extra_fields, extra_field_values, price_history, offers, product_search |
+| 2. Product catalog | categories, brands, dosage_forms, products, medicine_details, cosmetic_details, extra_fields, extra_field_values, price_history, offers |
 | 3. Stock | batches, product_stock, stock_movements |
 | 4. Suppliers | suppliers, receipts, receipt_lines, supplier_returns, supplier_return_lines, supplier_payments |
 | 5. Orders | orders, order_lines, order_line_changes, order_status_history, picks |
@@ -1051,7 +1047,7 @@ An **index** is like the index at the back of a book. It lets the database find 
 | 8. Customer returns | customer_returns, customer_return_lines |
 | 9. Activity and notifications | activity_log, notifications, notification_deliveries |
 
-In total there are **47 tables**. Refunds are shown in areas 7 and 8 because they belong to both, but it is one table.
+In total there are **46 tables**. Refunds are shown in areas 7 and 8 because they belong to both, but it is one table.
 
 ## Points to confirm
 

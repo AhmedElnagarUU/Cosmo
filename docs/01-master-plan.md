@@ -35,7 +35,8 @@ flowchart LR
 | Phase | Status |
 |---|---|
 | 1. Foundation and accounts | **Built.** Waiting for the project owner to try it and approve |
-| 2 to 9 | Not started |
+| 2. Catalog and inventory | **Built.** Waiting for the project owner to try it and approve |
+| 3 to 9 | Not started |
 
 ```mermaid
 flowchart TD

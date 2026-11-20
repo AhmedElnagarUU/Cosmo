@@ -50,6 +50,10 @@ export default function AppLayout({ children }: { children: ReactNode }) {
 
   const items: Array<{ href: string; label: string; show: boolean; badge?: number }> = [
     { href: '/app', label: t('home'), show: true },
+    { href: '/app/products', label: t('products'), show: me.userType === 'employee' && hasAnyRole(me, 'stock_manager', 'sales', 'accountant') },
+    { href: '/app/stock', label: t('stock'), show: me.userType === 'employee' && hasAnyRole(me, 'stock_manager') },
+    { href: '/app/lists', label: t('lists'), show: me.userType === 'employee' && hasAnyRole(me, 'stock_manager') },
+    { href: '/app/extra-fields', label: t('extraFields'), show: me.userType === 'employee' && isOwner(me) },
     { href: '/app/customers', label: t('customers'), show: me.userType === 'employee' && hasAnyRole(me, 'sales', 'accountant', 'delivery_manager') },
     { href: '/app/resets', label: t('resets'), show: me.userType === 'employee' && hasAnyRole(me, 'sales') },
     { href: '/app/employees', label: t('employees'), show: me.userType === 'employee' && isOwner(me) },
