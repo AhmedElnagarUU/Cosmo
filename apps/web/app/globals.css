@@ -74,3 +74,9 @@ body {
 .btn:disabled {
   opacity: 0.5;
 }
+
+@media print {
+  header, aside, nav, .no-print { display: none !important; }
+  body { background: white; color: black; }
+  .card { border: none; }
+}

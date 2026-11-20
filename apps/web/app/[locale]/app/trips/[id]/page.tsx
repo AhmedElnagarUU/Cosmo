@@ -58,6 +58,8 @@ export default function TripPage({ params }: { params: Promise<{ id: string }> }
   const payKey = useRef(key());
   const [actionError, setActionError] = useState<unknown>(null);
   const [busy, setBusy] = useState(false);
+  const [cash, setCash] = useState({ amount: '', note: '' });
+  const tB = useTranslations('billing');
 
   async function run(fn: () => Promise<Trip>) {
     setBusy(true);
@@ -106,6 +108,30 @@ export default function TripPage({ params }: { params: Promise<{ id: string }> }
         </button>
       )}
       {data.cashExpected && <Card className="text-lg font-bold">{t('cashTotal', { amount: data.cashExpected })}</Card>}
+      {/* ACC-03: the accountant records the cash received. A difference needs a note. */}
+      {hasAnyRole(me, 'accountant') && data.status === 'finished' && (
+        <Card className="space-y-2">
+          <h2 className="font-bold">{tB('cashHandover')}</h2>
+          <p className="muted text-sm">{tB('cashExpected', { amount: data.cashExpected ?? '0.00' })}</p>
+          <input className="field" dir="ltr" inputMode="decimal" value={cash.amount} onChange={(e) => setCash({ ...cash, amount: e.target.value })} />
+          {cash.amount !== '' && cash.amount !== data.cashExpected && (
+            <input className="field" placeholder={tB('cashNote')} value={cash.note} onChange={(e) => setCash({ ...cash, note: e.target.value })} />
+          )}
+          <button
+            type="button"
+            className="btn btn-primary"
+            disabled={busy || cash.amount === ''}
+            onClick={() =>
+              run(async () => {
+                await post(`/trips/${id}/cash-handover`, { cashReceived: cash.amount, note: cash.note || null });
+                return get<Trip>(`/trips/${id}`);
+              })
+            }
+          >
+            {tB('save')}
+          </button>
+        </Card>
+      )}
 
       {data.stops.map((s, i) => {
         const isOpen = open?.stopId === s.id;

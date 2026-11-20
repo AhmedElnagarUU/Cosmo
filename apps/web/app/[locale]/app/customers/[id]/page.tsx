@@ -22,6 +22,7 @@ export default function CustomerPage({ params }: { params: Promise<{ id: string 
   const { id } = use(params);
   const t = useTranslations('customers');
   const tApp = useTranslations('app');
+  const tB = useTranslations('billing');
   const { me } = useMe();
   const owner = isOwner(me);
   const canEdit = hasAnyRole(me, 'sales');
@@ -146,6 +147,9 @@ export default function CustomerPage({ params }: { params: Promise<{ id: string 
             ))}
         </Card>
       )}
+      <Link href={`/app/statement?customerId=${id}`} className="btn btn-secondary">
+        {tB('statement')}
+      </Link>
       <Link href="/app/customers" className="btn btn-secondary">
         {tApp('back')}
       </Link>

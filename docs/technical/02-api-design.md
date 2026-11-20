@@ -353,7 +353,9 @@ Built in phase 7. Invoices are not created by a request. The backend creates the
 | GET | /invoices | O, A, S, C | Lists invoices, filtered by customer, status, overdue, and date. A customer sees only their own | ACC-01, CUS-11 |
 | GET | /invoices/{id} | O, A, S, C | One invoice with its lines and payments | ACC-01 |
 | GET | /invoices/{id}/print | O, A, S, C | A printable page in Arabic or English (C-79) | ACC-07 |
-| GET | /invoices/overdue | O, A | Overdue credit invoices grouped by customer (C-33) | ACC-08 |
+| GET | /invoices?overdue=1 | O, A | Overdue credit invoices, with the days late (C-33) | ACC-08 |
+| GET | /customer-balances | O, A, S | Balances per customer, with overdue amounts (C-33) | OWN-12 |
+| GET | /my/statement | C | The customer's own statement | CUS-11 |
 | POST | /payments | O, A | Records a payment made to the office. Confirmed at once | ACC-04, ACC-05 |
 | GET | /payments | O, A, C | Lists payments, for example those waiting for confirmation | ACC-02, CUS-12 |
 | POST | /payments/{id}/confirm | O, A | Confirms that the money arrived (C-27) | ACC-02 |
