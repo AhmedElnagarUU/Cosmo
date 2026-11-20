@@ -11,6 +11,7 @@ A platform for small and medium wholesalers in Egypt who sell pharmaceutical and
 | 1 | [Overview](docs/00-overview.md) | What are we building, and for whom? |
 | 2 | [Decisions](docs/02-decisions.md) | What is confirmed, what is assumed, what is still open? |
 | 3 | [Master plan](docs/01-master-plan.md) | In what order will we build it? |
+| 3b | [Decision journal](docs/03-decision-journal.md) | Why does the product work this way? |
 | 4 | [Journeys](docs/journeys/) | What does a day look like for each person? |
 | 5 | [User stories](docs/user-stories/) | What must each role be able to do? |
 | 6 | [Workflows](docs/workflows/) | How does each business flow work, step by step? |
