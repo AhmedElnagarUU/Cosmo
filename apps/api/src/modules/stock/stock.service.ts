@@ -254,3 +254,122 @@ export async function expireBatches(trx: Trx, wholesalerId: string, todayDate?: 
   }
   return found.length;
 }
+
+// ---------- Used by the suppliers module (phase 3) ----------
+
+// Receiving from a supplier: units go into a batch as sellable stock (STK-01)
+export async function receiveIntoBatch(
+  trx: Trx,
+  actor: Actor,
+  m: { productId: string; batchId: string; quantity: number; documentId: string },
+) {
+  const stock = await lockProductStock(trx, m.productId);
+  const batch = await lockBatch(trx, m.productId, m.batchId);
+  await trx.updateTable('batches').set({ qty_sellable: batch.qty_sellable + m.quantity }).where('id', '=', batch.id).execute();
+  await trx.updateTable('product_stock').set({ on_hand_sellable: stock.on_hand_sellable + m.quantity }).where('product_id', '=', m.productId).execute();
+  await movement(trx, actor, {
+    productId: m.productId,
+    batchId: batch.id,
+    type: 'receipt',
+    state: 'sellable',
+    quantityChange: m.quantity,
+    documentType: 'receipt',
+    documentId: m.documentId,
+  });
+}
+
+type ReturnState = 'sellable' | 'damaged' | 'expired';
+const stateColumn = { sellable: 'qty_sellable', damaged: 'qty_damaged', expired: 'qty_expired' } as const;
+
+async function takeFromState(trx: Trx, productId: string, batchId: string, state: ReturnState, quantity: number) {
+  const stock = await lockProductStock(trx, productId);
+  const batch = await lockBatch(trx, productId, batchId);
+  const have = batch[stateColumn[state]];
+  if (quantity > have) {
+    throw errors.rule(
+      { en: `Batch ${batch.batch_number ?? ''} has only ${have} units in this state`, ar: `التشغيلة ${batch.batch_number ?? ''} بها ${have} وحدة فقط في هذه الحالة` },
+      { batchId, available: have },
+    );
+  }
+  // Sellable units promised to orders cannot leave (C-08)
+  if (state === 'sellable' && stock.on_hand_sellable - quantity < stock.reserved) throw notEnough(stock.on_hand_sellable - stock.reserved);
+  return { stock, batch };
+}
+
+// C-65: while the owner decides, the units are held, so they cannot be sold or reserved
+export async function holdForSupplierReturn(
+  trx: Trx,
+  actor: Actor,
+  m: { productId: string; batchId: string; state: ReturnState; quantity: number; documentId: string },
+) {
+  const { stock, batch } = await takeFromState(trx, m.productId, m.batchId, m.state, m.quantity);
+  await trx
+    .updateTable('batches')
+    .set({ [stateColumn[m.state]]: batch[stateColumn[m.state]] - m.quantity, qty_held: batch.qty_held + m.quantity })
+    .where('id', '=', batch.id)
+    .execute();
+  await trx
+    .updateTable('product_stock')
+    .set({
+      held: stock.held + m.quantity,
+      ...(m.state === 'sellable' ? { on_hand_sellable: stock.on_hand_sellable - m.quantity } : {}),
+    })
+    .where('product_id', '=', m.productId)
+    .execute();
+  const doc = { documentType: 'supplier_return', documentId: m.documentId };
+  await movement(trx, actor, { productId: m.productId, batchId: batch.id, type: 'held', state: m.state, quantityChange: -m.quantity, ...doc });
+  await movement(trx, actor, { productId: m.productId, batchId: batch.id, type: 'held', state: 'held', quantityChange: m.quantity, ...doc });
+}
+
+// The owner rejected the return: held units go back to where they came from
+export async function releaseHold(
+  trx: Trx,
+  actor: Actor,
+  m: { productId: string; batchId: string; state: ReturnState; quantity: number; documentId: string },
+) {
+  const stock = await lockProductStock(trx, m.productId);
+  const batch = await lockBatch(trx, m.productId, m.batchId);
+  await trx
+    .updateTable('batches')
+    .set({ [stateColumn[m.state]]: batch[stateColumn[m.state]] + m.quantity, qty_held: batch.qty_held - m.quantity })
+    .where('id', '=', batch.id)
+    .execute();
+  await trx
+    .updateTable('product_stock')
+    .set({
+      held: stock.held - m.quantity,
+      ...(m.state === 'sellable' ? { on_hand_sellable: stock.on_hand_sellable + m.quantity } : {}),
+    })
+    .where('product_id', '=', m.productId)
+    .execute();
+  const doc = { documentType: 'supplier_return', documentId: m.documentId };
+  await movement(trx, actor, { productId: m.productId, batchId: batch.id, type: 'unheld', state: 'held', quantityChange: -m.quantity, ...doc });
+  await movement(trx, actor, { productId: m.productId, batchId: batch.id, type: 'unheld', state: m.state, quantityChange: m.quantity, ...doc });
+}
+
+// The goods leave for the supplier (C-42). From held stock if the owner approved, otherwise from their state.
+export async function removeForSupplierReturn(
+  trx: Trx,
+  actor: Actor,
+  m: { productId: string; batchId: string; state: ReturnState; quantity: number; fromHeld: boolean; documentId: string },
+) {
+  const doc = { documentType: 'supplier_return', documentId: m.documentId };
+  if (m.fromHeld) {
+    const stock = await lockProductStock(trx, m.productId);
+    const batch = await lockBatch(trx, m.productId, m.batchId);
+    await trx.updateTable('batches').set({ qty_held: batch.qty_held - m.quantity }).where('id', '=', batch.id).execute();
+    await trx.updateTable('product_stock').set({ held: stock.held - m.quantity }).where('product_id', '=', m.productId).execute();
+    await movement(trx, actor, { productId: m.productId, batchId: batch.id, type: 'supplier_return', state: 'held', quantityChange: -m.quantity, ...doc });
+    return;
+  }
+  const { stock, batch } = await takeFromState(trx, m.productId, m.batchId, m.state, m.quantity);
+  await trx
+    .updateTable('batches')
+    .set({ [stateColumn[m.state]]: batch[stateColumn[m.state]] - m.quantity })
+    .where('id', '=', batch.id)
+    .execute();
+  if (m.state === 'sellable') {
+    await trx.updateTable('product_stock').set({ on_hand_sellable: stock.on_hand_sellable - m.quantity }).where('product_id', '=', m.productId).execute();
+  }
+  await movement(trx, actor, { productId: m.productId, batchId: batch.id, type: 'supplier_return', state: m.state, quantityChange: -m.quantity, ...doc });
+}

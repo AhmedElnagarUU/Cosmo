@@ -6,3 +6,4 @@ export * from './working-hours';
 export * from './catalog';
 export * from './money';
 export * from './search';
+export * from './suppliers';

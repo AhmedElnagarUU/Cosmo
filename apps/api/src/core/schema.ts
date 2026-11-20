@@ -284,6 +284,91 @@ export interface StockMovementsTable {
   created_at: Generated<Date>;
 }
 
+export interface DocumentCountersTable {
+  wholesaler_id: string;
+  doc_type: string;
+  year: number;
+  last_number: Generated<number>;
+}
+export interface SuppliersTable {
+  id: Uuid;
+  wholesaler_id: string;
+  name: string;
+  contact_person: string | null;
+  phone: string | null;
+  address: string | null;
+  is_active: Generated<boolean>;
+  created_at: Generated<Date>;
+}
+export interface ReceiptsTable {
+  id: Uuid;
+  wholesaler_id: string;
+  receipt_number: string | null;
+  supplier_id: string;
+  supplier_invoice_number: string | null;
+  supplier_invoice_date: string | null;
+  total_amount: Generated<string>;
+  status: Generated<'draft' | 'confirmed'>;
+  created_by: string | null;
+  created_at: Generated<Date>;
+  confirmed_by: string | null;
+  confirmed_at: Timestamp | null;
+}
+export interface ReceiptLinesTable {
+  id: Uuid;
+  wholesaler_id: string;
+  receipt_id: string;
+  product_id: string;
+  batch_number: string | null;
+  expiry_date: string | null;
+  batch_id: string | null;
+  quantity: number;
+  cost_price: string;
+  line_order: Generated<number>;
+}
+export type SupplierReturnReason = 'expired' | 'near_expiry' | 'damaged' | 'wrong_product' | 'other';
+export interface SupplierReturnsTable {
+  id: Uuid;
+  wholesaler_id: string;
+  return_number: string;
+  supplier_id: string;
+  status: 'waiting_for_owner' | 'confirmed' | 'rejected';
+  reason: SupplierReturnReason;
+  note: string | null;
+  total_value: Generated<string>;
+  created_by: string | null;
+  created_at: Generated<Date>;
+  decided_by: string | null;
+  decided_at: Timestamp | null;
+  rejection_reason: string | null;
+  confirmed_at: Timestamp | null;
+}
+export interface SupplierReturnLinesTable {
+  id: Uuid;
+  wholesaler_id: string;
+  supplier_return_id: string;
+  product_id: string;
+  batch_id: string;
+  stock_state: 'sellable' | 'damaged' | 'expired';
+  quantity: number;
+  cost_price: string;
+}
+export type PaymentMethod = 'cash' | 'bank_transfer' | 'instapay' | 'vodafone_cash' | 'other';
+export interface SupplierPaymentsTable {
+  id: Uuid;
+  wholesaler_id: string;
+  supplier_id: string;
+  amount: string;
+  method: PaymentMethod;
+  paid_on: string;
+  reference: string | null;
+  recorded_by: string | null;
+  created_at: Generated<Date>;
+  cancelled_at: Timestamp | null;
+  cancelled_by: string | null;
+  cancel_reason: string | null;
+}
+
 export interface Database {
   wholesalers: WholesalersTable;
   settings: SettingsTable;
@@ -311,4 +396,11 @@ export interface Database {
   batches: BatchesTable;
   product_stock: ProductStockTable;
   stock_movements: StockMovementsTable;
+  document_counters: DocumentCountersTable;
+  suppliers: SuppliersTable;
+  receipts: ReceiptsTable;
+  receipt_lines: ReceiptLinesTable;
+  supplier_returns: SupplierReturnsTable;
+  supplier_return_lines: SupplierReturnLinesTable;
+  supplier_payments: SupplierPaymentsTable;
 }
