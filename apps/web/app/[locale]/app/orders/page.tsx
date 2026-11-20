@@ -26,6 +26,7 @@ interface Row {
 // STK-03: new orders, oldest first. Customers see their own orders (CUS-09).
 export default function OrdersPage() {
   const t = useTranslations('orders');
+  const tPrep = useTranslations('prepare');
   const fmt = useDateFormat();
   const { me } = useMe();
   const staff = me.userType === 'employee';
@@ -33,7 +34,8 @@ export default function OrdersPage() {
     ? ([
         ['placed', 'placed', 'oldest', t('tabPlaced')],
         ['waiting', 'waiting_for_customer', 'oldest', t('tabWaiting')],
-        ['accepted', 'accepted', 'oldest', t('tabAccepted')],
+        ['prepare', 'accepted,preparing', 'oldest', tPrep('tabPrepare')],
+        ['ready', 'ready', 'oldest', tPrep('tabReady')],
         ['all', '', 'newest', t('tabAll')],
       ] as const)
     : null;

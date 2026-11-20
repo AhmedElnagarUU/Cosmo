@@ -50,6 +50,7 @@ export default function OrderPage({ params }: { params: Promise<{ id: string }> 
   const tStatus = useTranslations('orderStatus');
   const tReason = useTranslations('reduceReason');
   const tApp = useTranslations('app');
+  const tPrep = useTranslations('prepare');
   const name = useName();
   const fmt = useDateFormat();
   const placed = useSearchParams().get('placed') === '1';
@@ -253,6 +254,12 @@ export default function OrderPage({ params }: { params: Promise<{ id: string }> 
             </>
           )}
         </Card>
+      )}
+
+      {canDecide && (o.status === 'accepted' || o.status === 'preparing') && (
+        <Link href={`/app/orders/${o.id}/prepare`} className="btn btn-primary w-full">
+          {o.status === 'accepted' ? tPrep('start') : tPrep('continue')}
+        </Link>
       )}
 
       {(customerCanCancel || staffCanCancel) && (

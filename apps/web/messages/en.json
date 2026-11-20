@@ -492,5 +492,25 @@
     "damaged": "Damaged",
     "expired": "Expired",
     "other": "Other"
+  },
+  "prepare": {
+    "title": "Prepare order",
+    "start": "Prepare",
+    "continue": "Continue preparing",
+    "need": "Pick {n}",
+    "picked": "Picked {n} of {need}",
+    "useRecommended": "Use recommended",
+    "savePicks": "Save",
+    "nearExpiry": "Close to expiry",
+    "noBatches": "No stock to pick",
+    "lessFound": "Found less",
+    "newQty": "Quantity found",
+    "confirm": "Confirm preparation",
+    "confirmHelp": "Every product needs its full quantity. Stock leaves the warehouse when the trip starts.",
+    "release": "Let someone else prepare it",
+    "done": "The order is ready for delivery",
+    "free": "incl. {n} free",
+    "tabPrepare": "To prepare",
+    "tabReady": "Ready"
   }
 }

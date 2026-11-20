@@ -38,7 +38,8 @@ flowchart LR
 | 2. Catalog and inventory | **Built.** Waiting for the project owner to try it and approve |
 | 3. Suppliers and receiving | **Built.** Waiting for the project owner to try it and approve |
 | 4. Customer ordering and acceptance | **Built.** Waiting for the project owner to try it and approve |
-| 5 to 9 | Not started |
+| 5. Order preparation | **Built.** Waiting for the project owner to try it and approve |
+| 6 to 9 | Not started |
 
 ```mermaid
 flowchart TD

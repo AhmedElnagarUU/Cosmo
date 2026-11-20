@@ -314,7 +314,7 @@ Built in phase 5.
 | Method | Path | Who | What it does | Story |
 |---|---|---|---|---|
 | POST | /orders/{id}/start-preparing | O, K | Opens the order for preparation. Refused if another stock manager is already preparing it (C-77) | STK-07 |
-| GET | /orders/{id}/batch-recommendations | O, K | The recommended batches per line, soonest expiry first (C-14) | STK-07 |
+| GET | /orders/{id}/preparation | O, K | Each line with its picks and the batches to pick from, soonest expiry first, with the recommended quantities (C-14). Expired batches and units promised to other ready orders are left out | STK-07 |
 | PUT | /orders/{id}/lines/{lineId}/picks | O, K | Saves which batches were picked for a line. Expired batches are refused (C-55) | STK-08, STK-09 |
 | POST | /orders/{id}/lines/{lineId}/reduce | O, K | Reduces a line during preparation, with a reason (C-38, C-39) | STK-10 |
 | POST | /orders/{id}/confirm-preparation | O, K | Makes the order Ready. Refused while it waits for the customer | STK-11 |
