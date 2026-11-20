@@ -110,3 +110,24 @@ export const officePaymentSchema = z.object({
   reference: z.string().trim().max(100).optional().nullable(),
 });
 export const cashHandoverSchema = z.object({ cashReceived: money, note: z.string().trim().max(500).optional().nullable() });
+
+// ---------- Customer returns (phase 8) ----------
+export const RETURN_REASONS = ['not_needed', 'damaged', 'wrong_product', 'wrong_quantity', 'expired', 'other'] as const;
+export const createReturnSchema = z
+  .object({
+    orderId: z.string().uuid(),
+    reason: z.enum(RETURN_REASONS),
+    note: z.string().trim().max(500).optional().nullable(),
+    lines: z.array(z.object({ orderLineId: z.string().uuid(), quantity: z.number().int().min(1).max(100_000) })).min(1).max(200),
+  })
+  .refine((v) => v.reason !== 'other' || !!v.note, { message: 'note_required', path: ['note'] });
+export const checkReturnSchema = z.object({
+  lines: z.array(z.object({ lineId: z.string().uuid(), condition: z.enum(['sellable', 'damaged']) })).min(1).max(400),
+});
+export const leftOverSchema = z.object({ choice: z.enum(['refund', 'keep_as_credit']) });
+export const refundSchema = z.object({
+  amount: money.refine((v) => Number(v) > 0, 'invalid_money'),
+  method: z.enum(DOOR_PAYMENT_METHODS),
+  reference: z.string().trim().max(100).optional().nullable(),
+  refundedOn: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'invalid_date'),
+});

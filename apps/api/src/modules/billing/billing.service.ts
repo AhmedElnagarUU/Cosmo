@@ -295,7 +295,18 @@ export async function statement(trx: Trx, customerId: string) {
     .where('invoice_id', 'is not', null)
     .where((eb) => eb.or([eb('source', '=', 'at_the_door'), eb('status', '=', 'completed')]))
     .execute();
+  const leftOvers = await trx
+    .selectFrom('customer_returns')
+    .select(['id', 'return_number', 'left_over', 'completed_at'])
+    .where('customer_id', '=', customerId)
+    .where('status', '=', 'completed')
+    .where('left_over', '>', '0')
+    .execute();
+  const refunds = await trx.selectFrom('refunds').select(['id', 'amount', 'refunded_on', 'created_at', 'method']).where('customer_id', '=', customerId).execute();
   const rows = [
+    // C-69: what is left over after the unpaid part is a credit, until it is paid back
+    ...leftOvers.map((r) => ({ kind: 'return' as const, id: r.id + '-left', number: r.return_number, date: new Date(r.completed_at!).toISOString().slice(0, 10), at: new Date(r.completed_at!).getTime() + 1, amount: -toPiasters(r.left_over) })),
+    ...refunds.map((r) => ({ kind: 'refund' as const, id: r.id, number: r.method, date: r.refunded_on, at: new Date(r.created_at).getTime(), amount: toPiasters(r.amount) })),
     ...invoices.map((i) => ({ kind: 'invoice' as const, id: i.id, number: i.invoice_number, date: i.invoice_date, at: new Date(i.created_at).getTime(), amount: toPiasters(i.total) })),
     ...payments.map((p) => ({ kind: 'payment' as const, id: p.id, number: p.method, date: p.paid_on, at: new Date(p.decided_at ?? p.paid_on).getTime(), amount: -toPiasters(p.amount) })),
     ...returns.map((r) => ({ kind: 'return' as const, id: r.id, number: r.return_number, date: new Date(r.completed_at ?? r.created_at).toISOString().slice(0, 10), at: new Date(r.completed_at ?? r.created_at).getTime(), amount: -toPiasters(r.applied_to_invoice) })),
@@ -319,6 +330,18 @@ export async function balances(trx: Trx, customerIds: string[], today: string) {
     .where('status', '<>', 'cancelled')
     .execute();
   const out = new Map<string, { balance: number; overdue: number }>();
+  const leftOvers = await trx.selectFrom('customer_returns').select(['customer_id', 'left_over']).where('customer_id', 'in', customerIds).where('status', '=', 'completed').execute();
+  const refunds = await trx.selectFrom('refunds').select(['customer_id', 'amount']).where('customer_id', 'in', customerIds).execute();
+  for (const l of leftOvers) {
+    const cur = out.get(l.customer_id) ?? { balance: 0, overdue: 0 };
+    cur.balance -= toPiasters(l.left_over);
+    out.set(l.customer_id, cur);
+  }
+  for (const r of refunds) {
+    const cur = out.get(r.customer_id) ?? { balance: 0, overdue: 0 };
+    cur.balance += toPiasters(r.amount);
+    out.set(r.customer_id, cur);
+  }
   for (const r of rows) {
     const left = toPiasters(r.total) - toPiasters(r.confirmed_paid) - toPiasters(r.return_credit);
     const cur = out.get(r.customer_id) ?? { balance: 0, overdue: 0 };

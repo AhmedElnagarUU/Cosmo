@@ -496,3 +496,30 @@ export async function returnShippedOrder(trx: Trx, actor: Actor, orderId: string
     });
   }
 }
+
+// ---------- Used by the returns module (phase 8) ----------
+
+// Returned goods are checked by the stock manager: back to their batch as sellable, or recorded as damaged (C-60)
+export async function receiveCustomerReturn(
+  trx: Trx,
+  actor: Actor,
+  m: { productId: string; batchId: string; quantity: number; condition: 'sellable' | 'damaged'; documentId: string },
+) {
+  const stock = await lockProductStock(trx, m.productId);
+  const batch = await lockBatch(trx, m.productId, m.batchId);
+  if (m.condition === 'sellable') {
+    await trx.updateTable('batches').set({ qty_sellable: batch.qty_sellable + m.quantity }).where('id', '=', batch.id).execute();
+    await trx.updateTable('product_stock').set({ on_hand_sellable: stock.on_hand_sellable + m.quantity }).where('product_id', '=', m.productId).execute();
+  } else {
+    await trx.updateTable('batches').set({ qty_damaged: batch.qty_damaged + m.quantity }).where('id', '=', batch.id).execute();
+  }
+  await movement(trx, actor, {
+    productId: m.productId,
+    batchId: batch.id,
+    type: 'customer_return',
+    state: m.condition,
+    quantityChange: m.quantity,
+    documentType: 'customer_return',
+    documentId: m.documentId,
+  });
+}

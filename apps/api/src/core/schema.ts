@@ -561,6 +561,18 @@ export interface InvoiceLinesTable {
   line_total: string;
   line_order: Generated<number>;
 }
+export interface RefundsTable {
+  id: Uuid;
+  wholesaler_id: string;
+  customer_return_id: string;
+  customer_id: string;
+  amount: string;
+  method: 'cash' | 'instapay' | 'vodafone_cash';
+  reference: string | null;
+  refunded_on: string;
+  recorded_by: string | null;
+  created_at: Generated<Date>;
+}
 export interface Database {
   wholesalers: WholesalersTable;
   settings: SettingsTable;
@@ -607,4 +619,5 @@ export interface Database {
   customer_return_lines: CustomerReturnLinesTable;
   invoices: InvoicesTable;
   invoice_lines: InvoiceLinesTable;
+  refunds: RefundsTable;
 }
