@@ -2,7 +2,7 @@
 
 A platform for small and medium wholesalers in Egypt who sell pharmaceutical and cosmetics products to pharmacies and retail stores.
 
-**Current stage: building phase 1** (foundation and accounts). Planning documents are in `docs/`. Code is in `apps/` and `packages/`.
+**Current stage: all nine build phases are written and tested, waiting for the project owner to try them.** Next is the pilot with one wholesaler. Planning documents are in `docs/`. Code is in `apps/` and `packages/`.
 
 ## Where to start reading
 

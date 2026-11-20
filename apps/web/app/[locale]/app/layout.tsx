@@ -70,6 +70,8 @@ export default function AppLayout({ children }: { children: ReactNode }) {
     { href: '/app/suppliers', label: t('suppliers'), show: me.userType === 'employee' && hasAnyRole(me, 'stock_manager', 'accountant') },
     { href: '/app/customers', label: t('customers'), show: me.userType === 'employee' && hasAnyRole(me, 'sales', 'accountant', 'delivery_manager') },
     { href: '/app/resets', label: t('resets'), show: me.userType === 'employee' && hasAnyRole(me, 'sales') },
+    { href: '/app/activity', label: t('activity'), show: me.userType === 'employee' && isOwner(me) },
+    { href: '/app/reports', label: t('reports'), show: me.userType === 'employee' && isOwner(me) },
     { href: '/app/employees', label: t('employees'), show: me.userType === 'employee' && isOwner(me) },
     { href: '/app/settings', label: t('settings'), show: me.userType === 'employee' && isOwner(me) },
     { href: '/app/profile', label: t('profile'), show: me.userType === 'customer' },
