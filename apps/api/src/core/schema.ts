@@ -432,6 +432,16 @@ export interface OrderStatusHistoryTable {
   changed_at: Generated<Date>;
 }
 
+export interface PicksTable {
+  id: Uuid;
+  wholesaler_id: string;
+  order_line_id: string;
+  batch_id: string;
+  quantity: number;
+  recommended_batch_id: string | null;
+  picked_by: string | null;
+  picked_at: Generated<Date>;
+}
 export interface Database {
   wholesalers: WholesalersTable;
   settings: SettingsTable;
@@ -470,4 +480,5 @@ export interface Database {
   order_lines: OrderLinesTable;
   order_line_changes: OrderLineChangesTable;
   order_status_history: OrderStatusHistoryTable;
+  picks: PicksTable;
 }

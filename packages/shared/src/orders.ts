@@ -49,3 +49,17 @@ export const acceptSchema = z.object({ changes: z.array(change).max(200).optiona
 export const rejectSchema = z.object({ reason: z.string().trim().min(1, 'reason_required').max(500) });
 export const cancelSchema = z.object({ reason: z.string().trim().max(500).optional().nullable() });
 export const answerSchema = z.object({ answer: z.enum(['accept_change', 'cancel']) });
+
+export const picksSchema = z.object({
+  picks: z
+    .array(z.object({ batchId: z.string().uuid(), quantity: z.number().int().min(1).max(100_000) }))
+    .max(50)
+    .refine((p) => new Set(p.map((x) => x.batchId)).size === p.length, 'batch_repeated'),
+});
+export const reduceSchema = z
+  .object({
+    newQuantity: z.number().int().min(0).max(100_000),
+    reason: z.enum(REDUCE_REASONS),
+    note: z.string().trim().max(500).optional().nullable(),
+  })
+  .refine((c) => c.reason !== 'other' || !!c.note, { message: 'note_required', path: ['note'] });
