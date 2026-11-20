@@ -9,6 +9,8 @@ import { settingsRoutes } from './modules/settings/settings.routes';
 import { employeeRoutes } from './modules/people/employees.routes';
 import { customerRoutes } from './modules/people/customers.routes';
 import { notificationRoutes } from './modules/notifications/notifications.routes';
+import { catalogRoutes } from './modules/catalog/catalog.routes';
+import { stockRoutes } from './modules/stock/stock.routes';
 
 // The path of one request (docs/technical/02-api-design.md):
 // language -> same origin -> session -> route (role check, validation, transaction) -> error shape
@@ -37,6 +39,8 @@ export function createApp(db: Db) {
   api.use(employeeRoutes());
   api.use(customerRoutes());
   api.use(notificationRoutes());
+  api.use(catalogRoutes());
+  api.use(stockRoutes());
   api.use(notFoundHandler);
 
   app.use('/api/v1', api);

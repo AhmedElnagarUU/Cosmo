@@ -142,6 +142,148 @@ export interface NotificationDeliveriesTable {
   sent_at: Timestamp | null;
 }
 
+type ListRow = { id: Uuid; wholesaler_id: string; name_ar: string; name_en: string; is_active: Generated<boolean> };
+export interface CategoriesTable extends ListRow {
+  applies_to: Generated<'medicine' | 'cosmetic' | 'both'>;
+}
+export type BrandsTable = ListRow;
+export type DosageFormsTable = ListRow;
+
+export interface ProductsTable {
+  id: Uuid;
+  wholesaler_id: string;
+  product_type: 'medicine' | 'cosmetic';
+  name_ar: string;
+  name_en: string;
+  barcode: string | null;
+  brand_id: string;
+  category_id: string;
+  unit: string;
+  pack_size: string;
+  cost_price: string;
+  selling_price: string;
+  image_url: string | null;
+  description: string | null;
+  track_batches: Generated<boolean>;
+  is_active: Generated<boolean>;
+  search_text: Generated<string>;
+  created_at: Generated<Date>;
+  updated_at: Generated<Date>;
+}
+
+export interface MedicineDetailsTable {
+  product_id: string;
+  wholesaler_id: string;
+  active_ingredient: string;
+  strength: string;
+  dosage_form_id: string;
+  storage: 'room' | 'fridge';
+  public_price: string | null;
+  registration_number: string | null;
+  needs_prescription: boolean | null;
+}
+
+export interface CosmeticDetailsTable {
+  product_id: string;
+  wholesaler_id: string;
+  shade_name: string | null;
+  shade_number: string | null;
+  suitable_for: string | null;
+  period_after_opening_months: number | null;
+}
+
+export interface ExtraFieldsTable {
+  id: Uuid;
+  wholesaler_id: string;
+  name_ar: string;
+  name_en: string;
+  field_type: 'text' | 'number' | 'yes_no' | 'date' | 'choice';
+  choices: ColumnType<string[], string | undefined, string>;
+  applies_to: 'medicine' | 'cosmetic' | 'both';
+  is_required: boolean;
+  shown_to_customers: boolean;
+  is_active: Generated<boolean>;
+  sort_order: Generated<number>;
+  created_at: Generated<Date>;
+}
+
+export interface ExtraFieldValuesTable {
+  product_id: string;
+  extra_field_id: string;
+  wholesaler_id: string;
+  value: string;
+}
+
+export interface PriceHistoryTable {
+  id: Uuid;
+  wholesaler_id: string;
+  product_id: string;
+  price_type: 'selling' | 'cost';
+  old_price: string | null;
+  new_price: string;
+  changed_by: string | null;
+  changed_at: Generated<Date>;
+}
+
+export interface OffersTable {
+  id: Uuid;
+  wholesaler_id: string;
+  product_id: string;
+  offer_type: 'discount' | 'bonus';
+  discount_percent: string | null;
+  buy_quantity: number | null;
+  free_quantity: number | null;
+  starts_on: string | null;
+  ends_on: string | null;
+  is_active: Generated<boolean>;
+  created_by: string | null;
+  created_at: Generated<Date>;
+  stopped_at: Timestamp | null;
+}
+
+export interface BatchesTable {
+  id: Uuid;
+  wholesaler_id: string;
+  product_id: string;
+  batch_number: string | null;
+  expiry_date: string | null;
+  qty_sellable: Generated<number>;
+  qty_damaged: Generated<number>;
+  qty_expired: Generated<number>;
+  qty_held: Generated<number>;
+  created_at: Generated<Date>;
+}
+
+export interface ProductStockTable {
+  product_id: string;
+  wholesaler_id: string;
+  on_hand_sellable: Generated<number>;
+  reserved: Generated<number>;
+  held: Generated<number>;
+}
+
+export type MovementType =
+  | 'opening' | 'adjustment' | 'damaged' | 'lost' | 'expired'
+  | 'receipt' | 'order_reserved' | 'order_released' | 'trip_started' | 'delivery_failed_back'
+  | 'customer_return' | 'supplier_return' | 'held' | 'unheld';
+
+export interface StockMovementsTable {
+  id: Uuid;
+  wholesaler_id: string;
+  product_id: string;
+  batch_id: string | null;
+  movement_type: MovementType;
+  stock_state: 'sellable' | 'damaged' | 'expired' | 'held' | null;
+  quantity_change: Generated<number>;
+  reserved_change: Generated<number>;
+  document_type: string | null;
+  document_id: string | null;
+  reason: string | null;
+  note: string | null;
+  created_by: string | null;
+  created_at: Generated<Date>;
+}
+
 export interface Database {
   wholesalers: WholesalersTable;
   settings: SettingsTable;
@@ -156,4 +298,17 @@ export interface Database {
   activity_log: ActivityLogTable;
   notifications: NotificationsTable;
   notification_deliveries: NotificationDeliveriesTable;
+  categories: CategoriesTable;
+  brands: BrandsTable;
+  dosage_forms: DosageFormsTable;
+  products: ProductsTable;
+  medicine_details: MedicineDetailsTable;
+  cosmetic_details: CosmeticDetailsTable;
+  extra_fields: ExtraFieldsTable;
+  extra_field_values: ExtraFieldValuesTable;
+  price_history: PriceHistoryTable;
+  offers: OffersTable;
+  batches: BatchesTable;
+  product_stock: ProductStockTable;
+  stock_movements: StockMovementsTable;
 }

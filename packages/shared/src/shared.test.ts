@@ -78,3 +78,18 @@ describe('schemas', () => {
     expect(updateSettingsSchema.safeParse({ minimumOrderValue: '500.50' }).success).toBe(true);
   });
 });
+
+import { applyDiscount, bonusUnits, fromPiasters, toPiasters } from './money';
+describe('money', () => {
+  it('converts exactly', () => {
+    expect(toPiasters('125.5')).toBe(12550);
+    expect(toPiasters('0.1') + toPiasters('0.2')).toBe(30);
+    expect(fromPiasters(30)).toBe('0.30');
+  });
+  it('applies a discount and bonus units', () => {
+    expect(applyDiscount('100.00', '5')).toBe('95.00');
+    expect(applyDiscount('33.33', '10')).toBe('30.00');
+    expect(bonusUnits(25, 10, 1)).toBe(2);
+    expect(bonusUnits(9, 10, 1)).toBe(0);
+  });
+});

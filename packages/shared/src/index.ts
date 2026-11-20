@@ -3,3 +3,6 @@ export * from './errors';
 export * from './phone';
 export * from './schemas';
 export * from './working-hours';
+export * from './catalog';
+export * from './money';
+export * from './search';
