@@ -24,7 +24,7 @@ function currentLocale(): string {
   return document.documentElement.lang || 'ar';
 }
 
-export async function api<T = unknown>(method: string, path: string, body?: unknown): Promise<T> {
+export async function api<T = unknown>(method: string, path: string, body?: unknown, extraHeaders: Record<string, string> = {}): Promise<T> {
   let res: Response;
   try {
     res = await fetch(`/api/v1${path}`, {
@@ -32,6 +32,7 @@ export async function api<T = unknown>(method: string, path: string, body?: unkn
       credentials: 'same-origin',
       headers: {
         'Accept-Language': currentLocale(),
+        ...extraHeaders,
         ...(body !== undefined ? { 'Content-Type': 'application/json' } : {}),
       },
       body: body !== undefined ? JSON.stringify(body) : undefined,
@@ -48,7 +49,7 @@ export async function api<T = unknown>(method: string, path: string, body?: unkn
 }
 
 export const get = <T>(path: string) => api<T>('GET', path);
-export const post = <T>(path: string, body?: unknown) => api<T>('POST', path, body ?? {});
+export const post = <T>(path: string, body?: unknown, headers?: Record<string, string>) => api<T>('POST', path, body ?? {}, headers);
 export const patch = <T>(path: string, body: unknown) => api<T>('PATCH', path, body);
 export const put = <T>(path: string, body: unknown) => api<T>('PUT', path, body);
 export const del = <T>(path: string) => api<T>('DELETE', path);

@@ -627,6 +627,7 @@ erDiagram
         bool placed_while_closed
         timestamptz waiting_since "start of the 5 working hours"
         bool reported_to_owner
+        enum resume_status "status after the customer accepts a change"
         uuid preparing_by FK "only one at a time"
         text idempotency_key UK
         timestamptz placed_at
@@ -642,6 +643,8 @@ erDiagram
         numeric unit_price "price when the order was placed"
         numeric discount_percent
         uuid offer_id FK
+        int offer_buy "offer copied at ordering"
+        int offer_free
         numeric line_total
     }
     ORDER_LINE_CHANGES {

@@ -72,7 +72,12 @@
     "extraFields": "حقول إضافية",
     "suppliers": "الموردون",
     "receipts": "الاستلام",
-    "supplierReturns": "مرتجعات الموردين"
+    "supplierReturns": "مرتجعات الموردين",
+    "catalog": "الكتالوج",
+    "cart": "السلة",
+    "orders": "الطلبات",
+    "myOrders": "طلباتي",
+    "newOrder": "طلب جديد"
   },
   "open": {
     "openNow": "مفتوح الآن",
@@ -84,7 +89,7 @@
   "home": {
     "hello": "مرحباً، {name}",
     "staffIntro": "أدوارك: {roles}",
-    "customerIntro": "كتالوج المنتجات والطلبات في المرحلة القادمة.",
+    "customerIntro": "تصفح الكتالوج واطلب. يمكنك الطلب في أي وقت.",
     "comingSoon": "شاشات أخرى تضاف في المراحل القادمة."
   },
   "employees": {
@@ -399,5 +404,93 @@
     "sellable": "صالح",
     "approvalOn": "موافقة المالك مفعلة. تُحجز البضاعة حتى يقرر المالك.",
     "submit": "إرسال"
+  },
+  "catalog": {
+    "title": "المنتجات",
+    "search": "ابحث بالاسم أو الباركود أو المادة الفعالة",
+    "add": "أضف",
+    "inCart": "في السلة",
+    "outOfStock": "غير متوفر",
+    "none": "لا توجد منتجات",
+    "publicPrice": "سعر الجمهور {price}",
+    "closedNote": "نحن مغلقون الآن. يمكنك الطلب، وسنراجع طلبك عند الفتح."
+  },
+  "cart": {
+    "title": "السلة",
+    "empty": "سلتك فارغة",
+    "mustHave": "ضروري",
+    "mustHaveHelp": "حدد المنتجات التي يهمك طلبها. إذا قلّت كمية أحدها، نسألك قبل المتابعة.",
+    "askAll": "اسألني عن أي تغيير",
+    "payment": "كيف ستدفع؟",
+    "onArrival": "عند وصول الطلب",
+    "credit": "لاحقاً بالآجل ({days} يوم)",
+    "subtotal": "المجموع",
+    "discount": "الخصم",
+    "total": "الإجمالي",
+    "free": "+{n} مجاناً",
+    "place": "إرسال الطلب",
+    "short": "المتاح {n} فقط شاملة الوحدات المجانية",
+    "belowMinimum": "الحد الأدنى للطلب {min} جنيه",
+    "remove": "حذف",
+    "customer": "العميل",
+    "chooseCustomer": "اختر العميل أولاً",
+    "placed": "تم استلام الطلب {number}. في انتظار القبول."
+  },
+  "orders": {
+    "title": "الطلبات",
+    "none": "لا توجد طلبات",
+    "tabPlaced": "جديدة",
+    "tabWaiting": "في انتظار العميل",
+    "tabAccepted": "مقبولة",
+    "tabAll": "الكل",
+    "placedAt": "وقت الطلب",
+    "payment": "الدفع",
+    "onArrival": "عند الاستلام",
+    "credit": "آجل",
+    "closed": "طُلب أثناء الإغلاق",
+    "waitingLong": "ينتظر منذ فترة طويلة",
+    "placedBy": "بواسطة {name}",
+    "accept": "قبول",
+    "acceptWithChanges": "قبول مع تغييرات",
+    "reject": "رفض",
+    "rejectReason": "لماذا يُرفض الطلب؟ سيرى العميل السبب.",
+    "cancel": "إلغاء الطلب",
+    "cancelReason": "لماذا يُلغى الطلب؟ سيرى العميل السبب.",
+    "confirmCancel": "إلغاء هذا الطلب؟",
+    "answerTitle": "تم تغيير منتج ضروري لك",
+    "acceptChange": "قبول التغيير",
+    "cancelOrder": "إلغاء الطلب",
+    "ordered": "المطلوب",
+    "now": "الآن",
+    "reason": "السبب",
+    "history": "السجل",
+    "changeQty": "تغيير الكميات",
+    "newQty": "الكمية الجديدة",
+    "mustHave": "ضروري",
+    "keepCold": "يحفظ بارداً",
+    "lines": "{n} منتجات",
+    "free": "+{n} مجاناً",
+    "customer": "العميل"
+  },
+  "orderStatus": {
+    "placed": "في انتظار القبول",
+    "waiting_for_customer": "في انتظار ردك",
+    "accepted": "مقبول",
+    "rejected": "مرفوض",
+    "preparing": "قيد التجهيز",
+    "ready": "جاهز للتوصيل",
+    "out_for_delivery": "في الطريق",
+    "delivered": "تم التسليم",
+    "delivery_failed": "لم يكتمل التوصيل",
+    "cancelled": "ملغي"
+  },
+  "staffStatus": {
+    "waiting_for_customer": "في انتظار العميل"
+  },
+  "reduceReason": {
+    "not_found": "غير موجود على الرف",
+    "damaged": "تالف",
+    "expired": "منتهي الصلاحية",
+    "other": "أخرى"
   }
 }

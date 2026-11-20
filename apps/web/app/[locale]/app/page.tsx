@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { useMe } from '@/lib/me-context';
+import { Link } from '@/i18n/navigation';
 import { Card } from '@/components/ui';
 import { OpenStatusBadge } from '@/components/open-status';
 
@@ -10,6 +11,7 @@ export default function HomePage() {
   const { me } = useMe();
   const t = useTranslations('home');
   const tRoles = useTranslations('roles');
+  const tNav = useTranslations('nav');
 
   return (
     <div className="space-y-4">
@@ -23,8 +25,11 @@ export default function HomePage() {
           <p className="muted text-sm">{t('comingSoon')}</p>
         </Card>
       ) : (
-        <Card>
+        <Card className="space-y-3">
           <p>{t('customerIntro')}</p>
+          <Link href="/app/catalog" className="btn btn-primary">
+            {tNav('catalog')}
+          </Link>
         </Card>
       )}
     </div>

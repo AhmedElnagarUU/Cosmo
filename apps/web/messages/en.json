@@ -72,7 +72,12 @@
     "extraFields": "Extra fields",
     "suppliers": "Suppliers",
     "receipts": "Receiving",
-    "supplierReturns": "Supplier returns"
+    "supplierReturns": "Supplier returns",
+    "catalog": "Catalog",
+    "cart": "Cart",
+    "orders": "Orders",
+    "myOrders": "My orders",
+    "newOrder": "New order"
   },
   "open": {
     "openNow": "Open now",
@@ -84,7 +89,7 @@
   "home": {
     "hello": "Hello, {name}",
     "staffIntro": "Your roles: {roles}",
-    "customerIntro": "The product catalog and ordering come in the next phase.",
+    "customerIntro": "Browse the catalog and place an order. You can order at any time.",
     "comingSoon": "More screens are added in the next phases."
   },
   "employees": {
@@ -399,5 +404,93 @@
     "sellable": "Sellable",
     "approvalOn": "Owner approval is switched on. The goods are held until the owner decides.",
     "submit": "Send"
+  },
+  "catalog": {
+    "title": "Products",
+    "search": "Search by name, barcode, or active ingredient",
+    "add": "Add",
+    "inCart": "In cart",
+    "outOfStock": "Out of stock",
+    "none": "No products found",
+    "publicPrice": "Public price {price}",
+    "closedNote": "We are closed now. You can still order, and we will review your order when we open."
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty",
+    "mustHave": "Must have",
+    "mustHaveHelp": "Mark the products your order is really about. If one of them is reduced, we ask you before continuing.",
+    "askAll": "Ask me about any change",
+    "payment": "How will you pay?",
+    "onArrival": "When the order arrives",
+    "credit": "Later, on credit ({days} days)",
+    "subtotal": "Subtotal",
+    "discount": "Discount",
+    "total": "Total",
+    "free": "+{n} free",
+    "place": "Place order",
+    "short": "Only {n} available, free units included",
+    "belowMinimum": "The minimum order is {min} EGP",
+    "remove": "Remove",
+    "customer": "Customer",
+    "chooseCustomer": "Choose the customer first",
+    "placed": "Order {number} received. It is waiting for acceptance."
+  },
+  "orders": {
+    "title": "Orders",
+    "none": "No orders",
+    "tabPlaced": "New",
+    "tabWaiting": "Waiting for customer",
+    "tabAccepted": "Accepted",
+    "tabAll": "All",
+    "placedAt": "Placed",
+    "payment": "Payment",
+    "onArrival": "On arrival",
+    "credit": "Credit",
+    "closed": "Placed while closed",
+    "waitingLong": "Waiting too long",
+    "placedBy": "Placed by {name}",
+    "accept": "Accept",
+    "acceptWithChanges": "Accept with changes",
+    "reject": "Reject",
+    "rejectReason": "Why is the order rejected? The customer will see this.",
+    "cancel": "Cancel order",
+    "cancelReason": "Why is the order cancelled? The customer will see this.",
+    "confirmCancel": "Cancel this order?",
+    "answerTitle": "A product you must have was changed",
+    "acceptChange": "Accept the change",
+    "cancelOrder": "Cancel the order",
+    "ordered": "Ordered",
+    "now": "Now",
+    "reason": "Reason",
+    "history": "History",
+    "changeQty": "Change quantities",
+    "newQty": "New quantity",
+    "mustHave": "Must have",
+    "keepCold": "Keep cold",
+    "lines": "{n} products",
+    "free": "+{n} free",
+    "customer": "Customer"
+  },
+  "orderStatus": {
+    "placed": "Waiting for acceptance",
+    "waiting_for_customer": "Waiting for your answer",
+    "accepted": "Accepted",
+    "rejected": "Rejected",
+    "preparing": "Being prepared",
+    "ready": "Ready for delivery",
+    "out_for_delivery": "On the way",
+    "delivered": "Delivered",
+    "delivery_failed": "Delivery not completed",
+    "cancelled": "Cancelled"
+  },
+  "staffStatus": {
+    "waiting_for_customer": "Waiting for customer"
+  },
+  "reduceReason": {
+    "not_found": "Not found on the shelf",
+    "damaged": "Damaged",
+    "expired": "Expired",
+    "other": "Other"
   }
 }
