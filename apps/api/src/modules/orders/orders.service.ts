@@ -480,6 +480,12 @@ export async function cancelOrder(trx: Trx, actor: AuthContext, id: string, reas
   const o = await lockOrder(trx, id, allowed);
   await releaseAll(trx, actor, id, reason);
   await trx.updateTable('orders').set({ status: 'cancelled', waiting_since: null, preparing_by: null, updated_at: new Date() }).where('id', '=', id).execute();
+  // A cancelled order leaves any trip that has not started
+  await trx
+    .deleteFrom('trip_stops')
+    .where('order_id', '=', id)
+    .where('trip_id', 'in', (eb) => eb.selectFrom('trips').select('id').where('status', '=', 'planned'))
+    .execute();
   await history(trx, actor, id, o.status as OrderStatus, 'cancelled', reason);
   await logActivity(trx, actor, {
     action: 'order_cancelled',

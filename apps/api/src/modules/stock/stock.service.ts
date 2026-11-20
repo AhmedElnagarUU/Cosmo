@@ -429,3 +429,70 @@ export async function releaseForOrder(trx: Trx, actor: Actor, orderId: string, p
     documentId: orderId,
   });
 }
+
+// ---------- Used by the delivery module (phase 6) ----------
+
+async function picksOf(trx: Trx, orderId: string) {
+  return trx
+    .selectFrom('picks as p')
+    .innerJoin('order_lines as l', 'l.id', 'p.order_line_id')
+    .select(['p.batch_id', 'p.quantity', 'l.product_id'])
+    .where('l.order_id', '=', orderId)
+    .orderBy('l.product_id')
+    .execute();
+}
+
+// The trip starts: the picked units leave the warehouse (C-25). On hand and reserved go down together.
+export async function shipOrder(trx: Trx, actor: Actor, orderId: string, tripId: string) {
+  for (const p of await picksOf(trx, orderId)) {
+    const stock = await lockProductStock(trx, p.product_id);
+    const batch = await lockBatch(trx, p.product_id, p.batch_id);
+    if (batch.qty_sellable < p.quantity) {
+      throw errors.rule(
+        { en: `Batch ${batch.batch_number ?? ''} no longer has the picked units. Prepare the order again`, ar: `التشغيلة ${batch.batch_number ?? ''} لم تعد بها الكمية المجمعة. جهز الطلب مرة أخرى` },
+        { orderId },
+      );
+    }
+    await trx.updateTable('batches').set({ qty_sellable: batch.qty_sellable - p.quantity }).where('id', '=', batch.id).execute();
+    await trx
+      .updateTable('product_stock')
+      .set({ on_hand_sellable: stock.on_hand_sellable - p.quantity, reserved: stock.reserved - p.quantity })
+      .where('product_id', '=', p.product_id)
+      .execute();
+    await movement(trx, actor, {
+      productId: p.product_id,
+      batchId: batch.id,
+      type: 'trip_started',
+      state: 'sellable',
+      quantityChange: -p.quantity,
+      reservedChange: -p.quantity,
+      documentType: 'trip',
+      documentId: tripId,
+    });
+  }
+}
+
+// A failed delivery: the stock manager confirms the goods are back (C-61).
+// They go back to their batches and are reserved again for the next trip.
+export async function returnShippedOrder(trx: Trx, actor: Actor, orderId: string, tripId: string) {
+  for (const p of await picksOf(trx, orderId)) {
+    const stock = await lockProductStock(trx, p.product_id);
+    const batch = await lockBatch(trx, p.product_id, p.batch_id);
+    await trx.updateTable('batches').set({ qty_sellable: batch.qty_sellable + p.quantity }).where('id', '=', batch.id).execute();
+    await trx
+      .updateTable('product_stock')
+      .set({ on_hand_sellable: stock.on_hand_sellable + p.quantity, reserved: stock.reserved + p.quantity })
+      .where('product_id', '=', p.product_id)
+      .execute();
+    await movement(trx, actor, {
+      productId: p.product_id,
+      batchId: batch.id,
+      type: 'delivery_failed_back',
+      state: 'sellable',
+      quantityChange: p.quantity,
+      reservedChange: p.quantity,
+      documentType: 'trip',
+      documentId: tripId,
+    });
+  }
+}

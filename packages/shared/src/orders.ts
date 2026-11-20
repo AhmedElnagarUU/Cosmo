@@ -63,3 +63,39 @@ export const reduceSchema = z
     note: z.string().trim().max(500).optional().nullable(),
   })
   .refine((c) => c.reason !== 'other' || !!c.note, { message: 'note_required', path: ['note'] });
+
+// ---------- Delivery (phase 6) ----------
+export const FAILURE_REASONS = ['not_available', 'address_problem', 'refused', 'other'] as const;
+export const CUSTOMER_PAYMENT_METHODS = ['cash', 'instapay', 'vodafone_cash', 'bank_transfer', 'other'] as const;
+export const DOOR_PAYMENT_METHODS = ['cash', 'instapay', 'vodafone_cash'] as const;
+
+export const tripSchema = z.object({
+  deliveryPersonId: z.string().uuid(),
+  orderIds: z.array(z.string().uuid()).min(1).max(100).refine((a) => new Set(a).size === a.length, 'order_repeated'),
+});
+export const updateTripSchema = z.object({
+  deliveryPersonId: z.string().uuid().optional(),
+  orderIds: z.array(z.string().uuid()).min(1).max(100).refine((a) => new Set(a).size === a.length, 'order_repeated').optional(),
+});
+export const stopOrderSchema = z.object({ stopIds: z.array(z.string().uuid()).min(1).max(100) });
+export const deliverSchema = z.object({
+  refused: z
+    .array(
+      z.object({
+        orderLineId: z.string().uuid(),
+        quantity: z.number().int().min(1).max(100_000),
+      }),
+    )
+    .max(200)
+    .optional()
+    .default([]),
+  refusedReason: z.string().trim().max(500).optional().nullable(),
+});
+export const failSchema = z
+  .object({ reason: z.enum(FAILURE_REASONS), note: z.string().trim().max(500).optional().nullable() })
+  .refine((v) => v.reason !== 'other' || !!v.note, { message: 'note_required', path: ['note'] });
+export const doorPaymentSchema = z.object({
+  method: z.enum(DOOR_PAYMENT_METHODS),
+  amount: z.string().trim().regex(/^\d{1,10}(\.\d{1,2})?$/, 'invalid_money').refine((v) => Number(v) > 0, 'invalid_money'),
+  reference: z.string().trim().max(100).optional().nullable(),
+}).refine((v) => v.method === 'cash' || !!v.reference, { message: 'reference_required', path: ['reference'] });

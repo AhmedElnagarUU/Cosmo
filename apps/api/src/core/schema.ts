@@ -442,6 +442,92 @@ export interface PicksTable {
   picked_by: string | null;
   picked_at: Generated<Date>;
 }
+export interface TripsTable {
+  id: Uuid;
+  wholesaler_id: string;
+  trip_number: string;
+  delivery_person_id: string;
+  status: Generated<'planned' | 'in_progress' | 'finished' | 'closed'>;
+  created_by: string | null;
+  created_at: Generated<Date>;
+  started_at: Timestamp | null;
+  finished_at: Timestamp | null;
+  cash_expected: string | null;
+  cash_received: string | null;
+  cash_difference_note: string | null;
+  closed_at: Timestamp | null;
+}
+export interface TripStopsTable {
+  id: Uuid;
+  wholesaler_id: string;
+  trip_id: string;
+  order_id: string;
+  stop_position: number;
+  trip_active: Generated<boolean>;
+  result: Generated<'waiting' | 'delivered' | 'failed'>;
+  failure_reason: 'not_available' | 'address_problem' | 'refused' | 'other' | null;
+  failure_note: string | null;
+  result_at: Timestamp | null;
+  goods_back_confirmed: Generated<boolean>;
+  goods_back_by: string | null;
+  signed_paper_received: Generated<boolean>;
+  paper_received_by: string | null;
+  paper_received_at: Timestamp | null;
+}
+export type CustomerPaymentMethod = 'cash' | 'instapay' | 'vodafone_cash' | 'bank_transfer' | 'other';
+export interface PaymentsTable {
+  id: Uuid;
+  wholesaler_id: string;
+  order_id: string | null;
+  invoice_id: string | null;
+  customer_id: string;
+  amount: string;
+  method: CustomerPaymentMethod;
+  reference: string | null;
+  paid_on: string;
+  status: 'waiting' | 'confirmed' | 'rejected' | 'cancelled';
+  recorded_by: string | null;
+  trip_stop_id: string | null;
+  decided_by: string | null;
+  decided_at: Timestamp | null;
+  rejection_reason: string | null;
+  cancel_reason: string | null;
+  idempotency_key: string | null;
+  created_at: Generated<Date>;
+}
+export interface CustomerReturnsTable {
+  id: Uuid;
+  wholesaler_id: string;
+  return_number: string;
+  order_id: string;
+  invoice_id: string | null;
+  customer_id: string;
+  source: 'normal' | 'at_the_door';
+  trip_stop_id: string | null;
+  status: Generated<'requested' | 'received' | 'completed' | 'cancelled'>;
+  reason: string;
+  note: string | null;
+  credit_amount: Generated<string>;
+  applied_to_invoice: Generated<string>;
+  left_over: Generated<string>;
+  left_over_choice: string | null;
+  created_by: string | null;
+  created_at: Generated<Date>;
+  checked_by: string | null;
+  completed_at: Timestamp | null;
+}
+export interface CustomerReturnLinesTable {
+  id: Uuid;
+  wholesaler_id: string;
+  customer_return_id: string;
+  order_line_id: string;
+  product_id: string;
+  batch_id: string;
+  quantity: number;
+  condition: 'sellable' | 'damaged' | null;
+  unit_credit: Generated<string>;
+  line_credit: Generated<string>;
+}
 export interface Database {
   wholesalers: WholesalersTable;
   settings: SettingsTable;
@@ -481,4 +567,9 @@ export interface Database {
   order_line_changes: OrderLineChangesTable;
   order_status_history: OrderStatusHistoryTable;
   picks: PicksTable;
+  trips: TripsTable;
+  trip_stops: TripStopsTable;
+  payments: PaymentsTable;
+  customer_returns: CustomerReturnsTable;
+  customer_return_lines: CustomerReturnLinesTable;
 }
