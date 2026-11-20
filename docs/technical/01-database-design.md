@@ -139,7 +139,7 @@ The tables are grouped into nine areas:
 | 1. Wholesaler, settings, and people | 10 tables | 1 |
 | 2. Product catalog | 10 tables | 2 |
 | 3. Stock | 3 tables | 2 |
-| 4. Suppliers | 6 tables | 3 |
+| 4. Suppliers | 7 tables | 3 |
 | 5. Orders | 5 tables | 4 and 5 |
 | 6. Delivery | 2 tables | 6 |
 | 7. Invoices and payments | 5 tables | 7 |
@@ -599,6 +599,8 @@ erDiagram
 
 **supplier_returns** and **supplier_return_lines** — Goods sent back (C-42). `stock_state` says whether the units come from sellable, damaged, or expired stock. When owner approval is on, the status is `waiting_for_owner` and the units are moved to `qty_held` until the owner decides (C-65).
 
+**document_counters** — Gives readable numbers per wholesaler and year, such as `REC-2026-00001` for receipts and `SRT-2026-00001` for supplier returns. The row is locked while a number is taken, so numbers never repeat.
+
 **supplier_payments** — Money paid to a supplier. A wrong payment is cancelled with a reason, never deleted.
 
 **The supplier's balance** is not stored. It is calculated:
@@ -1040,14 +1042,14 @@ An **index** is like the index at the back of a book. It lets the database find 
 | 1. Wholesaler, settings, and people | wholesalers, settings, working_hours, closed_days, users, employees, employee_roles, customers, password_reset_requests, sessions |
 | 2. Product catalog | categories, brands, dosage_forms, products, medicine_details, cosmetic_details, extra_fields, extra_field_values, price_history, offers |
 | 3. Stock | batches, product_stock, stock_movements |
-| 4. Suppliers | suppliers, receipts, receipt_lines, supplier_returns, supplier_return_lines, supplier_payments |
+| 4. Suppliers | suppliers, receipts, receipt_lines, supplier_returns, supplier_return_lines, supplier_payments, document_counters |
 | 5. Orders | orders, order_lines, order_line_changes, order_status_history, picks |
 | 6. Delivery | trips, trip_stops |
 | 7. Invoices and payments | invoices, invoice_lines, invoice_number_counters, payments, refunds |
 | 8. Customer returns | customer_returns, customer_return_lines |
 | 9. Activity and notifications | activity_log, notifications, notification_deliveries |
 
-In total there are **46 tables**. Refunds are shown in areas 7 and 8 because they belong to both, but it is one table.
+In total there are **47 tables**. Refunds are shown in areas 7 and 8 because they belong to both, but it is one table.
 
 ## Points to confirm
 

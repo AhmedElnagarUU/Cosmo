@@ -109,7 +109,7 @@ export function supplierRoutes(): Router {
         isActive: s.is_active,
         ...balance,
         receipts: receipts.map((x) => ({ id: x.id, number: x.receipt_number, status: x.status, supplierInvoiceNumber: x.supplier_invoice_number, total: x.total_amount, at: x.confirmed_at ?? x.created_at })),
-        returns: returns.map((x) => ({ id: x.id, number: x.return_number, status: x.status, reason: x.reason, total: x.total_value, at: x.created_at })),
+        supplierReturns: returns.map((x) => ({ id: x.id, number: x.return_number, status: x.status, reason: x.reason, total: x.total_value, at: x.created_at })),
         payments: payments.map((x) => ({ id: x.id, amount: x.amount, method: x.method, paidOn: x.paid_on, reference: x.reference, by: x.name, cancelledAt: x.cancelled_at, cancelReason: x.cancel_reason })),
       };
     });

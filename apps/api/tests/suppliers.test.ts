@@ -133,6 +133,8 @@ describe('supplier payments (ACC-09, ACC-10)', () => {
     s = (await accountant.get(`/api/v1/suppliers/${supplierId}`).expect(200)).body;
     expect(s.balance).toBe('1865.00');
     expect(s.payments[0].cancelReason).toBe('Wrong amount');
+    expect(Array.isArray(s.supplierReturns)).toBe(true);
+    expect(typeof s.returns).toBe('string');
   });
 });
 

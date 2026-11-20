@@ -222,8 +222,7 @@ Built in phase 3.
 | PATCH | /receipts/{id} | O, K | Edits a draft: lines, batches, expiry dates, supplier invoice number and total (C-43) | STK-01, STK-02 |
 | POST | /receipts/{id}/confirm | O, K | Confirms it. Adds stock, updates cost prices, and increases the supplier balance in one transaction (C-75) | STK-01 |
 | GET | /receipts | O, K, A | Lists receipts | |
-| POST | /supplier-returns | O, K | Starts a supplier return as a draft | STK-19 |
-| POST | /supplier-returns/{id}/submit | O, K | If approval is on, sends it to the owner and holds the stock. If it is off, confirms it at once (C-65) | STK-19 |
+| POST | /supplier-returns | O, K | Records a supplier return with its lines and reason. If approval is on, the stock is held and the owner is asked. If it is off, it is confirmed at once and the owner gets an alert (C-65) | STK-19 |
 | POST | /supplier-returns/{id}/approve | O | Approves and confirms it | OWN-14 |
 | POST | /supplier-returns/{id}/reject | O | Rejects it with a reason. The held stock goes back | OWN-14 |
 | GET | /supplier-returns | O, K, A | Lists supplier returns | |
