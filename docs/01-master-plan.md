@@ -39,7 +39,8 @@ flowchart LR
 | 3. Suppliers and receiving | **Built.** Waiting for the project owner to try it and approve |
 | 4. Customer ordering and acceptance | **Built.** Waiting for the project owner to try it and approve |
 | 5. Order preparation | **Built.** Waiting for the project owner to try it and approve |
-| 6 to 9 | Not started |
+| 6. Delivery | **Built.** Waiting for the project owner to try it and approve. The cash handover and trip closing come with phase 7 |
+| 7 to 9 | Not started |
 
 ```mermaid
 flowchart TD

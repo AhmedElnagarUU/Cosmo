@@ -326,6 +326,9 @@ Built in phase 6.
 
 | Method | Path | Who | What it does | Story |
 |---|---|---|---|---|
+| GET | /ready-orders | O, M | Ready orders that are not in a trip yet | DM-01 |
+| GET | /delivery-people | O, M | Active employees with the delivery role | DM-02 |
+| GET | /trip-stops/goods-to-return | O, K, M | Failed stops whose goods are not confirmed back yet | STK-12 |
 | GET | /trips | O, M, A | Lists trips with their status and stops | DM-04 |
 | GET | /my/trips | D | The delivery person's own trips (C-64) | DEL-01 |
 | POST | /trips | O, M | Creates a trip from Ready orders and assigns a delivery person (C-28) | DM-02 |
