@@ -8,6 +8,7 @@ import type { AuthContext } from '../../core/context';
 import { offerIsCurrent } from '../catalog/products.service';
 import { releaseForOrder, reserveForOrder, todayIn, type Shortage } from '../stock/stock.service';
 import { currentOpenStatus } from '../settings/open-status';
+import { cancelInvoiceOf, createInvoiceIfMoment, syncInvoice } from '../billing/billing.service';
 
 // ---------- Prices: always from the database, never from the request ----------
 
@@ -378,6 +379,7 @@ export async function reduceLines(
     });
   }
   await recalcTotals(trx, orderId);
+  await syncInvoice(trx, orderId);
   return mustHaveChanged;
 }
 
@@ -397,6 +399,7 @@ export async function acceptOrder(trx: Trx, actor: Actor, id: string, changes: P
     .where('id', '=', id)
     .execute();
   await history(trx, actor, id, 'placed', next);
+  if (next === 'accepted') await createInvoiceIfMoment(trx, actor, id, 'on_accepted');
   await logActivity(trx, actor, { action: mustHave ? 'order_changed_waiting' : 'order_accepted', entityType: 'order', entityId: id, details: { number: o.order_number, changes: changes.length } });
   const recipient = await customerUser(trx, o.customer_id);
   await notify(trx, actor.wholesalerId, [recipient], mustHave
@@ -453,6 +456,7 @@ export async function answerChange(trx: Trx, ctx: AuthContext, id: string, answe
   const next = (o.resume_status ?? 'accepted') as OrderStatus;
   await trx.updateTable('orders').set({ status: next, resume_status: null, waiting_since: null, updated_at: new Date() }).where('id', '=', id).execute();
   await history(trx, ctx, id, 'waiting_for_customer', next);
+  if (next === 'accepted') await createInvoiceIfMoment(trx, ctx, id, 'on_accepted');
   await logActivity(trx, ctx, { action: 'order_change_accepted', entityType: 'order', entityId: id, details: { number: o.order_number } });
   const staff = await usersWithRoles(trx, ['owner', 'stock_manager']);
   await notify(trx, ctx.wholesalerId, staff, {
@@ -478,6 +482,7 @@ export async function cancelOrder(trx: Trx, actor: AuthContext, id: string, reas
   }
   if (!byCustomer && !reason) throw errors.validation({ fields: { reason: 'reason_required' } });
   const o = await lockOrder(trx, id, allowed);
+  await cancelInvoiceOf(trx, actor, id);
   await releaseAll(trx, actor, id, reason);
   await trx.updateTable('orders').set({ status: 'cancelled', waiting_since: null, preparing_by: null, updated_at: new Date() }).where('id', '=', id).execute();
   // A cancelled order leaves any trip that has not started

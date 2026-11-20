@@ -6,6 +6,7 @@ import { notify, usersWithRoles } from '../../core/notifications';
 import type { AuthContext } from '../../core/context';
 import { todayIn } from '../stock/stock.service';
 import { reduceLines } from '../orders/orders.service';
+import { createInvoiceIfMoment } from '../billing/billing.service';
 
 // Order preparation (docs/workflows/03-order-preparation.md, C-14, C-38, C-39, C-55, C-77).
 // On-hand stock does not change here. It changes when the trip starts (C-25).
@@ -251,6 +252,7 @@ export async function confirmPreparation(trx: Trx, ctx: AuthContext, orderId: st
   }
   await trx.updateTable('orders').set({ status: 'ready', preparing_by: null, updated_at: new Date() }).where('id', '=', orderId).execute();
   await history(trx, ctx, orderId, 'preparing', 'ready');
+  await createInvoiceIfMoment(trx, ctx, orderId, 'on_prepared');
   await logActivity(trx, ctx, { action: 'preparation_confirmed', entityType: 'order', entityId: orderId, details: { number: o.order_number } });
   await notify(trx, ctx.wholesalerId, (await usersWithRoles(trx, ['delivery_manager'])).filter((u) => u !== ctx.userId), {
     type: 'order_ready',

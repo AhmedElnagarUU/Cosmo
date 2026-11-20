@@ -99,3 +99,14 @@ export const doorPaymentSchema = z.object({
   amount: z.string().trim().regex(/^\d{1,10}(\.\d{1,2})?$/, 'invalid_money').refine((v) => Number(v) > 0, 'invalid_money'),
   reference: z.string().trim().max(100).optional().nullable(),
 }).refine((v) => v.method === 'cash' || !!v.reference, { message: 'reference_required', path: ['reference'] });
+
+// ---------- Invoices and payments (phase 7) ----------
+const money = z.string().trim().regex(/^\d{1,10}(\.\d{1,2})?$/, 'invalid_money');
+export const officePaymentSchema = z.object({
+  invoiceId: z.string().uuid(),
+  amount: money.refine((v) => Number(v) > 0, 'invalid_money'),
+  method: z.enum(CUSTOMER_PAYMENT_METHODS),
+  paidOn: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'invalid_date'),
+  reference: z.string().trim().max(100).optional().nullable(),
+});
+export const cashHandoverSchema = z.object({ cashReceived: money, note: z.string().trim().max(500).optional().nullable() });

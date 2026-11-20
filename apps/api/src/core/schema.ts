@@ -528,6 +528,39 @@ export interface CustomerReturnLinesTable {
   unit_credit: Generated<string>;
   line_credit: Generated<string>;
 }
+export interface InvoicesTable {
+  id: Uuid;
+  wholesaler_id: string;
+  invoice_number: string;
+  order_id: string;
+  customer_id: string;
+  invoice_date: string;
+  due_date: string;
+  payment_choice: 'on_arrival' | 'credit';
+  subtotal: string;
+  discount_total: Generated<string>;
+  total: string;
+  confirmed_paid: Generated<string>;
+  return_credit: Generated<string>;
+  status: Generated<'unpaid' | 'partially_paid' | 'paid' | 'cancelled'>;
+  created_at: Generated<Date>;
+  cancelled_at: Timestamp | null;
+}
+export interface InvoiceLinesTable {
+  id: Uuid;
+  wholesaler_id: string;
+  invoice_id: string;
+  order_line_id: string | null;
+  product_id: string;
+  product_name_ar: string;
+  product_name_en: string;
+  quantity: number;
+  is_bonus: Generated<boolean>;
+  unit_price: string;
+  discount_percent: string | null;
+  line_total: string;
+  line_order: Generated<number>;
+}
 export interface Database {
   wholesalers: WholesalersTable;
   settings: SettingsTable;
@@ -572,4 +605,6 @@ export interface Database {
   payments: PaymentsTable;
   customer_returns: CustomerReturnsTable;
   customer_return_lines: CustomerReturnLinesTable;
+  invoices: InvoicesTable;
+  invoice_lines: InvoiceLinesTable;
 }

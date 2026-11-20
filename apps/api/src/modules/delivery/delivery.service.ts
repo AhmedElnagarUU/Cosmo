@@ -6,6 +6,7 @@ import { notify, usersWithRoles } from '../../core/notifications';
 import { nextNumber } from '../../core/numbers';
 import type { AuthContext } from '../../core/context';
 import { returnShippedOrder, shipOrder, todayIn } from '../stock/stock.service';
+import { createInvoiceIfMoment, invoiceOf, tryCloseTrip } from '../billing/billing.service';
 
 // Delivery (docs/workflows/04-delivery.md): C-20, C-21, C-25, C-27, C-28, C-44, C-47, C-61, C-81
 
@@ -238,6 +239,7 @@ export async function deliverStop(trx: Trx, ctx: AuthContext, stopId: string, in
   await trx.updateTable('trip_stops').set({ result: 'delivered', result_at: new Date(), trip_active: false }).where('id', '=', s.id).execute();
   await trx.updateTable('orders').set({ status: 'delivered', updated_at: new Date() }).where('id', '=', o.id).execute();
   await history(trx, ctx, o.id, 'out_for_delivery', 'delivered');
+  await createInvoiceIfMoment(trx, ctx, o.id, 'on_delivered');
   await logActivity(trx, ctx, { action: 'order_delivered', entityType: 'order', entityId: o.id, details: { number: o.order_number } });
   const customer = await trx.selectFrom('customers').select('user_id').where('id', '=', o.customer_id).executeTakeFirstOrThrow();
   await notify(trx, ctx.wholesalerId, [customer.user_id], {
@@ -316,6 +318,7 @@ export async function recordDoorPayment(
     .values({
       wholesaler_id: ctx.wholesalerId,
       order_id: o.id,
+      invoice_id: (await invoiceOf(trx, o.id))?.id ?? null,
       customer_id: o.customer_id,
       amount: input.amount,
       method: input.method,
@@ -364,6 +367,7 @@ export async function paperReceived(trx: Trx, ctx: AuthContext, stopId: string) 
   if (s.signed_paper_received) return;
   await trx.updateTable('trip_stops').set({ signed_paper_received: true, paper_received_by: ctx.userId, paper_received_at: new Date() }).where('id', '=', s.id).execute();
   await logActivity(trx, ctx, { action: 'signed_paper_received', entityType: 'order', entityId: s.order_id });
+  await tryCloseTrip(trx, ctx, s.trip_id);
 }
 
 // The trip with its stops, for the delivery manager and the delivery person's phone
