@@ -369,6 +369,69 @@ export interface SupplierPaymentsTable {
   cancel_reason: string | null;
 }
 
+export type OrderStatusDb =
+  | 'placed' | 'waiting_for_customer' | 'accepted' | 'rejected' | 'preparing' | 'ready'
+  | 'out_for_delivery' | 'delivered' | 'delivery_failed' | 'cancelled';
+export interface OrdersTable {
+  id: Uuid;
+  wholesaler_id: string;
+  order_number: string;
+  customer_id: string;
+  placed_by: string;
+  status: Generated<OrderStatusDb>;
+  resume_status: OrderStatusDb | null;
+  payment_choice: 'on_arrival' | 'credit';
+  subtotal: string;
+  discount_total: Generated<string>;
+  total: string;
+  placed_while_closed: Generated<boolean>;
+  waiting_since: Timestamp | null;
+  reported_to_owner: Generated<boolean>;
+  preparing_by: string | null;
+  idempotency_key: string | null;
+  placed_at: Generated<Date>;
+  updated_at: Generated<Date>;
+}
+export interface OrderLinesTable {
+  id: Uuid;
+  wholesaler_id: string;
+  order_id: string;
+  product_id: string;
+  is_must_have: Generated<boolean>;
+  ordered_qty: number;
+  current_qty: number;
+  bonus_qty: Generated<number>;
+  unit_price: string;
+  discount_percent: string | null;
+  offer_id: string | null;
+  offer_buy: number | null;
+  offer_free: number | null;
+  line_total: string;
+  line_order: Generated<number>;
+}
+export interface OrderLineChangesTable {
+  id: Uuid;
+  wholesaler_id: string;
+  order_line_id: string;
+  stage: 'acceptance' | 'preparation';
+  old_qty: number;
+  new_qty: number;
+  reason: 'not_found' | 'damaged' | 'expired' | 'other';
+  note: string | null;
+  changed_by: string | null;
+  changed_at: Generated<Date>;
+}
+export interface OrderStatusHistoryTable {
+  id: Uuid;
+  wholesaler_id: string;
+  order_id: string;
+  from_status: OrderStatusDb | null;
+  to_status: OrderStatusDb;
+  changed_by: string | null;
+  reason: string | null;
+  changed_at: Generated<Date>;
+}
+
 export interface Database {
   wholesalers: WholesalersTable;
   settings: SettingsTable;
@@ -403,4 +466,8 @@ export interface Database {
   supplier_returns: SupplierReturnsTable;
   supplier_return_lines: SupplierReturnLinesTable;
   supplier_payments: SupplierPaymentsTable;
+  orders: OrdersTable;
+  order_lines: OrderLinesTable;
+  order_line_changes: OrderLineChangesTable;
+  order_status_history: OrderStatusHistoryTable;
 }

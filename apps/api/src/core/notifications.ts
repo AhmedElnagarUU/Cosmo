@@ -1,3 +1,4 @@
+import type { Role } from '@cosmo/shared';
 import type { Trx } from './db';
 import type { Text } from './errors';
 
@@ -43,7 +44,7 @@ export async function notify(
 }
 
 // User ids of active employees with one of these roles
-export async function usersWithRoles(trx: Trx, roles: Array<'owner' | 'sales'>): Promise<string[]> {
+export async function usersWithRoles(trx: Trx, roles: Role[]): Promise<string[]> {
   const rows = await trx
     .selectFrom('employee_roles as r')
     .innerJoin('employees as e', 'e.id', 'r.employee_id')

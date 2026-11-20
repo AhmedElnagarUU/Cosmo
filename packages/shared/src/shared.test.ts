@@ -93,3 +93,19 @@ describe('money', () => {
     expect(bonusUnits(9, 10, 1)).toBe(0);
   });
 });
+
+import { workingMinutesBetween } from './working-hours';
+describe('workingMinutesBetween (C-35)', () => {
+  const days = [0, 1, 2, 3, 4].map((d) => ({ dayOfWeek: d, opensAt: '09:00', closesAt: '17:00' })); // Sun-Thu
+  it('counts only open hours', () => {
+    // Sunday 16:00 to Monday 12:00 = 1h + 3h
+    expect(workingMinutesBetween({ date: '2026-11-15', dayOfWeek: 0, time: '16:00' }, { date: '2026-11-16', dayOfWeek: 1, time: '12:00' }, days, new Set())).toBe(240);
+  });
+  it('a night order counts from opening', () => {
+    expect(workingMinutesBetween({ date: '2026-11-15', dayOfWeek: 0, time: '22:00' }, { date: '2026-11-16', dayOfWeek: 1, time: '10:30' }, days, new Set())).toBe(90);
+  });
+  it('skips the weekend and closed days', () => {
+    // Thursday 16:00 to Sunday 10:00, with Sunday closed: 60 minutes only
+    expect(workingMinutesBetween({ date: '2026-11-19', dayOfWeek: 4, time: '16:00' }, { date: '2026-11-22', dayOfWeek: 0, time: '10:00' }, days, new Set(['2026-11-22']))).toBe(60);
+  });
+});

@@ -66,3 +66,27 @@ export function localMoment(at: Date, timeZone: string): LocalMoment {
   const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   return { date, dayOfWeek: weekdays.indexOf(get('weekday')), time: `${get('hour')}:${get('minute')}` };
 }
+
+// Working minutes between two moments, counting only open hours and skipping closed days (C-35, C-37).
+// "from" and "to" are local moments in the wholesaler's time zone.
+export function workingMinutesBetween(from: LocalMoment, to: LocalMoment, days: OpenDay[], closedDates: Set<string>): number {
+  const toMin = (t: string) => Number(t.slice(0, 2)) * 60 + Number(t.slice(3, 5));
+  let total = 0;
+  let date = from.date;
+  let dow = from.dayOfWeek;
+  for (let i = 0; i < 400 && date <= to.date; i++) {
+    const day = days.find((d) => d.dayOfWeek === dow);
+    if (day && !closedDates.has(date)) {
+      let start = toMin(day.opensAt);
+      let end = toMin(day.closesAt);
+      if (date === from.date) start = Math.max(start, toMin(from.time));
+      if (date === to.date) end = Math.min(end, toMin(to.time));
+      if (end > start) total += end - start;
+    }
+    const d = new Date(date + 'T00:00:00Z');
+    d.setUTCDate(d.getUTCDate() + 1);
+    date = d.toISOString().slice(0, 10);
+    dow = d.getUTCDay();
+  }
+  return total;
+}

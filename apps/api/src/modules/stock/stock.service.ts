@@ -373,3 +373,59 @@ export async function removeForSupplierReturn(
   }
   await movement(trx, actor, { productId: m.productId, batchId: batch.id, type: 'supplier_return', state: m.state, quantityChange: -m.quantity, ...doc });
 }
+
+// ---------- Used by the orders module (phase 4) ----------
+
+export interface Shortage {
+  productId: string;
+  requested: number;
+  available: number;
+}
+
+// Reserves stock for an order (C-25). Rows are locked in a fixed order (by product id),
+// so two orders for the same products wait for each other instead of deadlocking.
+// If any product is short, nothing is reserved and the list of shortages is returned.
+export async function reserveForOrder(
+  trx: Trx,
+  actor: Actor,
+  orderId: string,
+  needs: Array<{ productId: string; quantity: number }>,
+): Promise<Shortage[]> {
+  const sorted = [...needs].sort((a, b) => (a.productId < b.productId ? -1 : 1));
+  const locked = [];
+  for (const n of sorted) locked.push({ need: n, stock: await lockProductStock(trx, n.productId) });
+  const shortages = locked
+    .filter(({ need, stock }) => stock.on_hand_sellable - stock.reserved < need.quantity)
+    .map(({ need, stock }) => ({ productId: need.productId, requested: need.quantity, available: Math.max(0, stock.on_hand_sellable - stock.reserved) }));
+  if (shortages.length) return shortages;
+  for (const { need, stock } of locked) {
+    await trx.updateTable('product_stock').set({ reserved: stock.reserved + need.quantity }).where('product_id', '=', need.productId).execute();
+    await movement(trx, actor, {
+      productId: need.productId,
+      batchId: null,
+      type: 'order_reserved',
+      state: null,
+      reservedChange: need.quantity,
+      documentType: 'order',
+      documentId: orderId,
+    });
+  }
+  return [];
+}
+
+// Releases reserved stock: order rejected, cancelled, or a quantity reduced (C-12, C-38)
+export async function releaseForOrder(trx: Trx, actor: Actor, orderId: string, productId: string, quantity: number, reason?: string) {
+  if (quantity <= 0) return;
+  const stock = await lockProductStock(trx, productId);
+  await trx.updateTable('product_stock').set({ reserved: stock.reserved - quantity }).where('product_id', '=', productId).execute();
+  await movement(trx, actor, {
+    productId,
+    batchId: null,
+    type: 'order_released',
+    state: null,
+    reservedChange: -quantity,
+    reason: reason ?? null,
+    documentType: 'order',
+    documentId: orderId,
+  });
+}
