@@ -84,7 +84,8 @@
     "payments": "Payments",
     "invoices": "Invoices",
     "balances": "Balances",
-    "statement": "My statement"
+    "statement": "My statement",
+    "returns": "Returns"
   },
   "open": {
     "openNow": "Open now",
@@ -620,6 +621,42 @@
     "save": "Save",
     "returns": "Returns",
     "price": "Price",
-    "qty": "Qty"
+    "qty": "Qty",
+    "rowRefund": "Money paid back"
+  },
+  "returns": {
+    "title": "Returns",
+    "none": "No returns",
+    "new": "Start a return",
+    "reason": "Reason",
+    "note": "Note",
+    "quantity": "Quantity to return",
+    "max": "up to {n}",
+    "create": "Create return",
+    "requested": "Waiting for the goods",
+    "completed": "Completed",
+    "cancelled": "Cancelled",
+    "atDoor": "Refused at the door",
+    "credit": "Credit",
+    "applied": "Taken off the invoice",
+    "leftOver": "Left over",
+    "refunded": "Paid back",
+    "check": "Check the goods",
+    "sellable": "Sellable",
+    "damaged": "Damaged",
+    "confirmCheck": "Confirm",
+    "cancel": "Cancel return",
+    "refundOrCredit": "Left over for the customer",
+    "chooseRefund": "Money back",
+    "chooseCredit": "Keep as credit",
+    "keptAsCredit": "Kept as credit for the next order",
+    "payBack": "Pay back",
+    "reason_not_needed": "No longer needed",
+    "reason_damaged": "Damaged",
+    "reason_wrong_product": "Wrong product",
+    "reason_wrong_quantity": "Wrong quantity",
+    "reason_expired": "Expired",
+    "reason_other": "Other",
+    "reason_refused_at_door": "Refused at the door"
   }
 }

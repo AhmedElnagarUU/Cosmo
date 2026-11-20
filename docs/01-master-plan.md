@@ -41,7 +41,8 @@ flowchart LR
 | 5. Order preparation | **Built.** Waiting for the project owner to try it and approve |
 | 6. Delivery | **Built.** Waiting for the project owner to try it and approve |
 | 7. Invoices and payments | **Built.** Waiting for the project owner to try it and approve |
-| 8 and 9 | Not started |
+| 8. Returns | **Built.** Waiting for the project owner to try it and approve |
+| 9 | Not started |
 
 ```mermaid
 flowchart TD

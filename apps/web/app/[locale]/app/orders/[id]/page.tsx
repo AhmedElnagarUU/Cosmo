@@ -51,6 +51,7 @@ export default function OrderPage({ params }: { params: Promise<{ id: string }> 
   const tReason = useTranslations('reduceReason');
   const tApp = useTranslations('app');
   const tPrep = useTranslations('prepare');
+  const tRet = useTranslations('returns');
   const name = useName();
   const fmt = useDateFormat();
   const placed = useSearchParams().get('placed') === '1';
@@ -259,6 +260,12 @@ export default function OrderPage({ params }: { params: Promise<{ id: string }> 
       {canDecide && (o.status === 'accepted' || o.status === 'preparing') && (
         <Link href={`/app/orders/${o.id}/prepare`} className="btn btn-primary w-full">
           {o.status === 'accepted' ? tPrep('start') : tPrep('continue')}
+        </Link>
+      )}
+
+      {staff && o.status === 'delivered' && hasAnyRole(me, 'sales', 'stock_manager') && (
+        <Link href={`/app/returns/new?orderId=${o.id}`} className="btn btn-secondary w-full">
+          {tRet('new')}
         </Link>
       )}
 

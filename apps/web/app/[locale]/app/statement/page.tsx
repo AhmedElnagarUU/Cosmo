@@ -12,7 +12,7 @@ interface Statement {
   customer?: { businessName: string };
   balance: string;
   overdue: string;
-  rows: Array<{ kind: 'invoice' | 'payment' | 'return'; id: string; reference: string; date: string; amount: string; balance: string }>;
+  rows: Array<{ kind: 'invoice' | 'payment' | 'return' | 'refund'; id: string; reference: string; date: string; amount: string; balance: string }>;
 }
 
 // ACC-06: every invoice, payment, and return credit in date order, with a running balance
@@ -26,7 +26,7 @@ export default function StatementPage() {
   const { data, error } = useLoad(() => get<Statement>(path), [path]);
   if (error) return <ErrorBox error={error} />;
   if (!data) return <Loading />;
-  const label = { invoice: t('rowInvoice'), payment: t('rowPayment'), return: t('rowReturn') };
+  const label = { invoice: t('rowInvoice'), payment: t('rowPayment'), return: t('rowReturn'), refund: t('rowRefund') };
   return (
     <div className="space-y-4">
       <PageTitle action={<button type="button" className="btn btn-secondary no-print" onClick={() => window.print()}>🖨 {t('print')}</button>}>
@@ -55,7 +55,7 @@ export default function StatementPage() {
                 <td className="py-2">
                   <div>{label[r.kind]}</div>
                   <div className="muted text-xs" dir="ltr">
-                    {r.kind === 'payment' ? tM(r.reference) : r.reference}
+                    {r.kind === 'payment' || r.kind === 'refund' ? tM(r.reference) : r.reference}
                   </div>
                 </td>
                 <td className="py-2">{fmt(r.date)}</td>

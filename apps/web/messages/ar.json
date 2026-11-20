@@ -84,7 +84,8 @@
     "payments": "المدفوعات",
     "invoices": "الفواتير",
     "balances": "الأرصدة",
-    "statement": "كشف حسابي"
+    "statement": "كشف حسابي",
+    "returns": "المرتجعات"
   },
   "open": {
     "openNow": "مفتوح الآن",
@@ -620,6 +621,42 @@
     "save": "حفظ",
     "returns": "المرتجعات",
     "price": "السعر",
-    "qty": "الكمية"
+    "qty": "الكمية",
+    "rowRefund": "مبلغ مردود"
+  },
+  "returns": {
+    "title": "المرتجعات",
+    "none": "لا توجد مرتجعات",
+    "new": "بدء مرتجع",
+    "reason": "السبب",
+    "note": "ملاحظة",
+    "quantity": "الكمية المرتجعة",
+    "max": "حتى {n}",
+    "create": "إنشاء المرتجع",
+    "requested": "في انتظار البضاعة",
+    "completed": "مكتمل",
+    "cancelled": "ملغي",
+    "atDoor": "مرفوض عند التسليم",
+    "credit": "الرصيد",
+    "applied": "خُصم من الفاتورة",
+    "leftOver": "المتبقي",
+    "refunded": "تم رده",
+    "check": "فحص البضاعة",
+    "sellable": "صالح",
+    "damaged": "تالف",
+    "confirmCheck": "تأكيد",
+    "cancel": "إلغاء المرتجع",
+    "refundOrCredit": "المتبقي للعميل",
+    "chooseRefund": "رد المبلغ",
+    "chooseCredit": "إبقاؤه رصيداً",
+    "keptAsCredit": "يبقى رصيداً للطلب القادم",
+    "payBack": "رد المبلغ",
+    "reason_not_needed": "لم يعد مطلوباً",
+    "reason_damaged": "تالف",
+    "reason_wrong_product": "منتج خطأ",
+    "reason_wrong_quantity": "كمية خطأ",
+    "reason_expired": "منتهي الصلاحية",
+    "reason_other": "أخرى",
+    "reason_refused_at_door": "مرفوض عند التسليم"
   }
 }
